@@ -16,6 +16,20 @@ def hello_parser(runs_data, out_file, timestamp):
 
     return runs_data
 
+# Testing parser for hpcg_cpu benchmark
+def hpcg_cpu_parser(runs_data, out_file, timestamp):
+    try:
+        outf = open(out_file, mode='r')
+        data = outf.read()
+        z = re.search(r'of \d+\.\d+', str(data))
+        perf = re.search(r'(\d+\.\d+)', z.group()).group()
+        runs_data.loc[timestamp,'PERFORMANCE'] = perf
+    finally:
+        outf.close()
+
+    return runs_data
+
+
 # Try matching the benchmark to a performance metric parser
 def update_performance_metric(timestamp, benchmark, out_dir):
     csv_path = out_dir + '/runs.csv'
@@ -25,6 +39,8 @@ def update_performance_metric(timestamp, benchmark, out_dir):
 
     if benchmark == 'hello':
         updated_data = hello_parser(runs_data, out_file, timestamp)
+    elif benchmark == 'hpcg_cpu':
+        updated_data = hpcg_cpu_parser(runs_data, out_file, timestamp)
     else:
         print('*** No parser found for ' + benchmark + ', skipping performance recording  ***')
 

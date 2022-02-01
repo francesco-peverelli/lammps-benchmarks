@@ -79,7 +79,7 @@ out_arch_name = args.bench_name + timestamp + '_arch.txt'
 # Write runs in runs file
 
 line = timestamp + ',' + args.bench_name + ',' + args.run_tag \
-    + ',' + args.cmd_string + ',' + str(elapsed_time) + ', ' + out_res_name + ',' + out_arch_name + ',\n'
+    + ',' + args.cmd_string.replace(',',';') + ',' + str(elapsed_time) + ', ' + out_res_name + ',' + out_arch_name + ',\n'
 try:
     if os.path.exists(runs_file):
         f = open(runs_file, mode='a')
