@@ -20,3 +20,7 @@ parser.add_argument('--format', dest='format', type=str, default='svg',
 help='[OPTIONAL]\tAllows to specify the plot format (e.g. svg,pdf)')
 
 args = parser.parse_args()
+
+x_split = args.x_list.split(',')
+bench = [el.split(':')[0] for el in x_split]
+tag_string = [el.split(':')[0] for el in x_split]
