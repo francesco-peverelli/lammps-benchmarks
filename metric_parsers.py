@@ -30,11 +30,12 @@ def hpcg_cpu_parser(runs_data, out_file, timestamp, logs_dir):
         cwd = os.getcwd()
         log_res = re.compile(r'hpcg\d+T\d+\.txt')
         log_run = re.compile(r'n\d+-\d+p-\d+t.*\.txt')
-        for file in os.walk(cwd):
-            if log_res.match(file):
-                os.system('mv ' + file + ' ' + logs_dir + '/' + timestamp + '_residual.txt')
-            if log_run.match(file):
-                os.system('mv ' + file + ' ' + logs_dir + '/' + timestamp + '_rundata.txt')
+        for root, dirs, files in os.walk(cwd):
+            for file in files:
+                if log_res.match(file):
+                    os.system('mv ' + file + ' ' + logs_dir + '/' + timestamp + '_residual.txt')
+                if log_run.match(file):
+                    os.system('mv ' + file + ' ' + logs_dir + '/' + timestamp + '_rundata.txt')
 
     finally:
         outf.close()
