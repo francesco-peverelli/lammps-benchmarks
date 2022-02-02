@@ -52,6 +52,7 @@ start_time = time.time()
 
 # Launch benchmark
 proc = subprocess.Popen(args.cmd_string, shell=True, stdout=subprocess.PIPE)
+proc.wait()
 
 # End timed portion
 end_time = time.time()
