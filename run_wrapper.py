@@ -25,6 +25,9 @@ parser.add_argument('--dir', dest='dir', type=str,
 help='[OPTIONAL]\tAllows to specify the directory where the benchmark should be run, this script\'s directory by default')
 parser.add_argument('--gpu-power', dest='gpu_power',type=int,
 help='[OPTIONAL]\tAllows to monitor gpu power draw (requires nvidia-smi)')
+parser.add_argument('--cpu-power', dest='cpu_power',type=bool,
+help='[OPTIONAL]\tAllows to monitor gpu power draw (requires powerstat)')
+
 args = parser.parse_args()
 
 timestamp = datetime.today().strftime("%d-%m-%Y") + '_' + str(datetime.now().time())
@@ -56,6 +59,9 @@ if args.gpu_power is not None:
     id_str = id_str[:-1]
     smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
 
+if args.cpu_power is not None:
+    pow_proc = subprocess.Popen('sudo powerstat 2 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
+
 # Start timed portion
 start_time = time.time()
 
@@ -72,6 +78,8 @@ elapsed_time = end_time - start_time
 
 if args.gpu_power is not None:
     smi_proc.kill()
+if args.cpu_power is not None:
+    pow_proc.kill()
 
 print('*** Timestamp: ' + timestamp + '\n')
 print('*** Bench name: ' + args.bench_name + '\n')
