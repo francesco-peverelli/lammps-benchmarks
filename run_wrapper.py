@@ -23,6 +23,8 @@ parser.add_argument('--arch', dest='arch_info', type=str,
 help='[OPTIONAL]\tAllows to specify details on the architecture. By default is the output of lscpu')
 parser.add_argument('--dir', dest='dir', type=str,
 help='[OPTIONAL]\tAllows to specify the directory where the benchmark should be run, this script\'s directory by default')
+parser.add_argument('--gpu-power', dest='gpu_power',type=int,
+help='[OPTIONAL]\tAllows to monitor gpu power draw (requires nvidia-smi)')
 args = parser.parse_args()
 
 timestamp = datetime.today().strftime("%d-%m-%Y") + '_' + str(datetime.now().time())
@@ -47,6 +49,13 @@ else:
     # Override custom arch info
     arch_info = args.arch_info
 
+if args.gpu_power is not None:
+    id_str = ''
+    for i in range(0,args.gpu_power):
+        id_str += str(i) + ','
+    id_str = id_str[:-1]
+    smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
+
 # Start timed portion
 start_time = time.time()
 
@@ -60,6 +69,9 @@ end_time = time.time()
 result_str = proc.stdout.read().decode("utf-8")
 
 elapsed_time = end_time - start_time
+
+if args.gpu_power is not None:
+    smi_proc.kill()
 
 print('*** Timestamp: ' + timestamp + '\n')
 print('*** Bench name: ' + args.bench_name + '\n')
