@@ -132,4 +132,4 @@ def parse_powerstat_power(file):
                 device_power.append(tokens[watts_pos])
     finally:
         nvf.close()
-    print(device_power)
+    return device_power

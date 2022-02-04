@@ -9,6 +9,7 @@ import time
 import subprocess
 import metric_parsers
 from datetime import datetime
+from statistics import mean
 
 parser = argparse.ArgumentParser(
     description="Run a benchmark program and record standard output and additional information")
@@ -97,8 +98,7 @@ if args.gpu_power is not None:
             max_idx = maxi
         if mini < min_idx:
             min_idx = mini
-        gpu_avg += avg(filter(lambda v: v > th, float_watts))
-    gpu_avg = gpu_avg[:-1]
+        gpu_avg += mean(filter(lambda v: v > th, float_watts))
 
 cpu_avg = 0
 if args.cpu_power is not None:
@@ -110,9 +110,10 @@ if args.cpu_power is not None:
             th = args.cpu_threshold
         else:
             th = 0
-        cpu_avg = avg(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
+        cpu_avg = mean(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
     else:
-        cpu_avg = avg(cpu_watts[min_idx:max_idx])
+        print("Indexes are " + str(min_idx) + ' and ' + str(max_idx) + ', len is ' + str(len(cpu_watts)))
+        cpu_avg = mean([float(x) for x in cpu_watts[min_idx:max_idx]])
 
 print(cpu_avg)
 print(gpu_avg)
