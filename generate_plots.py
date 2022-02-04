@@ -8,7 +8,7 @@ import argparse
 import re
 import os
 
-colors = ['#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8','#228ea8']
+colors = ['#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#228ea8']
 
 parser = argparse.ArgumentParser(
     description="Plot different recorded metrics for a set of benchmark runs")

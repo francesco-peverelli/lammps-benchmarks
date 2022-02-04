@@ -2,6 +2,7 @@
 # The script assumes that the program does not require to use standard input and error. 
 
 import argparse
+from audioop import avg
 import os
 import io
 import time
@@ -27,6 +28,10 @@ parser.add_argument('--gpu-power', dest='gpu_power',type=int,
 help='[OPTIONAL]\tAllows to monitor gpu power draw (requires nvidia-smi)')
 parser.add_argument('--cpu-power', dest='cpu_power',type=bool,
 help='[OPTIONAL]\tAllows to monitor gpu power draw (requires powerstat)')
+parser.add_argument('--gpu-threshold', dest='gpu_threshold',type=int,
+help='[OPTIONAL]\tAllows to set a minimum threshold (Watt) for GPU power average')
+parser.add_argument('--cpu-threshold', dest='cpu_threshold',type=int,
+help='[OPTIONAL]\tAllows to set a minimum threshold (Watt) for CPU power average')
 
 args = parser.parse_args()
 
@@ -60,7 +65,7 @@ if args.gpu_power is not None:
     smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
 
 if args.cpu_power is not None:
-    pow_proc = subprocess.Popen('sudo powerstat 2 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
+    pow_proc = subprocess.Popen('sudo powerstat 1 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
 
 # Start timed portion
 start_time = time.time()
@@ -72,14 +77,36 @@ proc.wait()
 # End timed portion
 end_time = time.time()
 
+gpu_avg = 0
+if args.gpu_power is not None:
+    smi_proc.kill()
+    smi_proc.wait()
+    gpu_watts = metric_parsers.parse_nvidia_smi_power(out_dir + '/' + timestamp + '_nv-smi.txt')
+    if args.gpu_threshold is not None:
+        th = args.gpu_threshold
+    else:
+        th = 90
+    for key in gpu_watts:
+        gpu_avg += avg(filter(lambda v: v > th, [float(x) for x in gpu_watts[key]]))
+    gpu_avg = gpu_avg[:-1]
+
+cpu_avg = 0
+if args.cpu_power is not None:
+    pow_proc.kill()
+    pow_proc.wait()
+    cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
+    if args.cpu_threshold:
+        th = args.cpu_threshold
+    else:
+        th = 0
+    cpu_avg = avg(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
+
+power_average = gpu_avg + cpu_avg
+power_str = str(power_average) if power_average > 0 else ''
+
 result_str = proc.stdout.read().decode("utf-8")
 
 elapsed_time = end_time - start_time
-
-if args.gpu_power is not None:
-    smi_proc.kill()
-if args.cpu_power is not None:
-    pow_proc.kill()
 
 print('*** Timestamp: ' + timestamp + '\n')
 print('*** Bench name: ' + args.bench_name + '\n')
@@ -100,14 +127,15 @@ out_arch_name = args.bench_name + timestamp + '_arch.txt'
 # Write runs in runs file
 
 line = timestamp + ',' + args.bench_name + ',' + args.run_tag \
-    + ',' + args.cmd_string.replace(',',';') + ',' + str(elapsed_time) + ', ' + out_res_name + ',' + out_arch_name + ',\n'
+    + ',' + args.cmd_string.replace(',',';') + ',' + str(elapsed_time) \
+    + ', ' + out_res_name + ',' + out_arch_name + ',,' + power_str + '\n'
 try:
     if os.path.exists(runs_file):
         f = open(runs_file, mode='a')
         f.writelines(line)
     else:
         f = open(runs_file, 'w')
-        header = 'TIMESTAMP,BENCH,TAG,CMD,EXEC_TIME,RES_FILE,ARCH_FILE,PERFORMANCE\n'
+        header = 'TIMESTAMP,BENCH,TAG,CMD,EXEC_TIME,RES_FILE,ARCH_FILE,PERFORMANCE,POWER\n'
         f.writelines(header)
         f.writelines(line)
 finally:
