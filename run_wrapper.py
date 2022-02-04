@@ -78,6 +78,8 @@ proc.wait()
 end_time = time.time()
 
 gpu_avg = 0
+min_idx = 2e+16
+max_idx = 0
 if args.gpu_power is not None:
     smi_proc.kill()
     smi_proc.wait()
@@ -87,7 +89,15 @@ if args.gpu_power is not None:
     else:
         th = 90
     for key in gpu_watts:
-        gpu_avg += avg(filter(lambda v: v > th, [float(x) for x in gpu_watts[key]]))
+        float_watts = [float(x) for x in gpu_watts[key]]
+        filtered_idx = [idx for idx, element in enumerate(float_watts) if element > th]
+        maxi = max(filtered_idx)
+        mini = min(filtered_idx)
+        if maxi > max_idx:
+            max_idx = maxi
+        if mini < min_idx:
+            min_idx = mini
+        gpu_avg += avg(filter(lambda v: v > th, float_watts))
     gpu_avg = gpu_avg[:-1]
 
 cpu_avg = 0
@@ -95,12 +105,17 @@ if args.cpu_power is not None:
     pow_proc.kill()
     pow_proc.wait()
     cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
-    if args.cpu_threshold:
-        th = args.cpu_threshold
+    if args.gpu_power is None:
+        if args.cpu_threshold is not None:
+            th = args.cpu_threshold
+        else:
+            th = 0
+        cpu_avg = avg(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
     else:
-        th = 0
-    cpu_avg = avg(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
+        cpu_avg = avg(cpu_watts[min_idx:max_idx])
 
+print(cpu_avg)
+print(gpu_avg)
 power_average = gpu_avg + cpu_avg
 power_str = str(power_average) if power_average > 0 else ''
 
