@@ -115,8 +115,6 @@ if args.cpu_power is not None:
         print("Indexes are " + str(min_idx) + ' and ' + str(max_idx) + ', len is ' + str(len(cpu_watts)))
         cpu_avg = mean([float(x) for x in cpu_watts[min_idx:max_idx]])
 
-print(cpu_avg)
-print(gpu_avg)
 power_average = gpu_avg + cpu_avg
 power_str = str(power_average) if power_average > 0 else ''
 

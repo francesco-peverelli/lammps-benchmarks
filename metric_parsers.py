@@ -129,6 +129,8 @@ def parse_powerstat_power(file):
             if perfline.match(line) and header_ok:
                 tokens = re.split(r'\s+', line)
                 tokens = list(filter(lambda h: h != '', tokens))
+                if len(tokens) <= watts_pos: 
+                    continue
                 device_power.append(tokens[watts_pos])
     finally:
         nvf.close()
