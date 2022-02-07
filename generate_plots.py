@@ -40,7 +40,8 @@ bench = [el.split(':')[0] for el in x_split]
 tag_string = [el.split(':')[1] for el in x_split]
 label_pos = args.x_label_pos.split(':')
 label_pos = [int(x) for x in label_pos]
-
+print(label_pos)
+print(tag_string)
 assert(len(label_pos) == len(tag_string))
 
 x_ticklabels = []
@@ -58,7 +59,12 @@ for b,t,pos in zip(bench,tag_string,label_pos):
                 # TODO: implement averaging here
                 continue
             x_vals.append((runs_df.iloc[i]['TAG']).split('_')[pos][:-1])
-            y_vals.append(runs_df.iloc[i][args.y_metric])
+            if args.y_metric == "PPW":
+                # Compute performance per Watt on the fly
+                ppw = float(runs_df.iloc[i]['PERFORMANCE']) / float(runs_df.iloc[i]['POWER'])
+                y_vals.append(ppw)
+            else:
+                y_vals.append(runs_df.iloc[i][args.y_metric])
             seen_tags.add(tag)
     y_axes.append(y_vals)
     x_ticklabels.append(x_vals)
