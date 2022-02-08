@@ -171,9 +171,18 @@ try:
     # Update performace metrics
     metric_parsers.update_performance_metric(timestamp, args.bench_name, out_dir)
 finally:
-    if smi_proc is not None:
-        smi_proc.kill()
-    if pow_proc is not None:
-        pow_proc.kill()
-    if proc is not None:
-        proc.kill()
+    try:
+        if smi_proc is not None:
+            smi_proc.kill()
+    except NameError:
+        print("No smi to kill...")
+    try:
+        if pow_proc is not None:
+            pow_proc.kill()
+    except NameError:
+        print("No powerstat to kill...")
+    try:
+        if proc is not None:
+            proc.kill()
+    except NameError:
+        print("No app process to kill...")
