@@ -1,9 +1,9 @@
 
 for ppn in {1,2}; do
 	for n in {1..1}; do
-		for i in {16,32,64,128,256,512,1024,2048}; do
-			np=$((${n}/${ppn}))
-			ont=$((128/${n}))
+		for i in {512,1024,2048}; do
+			np=${n}
+			ont=128
 			rpl_str="3s/.*/${i} ${i} ${i}/"
 			rpl="sed -i '$rpl_str' ../hpcg.dat"
 			eval $rpl
