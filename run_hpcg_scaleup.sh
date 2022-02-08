@@ -1,7 +1,7 @@
 
 for ppn in {1,2}; do
 	for n in {1..1}; do
-		for i in {512,1024,2048}; do
+		for i in {320,384,430}; do
 			np=${n}
 			ont=128
 			rpl_str="3s/.*/${i} ${i} ${i}/"
