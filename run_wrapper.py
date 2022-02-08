@@ -58,114 +58,131 @@ else:
     # Override custom arch info
     arch_info = args.arch_info
 
-if args.gpu_power is not None:
-    id_str = ''
-    for i in range(0,args.gpu_power):
-        id_str += str(i) + ','
-    id_str = id_str[:-1]
-    smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
+try:
+    if args.gpu_power is not None:
+        id_str = ''
+        for i in range(0,args.gpu_power):
+            id_str += str(i) + ','
+        id_str = id_str[:-1]
+        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
 
-if args.cpu_power is not None:
-    pow_proc = subprocess.Popen('sudo powerstat 1 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
+    if args.cpu_power is not None:
+        pow_proc = subprocess.Popen('sudo powerstat 1 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
 
-# Start timed portion
-start_time = time.time()
+    # Start timed portion
+    start_time = time.time()
 
-# Launch benchmark
-proc = subprocess.Popen(args.cmd_string, shell=True, stdout=subprocess.PIPE)
-proc.wait()
+    # Launch benchmark
+    proc = subprocess.Popen(args.cmd_string, shell=True, stdout=subprocess.PIPE)
+    proc.wait()
 
-# End timed portion
-end_time = time.time()
+    # End timed portion
+    end_time = time.time()
 
-gpu_avg = 0
-min_idx = 2e+16
-max_idx = 0
-if args.gpu_power is not None:
-    smi_proc.kill()
-    smi_proc.wait()
-    gpu_watts = metric_parsers.parse_nvidia_smi_power(out_dir + '/' + timestamp + '_nv-smi.txt')
-    if args.gpu_threshold is not None:
-        th = args.gpu_threshold
-    else:
-        th = 90
-    for key in gpu_watts:
-        float_watts = [float(x) for x in gpu_watts[key]]
-        filtered_idx = [idx for idx, element in enumerate(float_watts) if element > th]
-        maxi = max(filtered_idx)
-        mini = min(filtered_idx)
-        if maxi > max_idx:
-            max_idx = maxi
-        if mini < min_idx:
-            min_idx = mini
-        gpu_avg += mean(filter(lambda v: v > th, float_watts))
-
-cpu_avg = 0
-if args.cpu_power is not None:
-    pow_proc.kill()
-    pow_proc.wait()
-    cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
-    if args.gpu_power is None:
-        if args.cpu_threshold is not None:
-            th = args.cpu_threshold
+    gpu_avg = 0
+    min_idx = 2e+16
+    max_idx = 0
+    if args.gpu_power is not None:
+        smi_proc.kill()
+        smi_proc.wait()
+        gpu_watts = metric_parsers.parse_nvidia_smi_power(out_dir + '/' + timestamp + '_nv-smi.txt')
+        if args.gpu_threshold is not None:
+            th = args.gpu_threshold
         else:
-            th = 0
-        cpu_avg = mean(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
-    else:
-        print("Indexes are " + str(min_idx) + ' and ' + str(max_idx) + ', len is ' + str(len(cpu_watts)))
-        cpu_avg = mean([float(x) for x in cpu_watts[min_idx:max_idx]])
+            th = 90
+        for key in gpu_watts:
+            float_watts = [float(x) for x in gpu_watts[key]]
+            filtered_idx = [idx for idx, element in enumerate(float_watts) if element > th]
+            maxi = max(filtered_idx)
+            mini = min(filtered_idx)
+            if maxi > max_idx:
+                max_idx = maxi
+            if mini < min_idx:
+                min_idx = mini
+            gpu_avg += mean(filter(lambda v: v > th, float_watts))
 
-power_average = gpu_avg + cpu_avg
-power_str = str(power_average) if power_average > 0 else ''
+    cpu_avg = 0
+    if args.cpu_power is not None:
+        pow_proc.kill()
+        pow_proc.wait()
+        cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
+        if args.gpu_power is None:
+            if args.cpu_threshold is not None:
+                th = args.cpu_threshold
+            else:
+                th = 0
+            cpu_avg = mean(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
+        else:
+            print("Indexes are " + str(min_idx) + ' and ' + str(max_idx) + ', len is ' + str(len(cpu_watts)))
+            cpu_avg = mean([float(x) for x in cpu_watts[min_idx:max_idx]])
 
-result_str = proc.stdout.read().decode("utf-8")
+    power_average = gpu_avg + cpu_avg
+    power_str = str(power_average) if power_average > 0 else ''
 
-elapsed_time = end_time - start_time
+    result_str = proc.stdout.read().decode("utf-8")
 
-print('*** Timestamp: ' + timestamp + '\n')
-print('*** Bench name: ' + args.bench_name + '\n')
-print('*** Run tag: ' + args.run_tag + '\n')
-print('*** Command: ' + args.cmd_string + '\n')
-print('*** Elapsed time: ' + str(elapsed_time) + '\n')
-print('*** Arch info:\n\n' + arch_info + '\n********\n')
-print('*** Result:\n\n' + result_str + '\n********\n')
+    elapsed_time = end_time - start_time
 
-print('Writing run results on file...')
+    print('*** Timestamp: ' + timestamp + '\n')
+    print('*** Bench name: ' + args.bench_name + '\n')
+    print('*** Run tag: ' + args.run_tag + '\n')
+    print('*** Command: ' + args.cmd_string + '\n')
+    print('*** Elapsed time: ' + str(elapsed_time) + '\n')
+    print('*** Arch info:\n\n' + arch_info + '\n********\n')
+    print('*** Result:\n\n' + result_str + '\n********\n')
 
-runs_file = out_dir + '/runs.csv'
-out_res_file = out_dir + '/' + timestamp + '_out.txt' 
-out_res_name = args.bench_name + timestamp + '_out.txt'
-out_arch_file = out_dir + '/' + timestamp + '_arch.txt'
-out_arch_name = args.bench_name + timestamp + '_arch.txt'
+    print('Writing run results on file...')
 
-# Write runs in runs file
+    runs_file = out_dir + '/runs.csv'
+    out_res_file = out_dir + '/' + timestamp + '_out.txt' 
+    out_res_name = args.bench_name + timestamp + '_out.txt'
+    out_arch_file = out_dir + '/' + timestamp + '_arch.txt'
+    out_arch_name = args.bench_name + timestamp + '_arch.txt'
 
-line = timestamp + ',' + args.bench_name + ',' + args.run_tag \
-    + ',' + args.cmd_string.replace(',',';') + ',' + str(elapsed_time) \
-    + ', ' + out_res_name + ',' + out_arch_name + ',,' + power_str + '\n'
-try:
-    if os.path.exists(runs_file):
-        f = open(runs_file, mode='a')
-        f.writelines(line)
-    else:
-        f = open(runs_file, 'w')
-        header = 'TIMESTAMP,BENCH,TAG,CMD,EXEC_TIME,RES_FILE,ARCH_FILE,PERFORMANCE,POWER\n'
-        f.writelines(header)
-        f.writelines(line)
+    # Write runs in runs file
+
+    line = timestamp + ',' + args.bench_name + ',' + args.run_tag \
+        + ',' + args.cmd_string.replace(',',';') + ',' + str(elapsed_time) \
+        + ', ' + out_res_name + ',' + out_arch_name + ',,' + power_str + '\n'
+    try:
+        if os.path.exists(runs_file):
+            f = open(runs_file, mode='a')
+            f.writelines(line)
+        else:
+            f = open(runs_file, 'w')
+            header = 'TIMESTAMP,BENCH,TAG,CMD,EXEC_TIME,RES_FILE,ARCH_FILE,PERFORMANCE,POWER\n'
+            f.writelines(header)
+            f.writelines(line)
+    finally:
+        f.close()
+    # Write stdout for the benchmark
+    try:
+        resf = open(out_res_file,'w')
+        resf.write(result_str)
+    finally:
+        resf.close()
+    # Write arch info for the benchmark
+    try:
+        archf = open(out_arch_file,'w')
+        archf.write(arch_info)
+    finally:
+        archf.close()
+
+    # Update performace metrics
+    metric_parsers.update_performance_metric(timestamp, args.bench_name, out_dir)
 finally:
-    f.close()
-# Write stdout for the benchmark
-try:
-    resf = open(out_res_file,'w')
-    resf.write(result_str)
-finally:
-    resf.close()
-# Write arch info for the benchmark
-try:
-    archf = open(out_arch_file,'w')
-    archf.write(arch_info)
-finally:
-    archf.close()
-
-# Update performace metrics
-metric_parsers.update_performance_metric(timestamp, args.bench_name, out_dir)
+    try:
+        if smi_proc is not None:
+            smi_proc.kill()
+    except NameError:
+        print("No smi to kill...")
+    try:
+        if pow_proc is not None:
+            pow_proc.kill()
+    except NameError:
+        print("No powerstat to kill...")
+    try:
+        if proc is not None:
+            proc.kill()
+    except NameError:
+        print("No app process to kill...")
