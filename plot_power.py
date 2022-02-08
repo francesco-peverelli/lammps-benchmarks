@@ -30,7 +30,7 @@ if args.type == 'CPU':
     power_list = metric_parsers.parse_powerstat_power(file)
     x = np.arange(len(power_list))
     y_values.append(power_list)
-    max_watts = max(power_list)
+    max_watts = max([float(x) for x in power_list])
     if max_watts > maxw:
         maxw = max_watts
 else:

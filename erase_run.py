@@ -18,6 +18,8 @@ bench_dir = cwd + '/' + args.bench_name
 csv_path = bench_dir + '/runs.csv'
 out_res_file = bench_dir + '/' + args.timestamp + '_out.txt'
 out_arch_file = bench_dir + '/' + args.timestamp + '_arch.txt'
+cpu_power_file = bench_dir + '/' + args.timestamp + '_powerstat.txt'
+gpu_power_file = bench_dir + '/' + args.timestamp + '_nv-smi.txt'
 
 if not os.path.exists(bench_dir):
     print("No such benchmark, terminating...")
@@ -33,6 +35,10 @@ if (runs_data.index == args.timestamp).any():
     runs_data.to_csv(csv_path)
     os.remove(out_res_file)
     os.remove(out_arch_file)
+    if os.path.exists(cpu_power_file):
+        os.remove(cpu_power_file)
+    if os.path.exists(gpu_power_file):
+        os.remove(gpu_power_file)
     print("Run " + args.timestamp + " was succesfully deleted!")
 else:
     print("No such timestamp, terminating...")

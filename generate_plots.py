@@ -30,6 +30,8 @@ parser.add_argument('--format', dest='format', type=str, default='svg',
 help='[OPTIONAL]\tAllows to specify the plot format (e.g. svg,pdf)')
 parser.add_argument('--bench-names', dest='bench_names', type=str,
 help='[OPTIONAL]\tAllows to specify alternative names for the benchmarks, e.g. NAME1:NAME2')
+parser.add_argument('--x-argsort', dest='x_sort', type=bool,
+help='[OPTIONAL]\tIf set to 1, sorts data accorfing to the sorting of the x axis variable')
 
 args = parser.parse_args()
 
@@ -60,17 +62,22 @@ for b,t,pos in zip(bench,tag_string,label_pos):
             seen_tags.add(tag)
     y_axes.append(y_vals)
     x_ticklabels.append(x_vals)
-print(x_ticklabels)
 
 fig, ax1 = plt.subplots(figsize=(8,8))
 for y_axis, x_labels,i in zip(y_axes,x_ticklabels,np.arange(len(y_axes))):
     x_axis = np.arange(0,len(x_labels))
+    if args.x_sort is not None:
+        int_x_labels = [int(l) for l in x_labels] 
+        x_index = np.array(int_x_labels).argsort()
+        y_axis = list(np.array(y_axis)[x_index])
+        x_labels = list(np.array(x_labels)[x_index])
     print(x_axis)
     print(y_axis)
     print(x_labels)
     ax1.plot(x_axis,y_axis, marker='.', color=colors[i])
     ax1.set_xticks(x_axis)
     ax1.set_xticklabels(x_labels)
+
 ax1.set_xlabel(args.x_name)
 ax1.set_ylabel(args.y_name)
 ax1.grid(visible=True, which='major', linestyle='dotted')
