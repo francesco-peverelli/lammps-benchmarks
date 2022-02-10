@@ -7,6 +7,7 @@ import pandas as pd
 import argparse
 import re
 import os
+import statistics
 
 colors = ['#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#228ea8']
 
@@ -32,7 +33,8 @@ parser.add_argument('--bench-names', dest='bench_names', type=str,
 help='[OPTIONAL]\tAllows to specify alternative names for the benchmarks, e.g. NAME1:NAME2')
 parser.add_argument('--x-argsort', dest='x_sort', type=bool,
 help='[OPTIONAL]\tIf set to 1, sorts data accorfing to the sorting of the x axis variable')
-
+parser.add_argument('--y-mean', dest='y_mean', type=bool,
+help='[OPTIONAL]\tIf set to 1, averages y values for data with the same tag')
 args = parser.parse_args()
 
 x_split = args.x_list.split(',')
@@ -53,19 +55,38 @@ for b,t,pos in zip(bench,tag_string,label_pos):
     x_vals = []
     y_vals = []
     seen_tags = set()
+    tag_vals = {}
     for tag,i in zip(runs_df['TAG'],runs_df.index):
-        if regex.match(tag):
-            if tag in seen_tags:
-                # TODO: implement averaging here
-                continue
-            x_vals.append((runs_df.iloc[i]['TAG']).split('_')[pos][:-1])
-            if args.y_metric == "PPW":
-                # Compute performance per Watt on the fly
-                ppw = float(runs_df.iloc[i]['PERFORMANCE']) / float(runs_df.iloc[i]['POWER'])
-                y_vals.append(ppw)
-            else:
-                y_vals.append(runs_df.iloc[i][args.y_metric])
-            seen_tags.add(tag)
+        if args.y_mean:
+            if regex.match(tag): 
+                if tag not in tag_vals:
+                    tag_vals[tag] = []
+                    x_vals.append((runs_df.iloc[i]['TAG']).split('_')[pos][:-1])
+                if args.y_metric == "PPW":
+                    # Compute performance per Watt on the fly
+                    ppw = float(runs_df.iloc[i]['PERFORMANCE']) / float(runs_df.iloc[i]['POWER'])
+                    tag_vals[tag].append(ppw)
+                else:
+                    tag_vals[tag].append(runs_df.iloc[i][args.y_metric])
+            
+        else:
+            if regex.match(tag):
+                if tag in seen_tags:
+                    # TODO: implement averaging here
+                    continue
+                x_vals.append((runs_df.iloc[i]['TAG']).split('_')[pos][:-1])
+                if args.y_metric == "PPW":
+                    # Compute performance per Watt on the fly
+                    ppw = float(runs_df.iloc[i]['PERFORMANCE']) / float(runs_df.iloc[i]['POWER'])
+                    y_vals.append(ppw)
+                else:
+                    y_vals.append(runs_df.iloc[i][args.y_metric])
+                seen_tags.add(tag)
+    # Compute per-tag mean
+    if args.y_mean:
+        for key in tag_vals:
+            y_vals.append(statistics.mean(tag_vals[key]))
+    
     y_axes.append(y_vals)
     x_ticklabels.append(x_vals)
 
