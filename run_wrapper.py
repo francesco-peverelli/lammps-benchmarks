@@ -64,10 +64,10 @@ try:
         for i in range(0,args.gpu_power):
             id_str += str(i) + ','
         id_str = id_str[:-1]
-        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
+        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=500 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
 
     if args.cpu_power is not None:
-        pow_proc = subprocess.Popen('sudo powerstat 1 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
+        pow_proc = subprocess.Popen('sudo powerstat 0.5 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
 
     # Start timed portion
     start_time = time.time()
@@ -105,12 +105,17 @@ try:
     if args.cpu_power is not None:
         pow_proc.kill()
         pow_proc.wait()
+        while os.path.getsize(out_dir + '/' + timestamp + '_powerstat.txt') == 0:
+            print("Waiting for power file to finish writing...")
+            time.sleep(5)
         cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
         if args.gpu_power is None:
             if args.cpu_threshold is not None:
                 th = args.cpu_threshold
             else:
                 th = 0
+            print(cpu_watts)
+            print(th)
             cpu_avg = mean(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
         else:
             print("Indexes are " + str(min_idx) + ' and ' + str(max_idx) + ', len is ' + str(len(cpu_watts)))
