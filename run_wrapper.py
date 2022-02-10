@@ -64,10 +64,10 @@ try:
         for i in range(0,args.gpu_power):
             id_str += str(i) + ','
         id_str = id_str[:-1]
-        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=1000 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
+        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=500 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
 
     if args.cpu_power is not None:
-        pow_proc = subprocess.Popen('sudo powerstat 1 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
+        pow_proc = subprocess.Popen('sudo powerstat 0.5 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
 
     # Start timed portion
     start_time = time.time()
