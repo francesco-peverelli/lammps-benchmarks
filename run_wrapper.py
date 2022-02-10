@@ -105,12 +105,17 @@ try:
     if args.cpu_power is not None:
         pow_proc.kill()
         pow_proc.wait()
+        while os.path.getsize(out_dir + '/' + timestamp + '_powerstat.txt') == 0:
+            print("Waiting for power file to finish writing...")
+            time.sleep(1)
         cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
         if args.gpu_power is None:
             if args.cpu_threshold is not None:
                 th = args.cpu_threshold
             else:
                 th = 0
+            print(cpu_watts)
+            print(th)
             cpu_avg = mean(filter(lambda v: v > th,[float(x) for x in cpu_watts]))
         else:
             print("Indexes are " + str(min_idx) + ' and ' + str(max_idx) + ', len is ' + str(len(cpu_watts)))

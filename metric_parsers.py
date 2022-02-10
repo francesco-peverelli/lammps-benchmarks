@@ -124,7 +124,6 @@ def parse_nvidia_smi_power(file):
         nvf = open(file, mode='r')
         data = nvf.readlines()
         perfline = re.compile(r'\d+\.\d+ W, GPU-')
-
         for line in data:
             if perfline.match(line):
                 watts = re.search(r'(\d+\.\d+)', line).group()
@@ -140,6 +139,7 @@ def parse_nvidia_smi_power(file):
 # Returns a list corresponding to the CPU energy values recorded in the input file
 def parse_powerstat_power(file):
     device_power = []
+    print("File: " + file)
     try:
         nvf = open(file, mode='r')
         data = nvf.readlines()
