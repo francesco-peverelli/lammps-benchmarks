@@ -107,7 +107,7 @@ try:
         pow_proc.wait()
         while os.path.getsize(out_dir + '/' + timestamp + '_powerstat.txt') == 0:
             print("Waiting for power file to finish writing...")
-            time.sleep(1)
+            time.sleep(5)
         cpu_watts = metric_parsers.parse_powerstat_power(out_dir + '/' + timestamp + '_powerstat.txt')
         if args.gpu_power is None:
             if args.cpu_threshold is not None:
