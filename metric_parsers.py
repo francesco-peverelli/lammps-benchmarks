@@ -43,6 +43,32 @@ def hpcg_cpu_parser(runs_data, out_file, timestamp, logs_dir):
 
     return runs_data
 
+# Testing parser for lammps benchmarks
+def lammps_parser(runs_data, out_file, timestamp, logs_dir):
+    try:
+        outf = open(out_file, mode='r')
+        data = outf.read()
+        z = re.search(r'Performance: \d+\.\d+ ns/day', str(data))
+        perf = re.search(r'(\d+\.\d+)', z.group()).group()
+        runs_data.loc[timestamp,'PERFORMANCE'] = perf
+        
+        # Rename and move additional log files
+        #cwd = os.getcwd()
+        #log_res = re.compile(r'hpcg\d+T\d+\.txt')
+        #log_run = re.compile(r'n\d+-\d+p-\d+t.*\.txt')
+        #for root, dirs, files in os.walk(cwd):
+        #    for file in files:
+        #        if log_res.match(file):
+        #            os.system('mv ' + file + ' ' + logs_dir + '/' + timestamp + '_residual.txt')
+        #        if log_run.match(file):
+        #            os.system('mv ' + file + ' ' + logs_dir + '/' + timestamp + '_rundata.txt')
+
+    finally:
+        outf.close()
+
+    return runs_data
+
+
 # Testing parser for hpcg_gpu benchmark
 def hpcg_gpu_parser(runs_data, out_file, timestamp, logs_dir):
     try:
@@ -83,6 +109,8 @@ def update_performance_metric(timestamp, benchmark, out_dir):
         updated_data = hpcg_cpu_parser(runs_data, out_file, timestamp, logs_dir)
     elif benchmark == 'hpcg_gpu':
         updated_data = hpcg_gpu_parser(runs_data, out_file, timestamp, logs_dir)
+    elif benchmark == 'lammps':
+        updated_data = lammps_parser(runs_data, out_file, timestamp, logs_dir)
     else:
         print('*** No parser found for ' + benchmark + ', skipping performance recording  ***')
 
