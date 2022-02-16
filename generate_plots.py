@@ -58,7 +58,7 @@ for b,t,pos in zip(bench,tag_string,label_pos):
     tag_vals = {}
     for tag,i in zip(runs_df['TAG'],runs_df.index):
         if args.y_mean:
-            if regex.match(tag): 
+            if regex.match(tag):
                 if tag not in tag_vals:
                     tag_vals[tag] = []
                     x_vals.append((runs_df.iloc[i]['TAG']).split('_')[pos][:-1])
