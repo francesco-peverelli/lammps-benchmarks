@@ -48,7 +48,7 @@ def lammps_parser(runs_data, out_file, timestamp, logs_dir):
     try:
         outf = open(out_file, mode='r')
         data = outf.read()
-        z = re.search(r'Performance: \d+\.\d+ ns/day', str(data))
+        z = re.search(r'Performance: \d+\.\d+ (ns|tau)/day', str(data))
         perf = re.search(r'(\d+\.\d+)', z.group()).group()
         runs_data.loc[timestamp,'PERFORMANCE'] = perf
         
