@@ -111,6 +111,8 @@ def update_performance_metric(timestamp, benchmark, out_dir):
         updated_data = hpcg_gpu_parser(runs_data, out_file, timestamp, logs_dir)
     elif benchmark == 'lammps':
         updated_data = lammps_parser(runs_data, out_file, timestamp, logs_dir)
+    elif benchmark == 'lammps_gpu':
+        updated_data = lammps_parser(runs_data, out_file, timestamp, logs_dir)
     else:
         print('*** No parser found for ' + benchmark + ', skipping performance recording  ***')
 
