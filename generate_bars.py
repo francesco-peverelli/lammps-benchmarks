@@ -78,7 +78,7 @@ for b,t in zip(bench,tag_string):
     y_axis.append(y_val)
 
 x = np.arange(len(x_labels))
-fig,ax = plt.subplots()
+fig,ax = plt.subplots(figsize=(12,8))
 width = 0.5
 print(x)
 print(y_axis)
