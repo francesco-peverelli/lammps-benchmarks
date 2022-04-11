@@ -16,7 +16,7 @@ gpu_mpi_dict = [{1 : 6, 2 : 12, 4 : 12, 6 : 18, 8 : 24},
 problem_idx = int(sys.argv[3])
 bench_dir="../../../lammps/bench/"
 bench_in=sys.argv[1]
-gthreshold=55
+gthreshold=40
 
 for gpu,mpi in gpu_mpi_dict[problem_idx].items():
     for k in range(0,10):
