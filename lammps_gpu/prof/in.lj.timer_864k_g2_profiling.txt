@@ -1,0 +1,107 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+New timer settings: style=full  mode=sync  timeout=off
+Lattice spacing in x,y,z = 1.6795962 1.6795962 1.6795962
+Created orthogonal box = (0 0 0) to (100.77577 100.77577 100.77577)
+  3 by 3 by 4 MPI processor grid
+Created 864000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (100.77577 100.77577 100.77577)
+  create_atoms CPU = 0.005 seconds
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for lj/cut:
+-  with 18 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 10/16 GB, 1.5 GHZ (Mixed Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-1 on core 0...Done.
+Initializing Devices 0-1 on core 1...Done.
+Initializing Devices 0-1 on core 2...Done.
+Initializing Devices 0-1 on core 3...Done.
+Initializing Devices 0-1 on core 4...Done.
+Initializing Devices 0-1 on core 5...Done.
+Initializing Devices 0-1 on core 6...Done.
+Initializing Devices 0-1 on core 7...Done.
+Initializing Devices 0-1 on core 8...Done.
+Initializing Devices 0-1 on core 9...Done.
+Initializing Devices 0-1 on core 10...Done.
+Initializing Devices 0-1 on core 11...Done.
+Initializing Devices 0-1 on core 12...Done.
+Initializing Devices 0-1 on core 13...Done.
+Initializing Devices 0-1 on core 14...Done.
+Initializing Devices 0-1 on core 15...Done.
+Initializing Devices 0-1 on core 16...Done.
+Initializing Devices 0-1 on core 17...Done.
+
+  generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 7.441 | 7.441 | 7.441 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1.44   -6.7733675            0     -4.61337   -5.0196713 
+   10000   0.69749427   -5.6674506            0   -4.6212104    0.7458333 
+Loop time of 56.0315 on 36 procs for 10000 steps with 864000 atoms
+
+Performance: 77099.511 tau/day, 178.471 timesteps/s
+98.6% CPU use with 36 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg|  %CPU | %total
+-----------------------------------------------------------------------
+Pair    | 26.17      | 27.695     | 29.342     |  12.1 |  98.9 | 49.43
+Neigh   | 0.00076734 | 0.00084907 | 0.00096284 |   0.0 | 100.0 |  0.00
+Comm    | 6.5927     | 6.9882     | 7.3197     |   9.1 |  98.2 | 12.47
+Output  | 0.00026016 | 0.00026187 | 0.00029174 |   0.0 | 100.0 |  0.00
+Modify  | 2.6926     | 3.0234     | 3.343      |  15.3 |  98.2 |  5.40
+Sync    | 15.491     | 17.104     | 18.548     |  18.5 |  98.3 | 30.52
+Other   |            | 18.32      |            |       |       | 32.70
+
+Nlocal:          24000 ave       24074 max       23878 min
+Histogram: 1 0 1 0 8 8 7 6 1 4
+Nghost:        15925.6 ave       16011 max       15848 min
+Histogram: 1 0 4 10 7 5 5 2 1 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 36 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 500
+Dangerous builds not checked
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   11.5685 s.
+Neighbor copy:   0.0251 s.
+Neighbor build:  1.1522 s.
+Force calc:      10.9120 s.
+Device Overhead: 18.7826 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  20.41 MB.
+CPU Neighbor:    0.7286 s.
+CPU Cast/Pack:   4.2489 s.
+CPU Driver_Time: 0.2751 s.
+CPU Idle_Time:   20.8139 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:01:17
+Intel(R) VTune(TM) Profiler 2022.1.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220414" command to generate textual and HTML reports for the profiling session.
