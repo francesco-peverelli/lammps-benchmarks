@@ -10,6 +10,8 @@ import subprocess
 import metric_parsers
 from datetime import datetime
 from statistics import mean
+import signal
+import subprocess
 
 parser = argparse.ArgumentParser(
     description="Run a benchmark program and record standard output and additional information")
@@ -64,10 +66,13 @@ try:
         for i in range(0,args.gpu_power):
             id_str += str(i) + ','
         id_str = id_str[:-1]
-        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=500 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True)
+        sid=os.setsid
+        smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=500 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True, preexec_fn=sid)
 
     if args.cpu_power is not None:
-        pow_proc = subprocess.Popen('sudo powerstat 0.5 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True)
+        if sid is None:
+            sid=os.setsid
+        pow_proc = subprocess.Popen('sudo powerstat 0.5 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True, preexec_fn=sid)
 
     # Start timed portion
     start_time = time.time()
@@ -83,7 +88,7 @@ try:
     min_idx = 2e+16
     max_idx = 0
     if args.gpu_power is not None:
-        smi_proc.kill()
+        os.killpg(os.getpgid(smi_proc.pid), signal.SIGTERM)
         smi_proc.wait()
         gpu_watts = metric_parsers.parse_nvidia_smi_power(out_dir + '/' + timestamp + '_nv-smi.txt')
         if args.gpu_threshold is not None:
@@ -103,7 +108,8 @@ try:
 
     cpu_avg = 0
     if args.cpu_power is not None:
-        pow_proc.kill()
+        os.system("sudo kill $(ps aux | grep 'powerstat' | awk '{print $2}') &> /dev/null")
+        #os.killpg(os.getpgid(pow_proc.pid), signal.SIGTERM)
         pow_proc.wait()
         while os.path.getsize(out_dir + '/' + timestamp + '_powerstat.txt') == 0:
             print("Waiting for power file to finish writing...")
@@ -177,23 +183,10 @@ try:
     metric_parsers.update_performance_metric(timestamp, args.bench_name, out_dir)
 finally:
     try:
-        if smi_proc is not None:
-            smi_proc.close()
-        else:
-            print("No smi process found to close...")
-    except NameError:
-        print("No smi to kill...")
-    try:
-        if pow_proc is not None:
-            pow_proc.close()
-        else:
-            print("No powerstat process found to close...")
-    except NameError:
-        print("No powerstat to kill...")
-    try:
         if proc is not None:
-            proc.close()
+            proc.kill()
         else:
             print("No app process found to close")
     except NameError:
         print("No app process to kill...")
+
