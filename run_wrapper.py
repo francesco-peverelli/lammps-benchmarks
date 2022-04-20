@@ -178,16 +178,22 @@ try:
 finally:
     try:
         if smi_proc is not None:
-            smi_proc.kill()
+            smi_proc.close()
+        else:
+            print("No smi process found to close...")
     except NameError:
         print("No smi to kill...")
     try:
         if pow_proc is not None:
-            pow_proc.kill()
+            pow_proc.close()
+        else:
+            print("No powerstat process found to close...")
     except NameError:
         print("No powerstat to kill...")
     try:
         if proc is not None:
-            proc.kill()
+            proc.close()
+        else:
+            print("No app process found to close")
     except NameError:
         print("No app process to kill...")

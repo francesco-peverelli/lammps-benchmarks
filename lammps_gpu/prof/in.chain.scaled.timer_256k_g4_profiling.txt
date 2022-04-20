@@ -1,6 +1,6 @@
 LAMMPS (7 Jan 2022)
   using 1 OpenMP thread(s) per MPI task
-New timer settings: style=full  mode=sync  timeout=off
+New timer settings: style=full  mode=nosync  timeout=off
 Reading data file ...
   orthogonal box = (-16.796 -16.796 -16.796) to (16.796 16.796 16.796)
   2 by 4 by 4 MPI processor grid
@@ -17,8 +17,8 @@ Finding 1-2 1-3 1-4 neighbors ...
   special bond factors coul:  0        1        1       
      2 = max # of 1-2 neighbors
      2 = max # of special neighbors
-  special bonds CPU = 0.005 seconds
-  read_data CPU = 0.258 seconds
+  special bonds CPU = 0.004 seconds
+  read_data CPU = 0.177 seconds
 Replicating atoms ...
   orthogonal box = (-16.796 -16.796 -16.796) to (50.388 50.388 50.388)
   2 by 4 by 4 MPI processor grid
@@ -29,8 +29,8 @@ Finding 1-2 1-3 1-4 neighbors ...
   special bond factors coul:  0        1        1       
      2 = max # of 1-2 neighbors
      2 = max # of special neighbors
-  special bonds CPU = 0.009 seconds
-  replicate CPU = 0.028 seconds
+  special bonds CPU = 0.007 seconds
+  replicate CPU = 0.021 seconds
 
 CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
 
@@ -73,22 +73,21 @@ Per MPI rank memory allocation (min/avg/max) = 4.682 | 4.682 | 4.683 Mbytes
 Step Temp E_pair E_mol TotEng Press 
        0   0.97027119   0.44484089    20.494523    22.394765    4.6721843 
      100   0.97348665   0.44199381    20.501529    22.403747    4.6869238 
-Loop time of 0.391833 on 32 procs for 100 steps with 256000 atoms
+Loop time of 0.337087 on 32 procs for 100 steps with 256000 atoms
 
-Performance: 264602.440 tau/day, 255.211 timesteps/s
-98.2% CPU use with 32 MPI tasks x 1 OpenMP threads
+Performance: 307576.372 tau/day, 296.659 timesteps/s
+96.3% CPU use with 32 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg|  %CPU | %total
 -----------------------------------------------------------------------
-Pair    | 0.08333    | 0.10274    | 0.15139    |   5.1 |  97.6 | 26.22
-Bond    | 0.024017   | 0.026619   | 0.041693   |   3.4 |  98.3 |  6.79
-Neigh   | 0.013486   | 0.013498   | 0.013522   |   0.0 |  97.4 |  3.44
-Comm    | 0.03357    | 0.037448   | 0.043912   |   1.4 |  98.3 |  9.56
-Output  | 0.00010045 | 0.00010208 | 0.00012283 |   0.0 | 100.0 |  0.03
-Modify  | 0.052785   | 0.056173   | 0.075553   |   2.8 |  98.6 | 14.34
-Sync    | 0.051866   | 0.14228    | 0.16609    |   8.5 |  98.4 | 36.31
-Other   |            | 0.1553     |            |       |       | 39.62
+Pair    | 0.10144    | 0.12553    | 0.14842    |   3.3 |  96.7 | 37.24
+Bond    | 0.024182   | 0.024779   | 0.025711   |   0.2 |  96.9 |  7.35
+Neigh   | 0.009427   | 0.010081   | 0.010642   |   0.3 |  96.4 |  2.99
+Comm    | 0.048874   | 0.056339   | 0.063983   |   1.8 |  94.0 | 16.71
+Output  | 0.00010032 | 0.00049436 | 0.00091436 |   0.0 |  93.7 |  0.15
+Modify  | 0.057911   | 0.060473   | 0.065508   |   0.9 |  97.1 | 17.94
+Other   |            | 0.05939    |            |       |       | 17.62
 
 Nlocal:           8000 ave        8040 max        7968 min
 Histogram: 3 2 3 4 5 10 1 2 1 1
@@ -107,20 +106,20 @@ Dangerous builds = 0
 ---------------------------------------------------------------------
       Device Time Info (average): 
 ---------------------------------------------------------------------
-Data Transfer:   0.0312 s.
-Neighbor copy:   0.0377 s.
-Neighbor build:  0.0247 s.
+Data Transfer:   0.0306 s.
+Neighbor copy:   0.0376 s.
+Neighbor build:  0.0243 s.
 Force calc:      0.0317 s.
-Device Overhead: 0.0843 s.
+Device Overhead: 0.0823 s.
 Average split:   1.0000.
 Lanes / atom:    4.
 Vector width:    32.
 Max Mem / Proc:  2.69 MB.
-CPU Neighbor:    0.0284 s.
-CPU Cast/Pack:   0.0103 s.
-CPU Driver_Time: 0.0025 s.
-CPU Idle_Time:   0.0214 s.
+CPU Neighbor:    0.0273 s.
+CPU Cast/Pack:   0.0098 s.
+CPU Driver_Time: 0.0023 s.
+CPU Idle_Time:   0.0458 s.
 ---------------------------------------------------------------------
 
 Total wall time: 0:00:19
-Intel(R) VTune(TM) Profiler 2022.1.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220414" command to generate textual and HTML reports for the profiling session.
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220420" command to generate textual and HTML reports for the profiling session.

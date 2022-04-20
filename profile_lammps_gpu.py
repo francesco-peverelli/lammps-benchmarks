@@ -15,7 +15,7 @@ gpu_mpi_dict = [{1 : 6, 2 : 12, 4 : 12, 6 : 18, 8 : 24},
 
 problem_idx = int(sys.argv[3])
 start_dir=os.getcwd()
-bench_dir="../../../lammps/bench/"
+bench_dir="../lammps/bench/"
 bench_in=sys.argv[1]
 os.chdir(bench_dir)
 
