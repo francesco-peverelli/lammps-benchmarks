@@ -25,4 +25,3 @@ for gpu,mpi in gpu_mpi_dict[problem_idx].items():
         cmd="python3 run_wrapper.py --cmd " + bench_cmd + " --bench lammps_gpu --tag " + tag + " --dir " + bench_dir + " --arch BM.GPU3.8 --gpu-power " + str(gpu) + " --cpu-power 1 --gpu-threshold " + str(gthreshold)
         print("running " + cmd)
         os.system(cmd) 
-        quit()
