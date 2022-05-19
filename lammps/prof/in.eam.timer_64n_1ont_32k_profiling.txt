@@ -1,0 +1,65 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+New timer settings: style=full  mode=nosync  timeout=off
+Lattice spacing in x,y,z = 3.615 3.615 3.615
+Created orthogonal box = (0 0 0) to (72.3 72.3 72.3)
+  4 by 4 by 4 MPI processor grid
+Created 32000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (72.3 72.3 72.3)
+  create_atoms CPU = 0.001 seconds
+Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
+----------------------------------------------------------
+Using INTEL Package without Coprocessor.
+Compiler: Intel Classic C++ 20.21.5 / Intel(R) C++ g++ 9.3 mode
+SIMD compiler directives: Enabled
+Precision: mixed
+----------------------------------------------------------
+Neighbor list info ...
+  update every 1 steps, delay 5 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.95
+  ghost atom cutoff = 5.95
+  binsize = 2.975, bins = 25 25 25
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/intel, perpetual
+      attributes: half, newton on, intel
+      pair build: half/bin/newton/intel
+      stencil: half/bin/3d
+      bin: intel
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 6.582 | 7.727 | 9.115 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1600   -113279.97            0   -106662.06    18703.495 
+      50    781.69066   -109873.35            0   -106640.13    52273.084 
+     100    801.83228    -109957.3            0   -106640.76    51322.819 
+Loop time of 0.0531986 on 64 procs for 100 steps with 32000 atoms
+
+Performance: 812.051 ns/day, 0.030 hours/ns, 1879.748 timesteps/s
+91.9% CPU use with 64 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg|  %CPU | %total
+-----------------------------------------------------------------------
+Pair    | 0.033219   | 0.034064   | 0.037417   |   0.4 |  91.9 | 64.03
+Neigh   | 0.0024005  | 0.0026851  | 0.0036438  |   0.4 |  97.5 |  5.05
+Comm    | 0.010372   | 0.013917   | 0.015514   |   0.8 |  90.9 | 26.16
+Output  | 6.2168e-05 | 0.00012468 | 0.00017862 |   0.0 |  93.5 |  0.23
+Modify  | 0.0006299  | 0.0006737  | 0.00085896 |   0.0 |  92.7 |  1.27
+Other   |            | 0.001735   |            |       |       |  3.26
+
+Nlocal:            500 ave         525 max         469 min
+Histogram: 1 0 2 7 10 20 15 6 2 1
+Nghost:        1955.75 ave        1987 max        1931 min
+Histogram: 1 2 7 16 18 11 6 2 0 1
+Neighs:        18871.6 ave       19672 max       17706 min
+Histogram: 1 0 3 5 11 12 14 11 3 4
+
+Total # of neighbors = 1207782
+Ave neighs/atom = 37.743187
+Neighbor list builds = 13
+Dangerous builds = 0
+Total wall time: 0:00:00
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220519" command to generate textual and HTML reports for the profiling session.

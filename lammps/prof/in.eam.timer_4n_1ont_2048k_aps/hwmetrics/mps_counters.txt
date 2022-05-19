@@ -1,0 +1,56 @@
+Intel(R) VTune(TM) Amplifier summary
+Number of nodes;1
+
+/opt/intel/oneapi/vtune/2022.2.0/bin64/vtune -R summary -r /home/ubuntu/lammps/bench/aps_result_20220519/hwmetrics/results.instance-20220519-1049,s.* -q -format csv -csv-delimiter semicolon
+Hierarchy Level;Metric Name;Metric Value
+0;Elapsed Time;23.358812
+1;SP GFLOPS;20.271464
+1;DP GFLOPS;6.799813
+1;x87 GFLOPS;0.0
+1;IPC;0.806535
+1;Average CPU Frequency;2626969089.696172
+1;Total Thread Count;
+1;CPU Time;119.048713
+0;Effective Physical Core Utilization;7.7% (4.932 out of 64)
+1;Effective Logical Core Utilization;4.0% (5.097 out of 128)
+0;Memory Bound;35.0
+1;Cache Bound;31.8
+1;DRAM Bound;5.7
+2;DRAM Bandwidth Bound;5.0
+1;NUMA: % of Remote Accesses;0.7
+1;Bandwidth Utilization;
+1;Bandwidth Domain;Platform Maximum;Observed Maximum;Average;% of Elapsed Time with High BW Utilization(%)
+1;DRAM, GB/sec;50.000000;56.040500;8.585509;4.8
+1;DRAM Single-Package, GB/sec;25.000000;28.106700;4.376238;5.0
+1;UPI Outgoing, GB/sec;[Unknown];4.025760;0.261926;100.0
+0;Vectorization;94.7
+1;Instruction Mix;
+2;SP FLOPs;7.7
+3;Packed;100.0
+4;128-bit;0.8
+4;256-bit;0.0
+4;512-bit;99.2
+3;Scalar;0.0
+2;DP FLOPs;5.8
+3;Packed;87.5
+4;128-bit;0.0
+4;256-bit;0.3
+4;512-bit;87.2
+3;Scalar;12.5
+2;x87 FLOPs;0.0
+2;Non-FP;86.5
+1;FP Arith/Mem Rd Instr. Ratio;0.844879
+1;FP Arith/Mem Wr Instr. Ratio;2.201077
+0;Collection and Platform Info;
+1;Application Command Line;env "OMP_NUM_THREADS=1" "KMP_AFFINITY=granularity=fine,compact,1,0" "../src/lmp_intel_cpu_intelmpi" "-in" "in.eam.timer" "-pk" "intel" "0" "omp" "1" "mode" "mixed" "-sf" "intel" 
+1;Operating System;5.13.0-1027-oracle DISTRIB_ID=Ubuntu DISTRIB_RELEASE=20.04 DISTRIB_CODENAME=focal DISTRIB_DESCRIPTION="Ubuntu 20.04.4 LTS"
+1;MPI Process Rank;2
+1;Computer Name;instance-20220519-1049
+1;Result Size;6224991
+1;Collection start time;14:25:26 19/05/2022 UTC
+1;Collection stop time;14:25:49 19/05/2022 UTC
+1;Collector Type;Driverless Perf system-wide counting
+1;CPU;
+2;Name;Intel(R) Xeon(R) Processor code named Icelake
+2;Frequency;2593987112
+2;Logical CPU Count;128

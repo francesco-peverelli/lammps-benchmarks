@@ -1,0 +1,62 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+New timer settings: style=full  mode=nosync  timeout=off
+Reading data file ...
+  orthogonal box = (0 0 0) to (40 20 37.2886)
+  2 by 1 by 2 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  read_data CPU = 0.104 seconds
+912 atoms in group bottom
+31088 atoms in group active
+  generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 1.1
+  ghost atom cutoff = 1.1
+  binsize = 0.55, bins = 73 37 68
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair gran/hooke/history, perpetual
+      attributes: half, newton off, size, history
+      pair build: half/size/bin/newtoff
+      stencil: full/bin/3d
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.0001
+Per MPI rank memory allocation (min/avg/max) = 10.59 | 10.59 | 10.6 Mbytes
+Step Atoms KinEng c_1 Volume 
+       0    32000    784139.13    1601.1263    29833.783 
+     100    32000    784292.08    1571.0968    29834.707 
+Loop time of 0.09472 on 4 procs for 100 steps with 32000 atoms
+
+Performance: 9121.620 tau/day, 1055.743 timesteps/s
+98.1% CPU use with 4 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg|  %CPU | %total
+-----------------------------------------------------------------------
+Pair    | 0.039997   | 0.043244   | 0.046416   |   1.5 |  98.3 | 45.65
+Neigh   | 0.010665   | 0.010743   | 0.010846   |   0.1 |  99.3 | 11.34
+Comm    | 0.010708   | 0.011476   | 0.012218   |   0.5 |  96.4 | 12.12
+Output  | 5.9168e-05 | 8.2759e-05 | 0.00010888 |   0.0 | 100.0 |  0.09
+Modify  | 0.018161   | 0.018817   | 0.019386   |   0.4 |  97.7 | 19.87
+Other   |            | 0.01036    |            |       |       | 10.93
+
+Nlocal:           8000 ave        8008 max        7992 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+Nghost:           2439 ave        2450 max        2428 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+Neighs:        29500.5 ave       30488 max       28513 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+
+Total # of neighbors = 118002
+Ave neighs/atom = 3.6875625
+Neighbor list builds = 2
+Dangerous builds = 0
+Total wall time: 0:00:00
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220519" command to generate textual and HTML reports for the profiling session.

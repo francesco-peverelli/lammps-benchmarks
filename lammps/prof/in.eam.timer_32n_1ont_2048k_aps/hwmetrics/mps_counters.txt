@@ -1,0 +1,56 @@
+Intel(R) VTune(TM) Amplifier summary
+Number of nodes;1
+
+/opt/intel/oneapi/vtune/2022.2.0/bin64/vtune -R summary -r /home/ubuntu/lammps/bench/aps_result_20220519/hwmetrics/results.instance-20220519-1049,s.* -q -format csv -csv-delimiter semicolon
+Hierarchy Level;Metric Name;Metric Value
+0;Elapsed Time;5.839177
+1;SP GFLOPS;83.501348
+1;DP GFLOPS;27.624222
+1;x87 GFLOPS;0.000000
+1;IPC;0.852101
+1;Average CPU Frequency;2605874318.216662
+1;Total Thread Count;
+1;CPU Time;134.576561
+0;Effective Physical Core Utilization;36.3% (23.210 out of 64)
+1;Effective Logical Core Utilization;18.0% (23.047 out of 128)
+0;Memory Bound;35.6
+1;Cache Bound;29.4
+1;DRAM Bound;7.2
+2;DRAM Bandwidth Bound;52.9
+1;NUMA: % of Remote Accesses;0.9
+1;Bandwidth Utilization;
+1;Bandwidth Domain;Platform Maximum;Observed Maximum;Average;% of Elapsed Time with High BW Utilization(%)
+1;DRAM, GB/sec;50.000000;120.941000;38.629771;51.7
+1;DRAM Single-Package, GB/sec;25.000000;61.730400;19.610687;52.9
+1;UPI Outgoing, GB/sec;[Unknown];16.962200;2.637405;100.0
+0;Vectorization;92.8
+1;Instruction Mix;
+2;SP FLOPs;7.2
+3;Packed;100.0
+4;128-bit;1.0
+4;256-bit;0.0
+4;512-bit;99.0
+3;Scalar;0.0
+2;DP FLOPs;5.5
+3;Packed;83.5
+4;128-bit;0.0
+4;256-bit;0.5
+4;512-bit;83.0
+3;Scalar;16.5
+2;x87 FLOPs;0.0
+2;Non-FP;87.2
+1;FP Arith/Mem Rd Instr. Ratio;0.696957
+1;FP Arith/Mem Wr Instr. Ratio;1.646411
+0;Collection and Platform Info;
+1;Application Command Line;env "OMP_NUM_THREADS=1" "KMP_AFFINITY=granularity=fine,compact,1,0" "../src/lmp_intel_cpu_intelmpi" "-in" "in.eam.timer" "-pk" "intel" "0" "omp" "1" "mode" "mixed" "-sf" "intel" 
+1;Operating System;5.13.0-1027-oracle DISTRIB_ID=Ubuntu DISTRIB_RELEASE=20.04 DISTRIB_CODENAME=focal DISTRIB_DESCRIPTION="Ubuntu 20.04.4 LTS"
+1;MPI Process Rank;6
+1;Computer Name;instance-20220519-1049
+1;Result Size;6132459
+1;Collection start time;14:26:30 19/05/2022 UTC
+1;Collection stop time;14:26:36 19/05/2022 UTC
+1;Collector Type;Driverless Perf system-wide counting
+1;CPU;
+2;Name;Intel(R) Xeon(R) Processor code named Icelake
+2;Frequency;2593987140
+2;Logical CPU Count;128
