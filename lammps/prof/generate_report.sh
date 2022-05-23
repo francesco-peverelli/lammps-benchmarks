@@ -2,7 +2,7 @@ array=( $(find -type d -regex ".*_aps") )
 
 for dir in ${array[@]}
 do
-	cmd_csv="aps-report --format csv"
+	cmd_csv="aps-report -a --format csv"
 	cmd="aps --report $dir"
 	echo $cmd_csv
 	${cmd_csv} ${dir} > ${dir}.csv

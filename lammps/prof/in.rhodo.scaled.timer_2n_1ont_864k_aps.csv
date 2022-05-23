@@ -43,3 +43,348 @@ Per rank
 Peak memory consumption,MB;         8200.00
 Peak memory consumption rank;1
 Average memory consumption,MB;         8199.00
+| Counters, Memory and Disk usage statistics for all Ranks
+Elapsed Time, s
+  MIN;           92.03 ;Rank 1
+  MAX;           92.05 ;Rank 0
+  AVG;           92.04 ;
+
+MPI Time, s
+Total;            1.73 ;all ranks
+  MIN;            0.77 ;Rank 1
+  MAX;            0.95 ;Rank 0
+  AVG;            0.86 ;
+
+MPI Time, % of Elapsed Time
+  MIN;            0.84 ;Rank 1
+  MAX;            1.04 ;Rank 0
+  AVG;            0.94 ;
+
+MPI Imbalance, s
+Total;            0.53 ;all ranks
+  MIN;            0.22 ;Rank 1
+  MAX;            0.31 ;Rank 0
+  AVG;            0.26 ;
+
+MPI Imbalance, % of Elapsed Time
+  MIN;            0.24 ;Rank 1
+  MAX;            0.33 ;Rank 0
+  AVG;            0.29 ;
+
+MPI Hotspot 1 - MPI_Init, s
+Total;            0.49 ;all ranks
+  MIN;            0.24 ;Rank 1
+  MAX;            0.25 ;Rank 0
+  AVG;            0.24 ;
+
+MPI Hotspot 1 - MPI_Init, % of Elapsed Time
+  MIN;            0.26 ;Rank 1
+  MAX;            0.27 ;Rank 0
+  AVG;            0.26 ;
+
+MPI Hotspot 2 - MPI_Wait, s
+Total;            0.41 ;all ranks
+  MIN;            0.10 ;Rank 1
+  MAX;            0.31 ;Rank 0
+  AVG;            0.21 ;
+
+MPI Hotspot 2 - MPI_Wait, % of Elapsed Time
+  MIN;            0.11 ;Rank 1
+  MAX;            0.34 ;Rank 0
+  AVG;            0.22 ;
+
+MPI Hotspot 3 - MPI_Allreduce, s
+Total;            0.21 ;all ranks
+  MIN;            0.05 ;Rank 1
+  MAX;            0.16 ;Rank 0
+  AVG;            0.11 ;
+
+MPI Hotspot 3 - MPI_Allreduce, % of Elapsed Time
+  MIN;            0.06 ;Rank 1
+  MAX;            0.17 ;Rank 0
+  AVG;            0.11 ;
+
+MPI Hotspot 4 - MPI_Send, s
+Total;            0.20 ;all ranks
+  MIN;            0.10 ;Rank 0
+  MAX;            0.10 ;Rank 1
+  AVG;            0.10 ;
+
+MPI Hotspot 4 - MPI_Send, % of Elapsed Time
+  MIN;            0.11 ;Rank 0
+  MAX;            0.11 ;Rank 1
+  AVG;            0.11 ;
+
+MPI Hotspot 5 - MPI_Sendrecv, s
+Total;            0.20 ;all ranks
+  MIN;            0.04 ;Rank 0
+  MAX;            0.16 ;Rank 1
+  AVG;            0.10 ;
+
+MPI Hotspot 5 - MPI_Sendrecv, % of Elapsed Time
+  MIN;            0.05 ;Rank 0
+  MAX;            0.17 ;Rank 1
+  AVG;            0.11 ;
+
+OpenMP threads number, per Rank
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 1
+  AVG;            1.00 ;
+
+Disk I/O Bound, s
+Total;            0.00 ;all ranks
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 1
+  AVG;            0.00 ;
+
+Resident Memory Usage per Rank, MB
+Total;         3619.00 ;all ranks
+  MIN;         1805.00 ;Rank 0
+  MAX;         1814.00 ;Rank 1
+  AVG;         1809.50 ;
+
+Resident Memory Usage per Node, MB
+Total;         3619.00 ;all nodes
+  MIN;         3619.00 ;Node instance-20220421-1624
+  MAX;         3619.00 ;Node instance-20220421-1624
+  AVG;         3619.00 ;
+
+Virtual Memory Usage per Rank, MB
+Total;        16398.00 ;all ranks
+  MIN;         8198.00 ;Rank 0
+  MAX;         8200.00 ;Rank 1
+  AVG;         8199.00 ;
+
+Virtual Memory Usage per Node, MB
+Total;        16398.00 ;all nodes
+  MIN;        16398.00 ;Node instance-20220421-1624
+  MAX;        16398.00 ;Node instance-20220421-1624
+  AVG;        16398.00 ;
+
+| MPI Time per Rank for all Ranks
+Rank;Elapsed Time(sec);    MPI;Time(sec);    MPI;Time(%);Imbalance(sec);Imbalance(%)
+  0000 ;           92.05;            0.95;           1.04;            0.31;           0.33
+  0001 ;           92.03;            0.77;           0.84;            0.22;           0.24
+| TOTAL;          184.08;            1.73;           0.94;            0.53;           0.29
+| AVG  ;           92.04;            0.86;           0.94;            0.26;           0.29
+
+| Number of ranks = 2
+
+|#########################################################
+| RANK 0
+|#########################################################
+Elapsed Time;92.05;sec
+MPI Time;0.95;sec;1.04%
+MPI Imbalance;0.00;sec;0.33%
+
+Function;Time(sec);Time(%);Volume(MB);Volume(%);Calls;AvrMsgSize(B)
+            MPI_Wait;            0.31;            0.34;             N/A;             N/A;            1028;             N/A
+            MPI_Init;            0.25;            0.27;             N/A;             N/A;               1;             N/A
+       MPI_Allreduce;            0.16;            0.17;             N/A;             N/A;             890;             N/A
+            MPI_Send;            0.10;            0.11;             N/A;             N/A;            1634;             N/A
+         MPI_Waitany;            0.08;            0.08;             N/A;             N/A;             606;             N/A
+        MPI_Sendrecv;            0.04;            0.05;             N/A;             N/A;              40;             N/A
+           MPI_Bcast;            0.01;            0.01;             N/A;             N/A;             866;             N/A
+         MPI_Barrier;            0.00;            0.00;             N/A;             N/A;               9;             N/A
+       MPI_Alltoallv;            0.00;            0.00;             N/A;             N/A;              21;             N/A
+        MPI_Alltoall;            0.00;            0.00;             N/A;             N/A;              21;             N/A
+           MPI_Irecv;            0.00;            0.00;             N/A;             N/A;            1634;             N/A
+        MPI_Finalize;            0.00;            0.00;             N/A;             N/A;               1;             N/A
+        MPI_Comm_dup;            0.00;            0.00;             N/A;             N/A;               7;             N/A
+     MPI_Cart_create;            0.00;            0.00;             N/A;             N/A;               2;             N/A
+       MPI_Allgather;            0.00;            0.00;             N/A;             N/A;              14;             N/A
+          MPI_Reduce;            0.00;            0.00;             N/A;             N/A;               3;             N/A
+       MPI_Comm_free;            0.00;            0.00;             N/A;             N/A;               9;             N/A
+       MPI_Comm_rank;            0.00;            0.00;             N/A;             N/A;              26;             N/A
+        MPI_Cart_get;            0.00;            0.00;             N/A;             N/A;               2;             N/A
+       MPI_Comm_size;            0.00;            0.00;             N/A;             N/A;              18;             N/A
+      MPI_Cart_shift;            0.00;            0.00;             N/A;             N/A;               6;             N/A
+       MPI_Cart_rank;            0.00;            0.00;             N/A;             N/A;               4;             N/A
+       MPI_Type_size;            0.00;            0.00;             N/A;             N/A;               2;             N/A
+| TOTAL             ;            0.95;            1.04;             N/A;             N/A;            6844;             N/A
+
+Function;Time(sec);Time(%);Volume(MB);Volume(%);Calls;MsgSize(B)
+            MPI_Wait;            0.31;            0.34;             N/A;             N/A;            1028             ;N/A
+            MPI_Init;            0.25;            0.27;             N/A;             N/A;               1             ;N/A
+       MPI_Allreduce;            0.16;            0.17;             N/A;             N/A;             890             ;N/A
+            MPI_Send;            0.10;            0.11;             N/A;             N/A;            1634             ;N/A
+         MPI_Waitany;            0.08;            0.08;             N/A;             N/A;             606             ;N/A
+        MPI_Sendrecv;            0.04;            0.05;             N/A;             N/A;              40             ;N/A
+           MPI_Bcast;            0.01;            0.01;             N/A;             N/A;             866             ;N/A
+         MPI_Barrier;            0.00;            0.00;             N/A;             N/A;               9             ;N/A
+       MPI_Alltoallv;            0.00;            0.00;             N/A;             N/A;              21             ;N/A
+        MPI_Alltoall;            0.00;            0.00;             N/A;             N/A;              21             ;N/A
+           MPI_Irecv;            0.00;            0.00;             N/A;             N/A;            1634             ;N/A
+        MPI_Finalize;            0.00;            0.00;             N/A;             N/A;               1             ;N/A
+        MPI_Comm_dup;            0.00;            0.00;             N/A;             N/A;               7             ;N/A
+     MPI_Cart_create;            0.00;            0.00;             N/A;             N/A;               2             ;N/A
+       MPI_Allgather;            0.00;            0.00;             N/A;             N/A;              14             ;N/A
+          MPI_Reduce;            0.00;            0.00;             N/A;             N/A;               3             ;N/A
+       MPI_Comm_free;            0.00;            0.00;             N/A;             N/A;               9             ;N/A
+       MPI_Comm_rank;            0.00;            0.00;             N/A;             N/A;              26             ;N/A
+        MPI_Cart_get;            0.00;            0.00;             N/A;             N/A;               2             ;N/A
+       MPI_Comm_size;            0.00;            0.00;             N/A;             N/A;              18             ;N/A
+      MPI_Cart_shift;            0.00;            0.00;             N/A;             N/A;               6             ;N/A
+       MPI_Cart_rank;            0.00;            0.00;             N/A;             N/A;               4             ;N/A
+       MPI_Type_size;            0.00;            0.00;             N/A;             N/A;               2             ;N/A
+
+WARNING: No information about Volume of transfers. Set the APS_STAT_LEVEL value to 2 or greater to generate results. 
+|#########################################################
+| RANK 1
+|#########################################################
+Elapsed Time;92.03;sec
+MPI Time;0.77;sec;0.84%
+MPI Imbalance;0.00;sec;0.24%
+
+Function;Time(sec);Time(%);Volume(MB);Volume(%);Calls;AvrMsgSize(B)
+            MPI_Init;            0.24;            0.26;             N/A;             N/A;               1;             N/A
+        MPI_Sendrecv;            0.16;            0.17;             N/A;             N/A;              40;             N/A
+            MPI_Wait;            0.10;            0.11;             N/A;             N/A;            1028;             N/A
+            MPI_Send;            0.10;            0.11;             N/A;             N/A;            1634;             N/A
+         MPI_Waitany;            0.07;            0.07;             N/A;             N/A;             606;             N/A
+       MPI_Allreduce;            0.05;            0.06;             N/A;             N/A;             890;             N/A
+           MPI_Bcast;            0.05;            0.05;             N/A;             N/A;             866;             N/A
+        MPI_Alltoall;            0.00;            0.00;             N/A;             N/A;              21;             N/A
+       MPI_Alltoallv;            0.00;            0.00;             N/A;             N/A;              21;             N/A
+           MPI_Irecv;            0.00;            0.00;             N/A;             N/A;            1634;             N/A
+        MPI_Finalize;            0.00;            0.00;             N/A;             N/A;               1;             N/A
+        MPI_Comm_dup;            0.00;            0.00;             N/A;             N/A;               7;             N/A
+     MPI_Cart_create;            0.00;            0.00;             N/A;             N/A;               2;             N/A
+         MPI_Barrier;            0.00;            0.00;             N/A;             N/A;               9;             N/A
+       MPI_Allgather;            0.00;            0.00;             N/A;             N/A;              14;             N/A
+       MPI_Comm_free;            0.00;            0.00;             N/A;             N/A;               9;             N/A
+          MPI_Reduce;            0.00;            0.00;             N/A;             N/A;               3;             N/A
+       MPI_Comm_rank;            0.00;            0.00;             N/A;             N/A;              26;             N/A
+       MPI_Comm_size;            0.00;            0.00;             N/A;             N/A;              18;             N/A
+        MPI_Cart_get;            0.00;            0.00;             N/A;             N/A;               2;             N/A
+      MPI_Cart_shift;            0.00;            0.00;             N/A;             N/A;               6;             N/A
+       MPI_Cart_rank;            0.00;            0.00;             N/A;             N/A;               4;             N/A
+       MPI_Type_size;            0.00;            0.00;             N/A;             N/A;               2;             N/A
+| TOTAL             ;            0.77;            0.84;             N/A;             N/A;            6844;             N/A
+
+Function;Time(sec);Time(%);Volume(MB);Volume(%);Calls;MsgSize(B)
+            MPI_Init;            0.24;            0.26;             N/A;             N/A;               1             ;N/A
+        MPI_Sendrecv;            0.16;            0.17;             N/A;             N/A;              40             ;N/A
+            MPI_Wait;            0.10;            0.11;             N/A;             N/A;            1028             ;N/A
+            MPI_Send;            0.10;            0.11;             N/A;             N/A;            1634             ;N/A
+         MPI_Waitany;            0.07;            0.07;             N/A;             N/A;             606             ;N/A
+       MPI_Allreduce;            0.05;            0.06;             N/A;             N/A;             890             ;N/A
+           MPI_Bcast;            0.05;            0.05;             N/A;             N/A;             866             ;N/A
+        MPI_Alltoall;            0.00;            0.00;             N/A;             N/A;              21             ;N/A
+       MPI_Alltoallv;            0.00;            0.00;             N/A;             N/A;              21             ;N/A
+           MPI_Irecv;            0.00;            0.00;             N/A;             N/A;            1634             ;N/A
+        MPI_Finalize;            0.00;            0.00;             N/A;             N/A;               1             ;N/A
+        MPI_Comm_dup;            0.00;            0.00;             N/A;             N/A;               7             ;N/A
+     MPI_Cart_create;            0.00;            0.00;             N/A;             N/A;               2             ;N/A
+         MPI_Barrier;            0.00;            0.00;             N/A;             N/A;               9             ;N/A
+       MPI_Allgather;            0.00;            0.00;             N/A;             N/A;              14             ;N/A
+       MPI_Comm_free;            0.00;            0.00;             N/A;             N/A;               9             ;N/A
+          MPI_Reduce;            0.00;            0.00;             N/A;             N/A;               3             ;N/A
+       MPI_Comm_rank;            0.00;            0.00;             N/A;             N/A;              26             ;N/A
+       MPI_Comm_size;            0.00;            0.00;             N/A;             N/A;              18             ;N/A
+        MPI_Cart_get;            0.00;            0.00;             N/A;             N/A;               2             ;N/A
+      MPI_Cart_shift;            0.00;            0.00;             N/A;             N/A;               6             ;N/A
+       MPI_Cart_rank;            0.00;            0.00;             N/A;             N/A;               4             ;N/A
+       MPI_Type_size;            0.00;            0.00;             N/A;             N/A;               2             ;N/A
+
+WARNING: No information about Volume of transfers. Set the APS_STAT_LEVEL value to 2 or greater to generate results. 
+| % - percentage of MPI functions total time
+| Function summary for all Ranks
+Function;Time(sec);Time(%);Imbalance(sec);Imbalance(%);Volume(MB);Volume(%);Calls
+                  MPI_Init;            0.49;           28.17     ;            0.00    ;            0.00;              N/A;             N/A;                2
+                              ; Min:;0.2374          
+                              ; Avg:;0.2431          
+                              ; Max:;0.2488          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                  MPI_Wait;            0.41;           23.95     ;            0.13    ;            7.79;              N/A;             N/A;             2056
+                              ; Min:;0.0000          
+                              ; Avg:;0.0002          
+                              ; Max:;0.0054          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+             MPI_Allreduce;            0.21;           12.22     ;            0.17    ;            9.56;              N/A;             N/A;             1780
+                              ; Min:;0.0000          
+                              ; Avg:;0.0001          
+                              ; Max:;0.0313          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                  MPI_Send;            0.20;           11.80     ;            0.00    ;            0.00;              N/A;             N/A;             3268
+                              ; Min:;0.0000          
+                              ; Avg:;0.0001          
+                              ; Max:;0.0003          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+              MPI_Sendrecv;            0.20;           11.72     ;            0.20    ;           11.30;              N/A;             N/A;               80
+                              ; Min:;0.0000          
+                              ; Avg:;0.0025          
+                              ; Max:;0.0285          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+               MPI_Waitany;            0.14;            8.19     ;            0.00    ;            0.11;              N/A;             N/A;             1212
+                              ; Min:;0.0001          
+                              ; Avg:;0.0001          
+                              ; Max:;0.0017          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                 MPI_Bcast;            0.05;            3.08     ;            0.03    ;            1.75;              N/A;             N/A;             1732
+                              ; Min:;0.0000          
+                              ; Avg:;0.0000          
+                              ; Max:;0.0283          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+              MPI_Alltoall;            0.00;            0.18     ;            0.00    ;            0.04;              N/A;             N/A;               42
+                              ; Min:;0.0000          
+                              ; Avg:;0.0001          
+                              ; Max:;0.0008          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+               MPI_Barrier;            0.00;            0.18     ;            0.00    ;            0.14;              N/A;             N/A;               18
+                              ; Min:;0.0000          
+                              ; Avg:;0.0002          
+                              ; Max:;0.0018          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+             MPI_Alltoallv;            0.00;            0.17     ;            0.00    ;            0.00;              N/A;             N/A;               42
+                              ; Min:;0.0000          
+                              ; Avg:;0.0001          
+                              ; Max:;0.0005          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                 MPI_Irecv;            0.00;            0.13     ;            0.00    ;            0.00;              N/A;             N/A;             3268
+                              ; Min:;0.0000          
+                              ; Avg:;0.0000          
+                              ; Max:;0.0000          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+              MPI_Finalize;            0.00;            0.09     ;            0.00    ;            0.00;              N/A;             N/A;                2
+                              ; Min:;0.0008          
+                              ; Avg:;0.0008          
+                              ; Max:;0.0008          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+              MPI_Comm_dup;            0.00;            0.06     ;            0.00    ;            0.00;              N/A;             N/A;               14
+                              ; Min:;0.0000          
+                              ; Avg:;0.0001          
+                              ; Max:;0.0004          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+           MPI_Cart_create;            0.00;            0.04     ;            0.00    ;            0.00;              N/A;             N/A;                4
+                              ; Min:;0.0000          
+                              ; Avg:;0.0002          
+                              ; Max:;0.0004          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+             MPI_Allgather;            0.00;            0.00     ;            0.00    ;            0.00;              N/A;             N/A;               28
+                              ; Min:;0.0000          
+                              ; Avg:;0.0000          
+                              ; Max:;0.0000          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                MPI_Reduce;            0.00;            0.00     ;            0.00    ;            0.00;              N/A;             N/A;                6
+                              ; Min:;0.0000          
+                              ; Avg:;0.0000          
+                              ; Max:;0.0000          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+             MPI_Comm_free;            0.00;            0.00     ;            0.00    ;            0.00;              N/A;             N/A;               18
+                              ; Min:;0.0000          
+                              ; Avg:;0.0000          
+                              ; Max:;0.0000          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+             MPI_Comm_rank;            0.00;            0.00     ;            0.00    ;            0.00;              N/A;             N/A;               52
+                              ; Min:;0.0000          
+                              ; Avg:;0.0000          
+                              ; Max:;0.0000          
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+              MPI_Cart_get;            0.00;            0.00     ;            0.00    ;            0.00;              N/A;             N/A;                4
+                              ; Min:;0.0000          
+| TOTAL                   ;            1.73;          100.00     ;            0.53    ;           30.70;              N/A;             N/A;            13688
+
+WARNING: No information about Volume of transfers. Set the APS_STAT_LEVEL value to 2 or greater to generate results. 
+| Communicators used in the application
+Communicator Id;Communicator Size;Time (Rank Average)(sec);Ranks
