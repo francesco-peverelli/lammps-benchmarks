@@ -1,0 +1,90 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-16.796 -16.796 -16.796) to (16.796 16.796 16.796)
+  2 by 2 by 2 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  1 = max bonds/atom
+  reading bonds ...
+  31680 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     2 = max # of special neighbors
+  special bonds CPU = 0.002 seconds
+  read_data CPU = 0.215 seconds
+Replicating atoms ...
+  orthogonal box = (-16.796 -16.796 -16.796) to (50.388 50.388 50.388)
+  2 by 2 by 2 MPI processor grid
+  256000 atoms
+  253440 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     2 = max # of special neighbors
+  special bonds CPU = 0.007 seconds
+  replicate CPU = 0.034 seconds
+----------------------------------------------------------
+Using INTEL Package without Coprocessor.
+Compiler: Intel Classic C++ 20.21.5 / Intel(R) C++ g++ 9.3 mode
+SIMD compiler directives: Enabled
+Precision: mixed
+----------------------------------------------------------
+  generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 1 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 1.52
+  ghost atom cutoff = 1.52
+  binsize = 0.76, bins = 89 89 89
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/intel, perpetual
+      attributes: half, newton on, intel
+      pair build: half/bin/newton/intel
+      stencil: half/bin/3d
+      bin: intel
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.012
+WARNING: Communication cutoff 1.52 is shorter than a bond length based estimate of 1.855. This may lead to errors. (../comm.cpp:723)
+Per MPI rank memory allocation (min/avg/max) = 285.7 | 285.7 | 285.7 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0   0.97027119   0.44484088    20.494523    22.394765    4.6721834 
+     100   0.97392885   0.44177693     20.50213    22.404795    4.6718363 
+Loop time of 1.62034 on 8 procs for 100 steps with 256000 atoms
+
+Performance: 63986.376 tau/day, 61.715 timesteps/s
+88.8% CPU use with 8 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.24039    | 0.25426    | 0.28214    |   2.2 | 15.69
+Bond    | 0.042155   | 0.044912   | 0.051621   |   1.2 |  2.77
+Neigh   | 0.48377    | 0.49226    | 0.50139    |   1.2 | 30.38
+Comm    | 0.29494    | 0.34261    | 0.37815    |   4.9 | 21.14
+Output  | 0.0001068  | 0.00032071 | 0.00054011 |   0.0 |  0.02
+Modify  | 0.19102    | 0.20659    | 0.25435    |   4.0 | 12.75
+Other   |            | 0.2794     |            |       | 17.24
+
+Nlocal:          32000 ave       32038 max       31962 min
+Histogram: 1 1 0 2 0 1 0 1 1 1
+Nghost:         9488.5 ave        9543 max        9457 min
+Histogram: 3 1 0 0 1 1 0 1 0 1
+Neighs:         187534 ave      187943 max      187277 min
+Histogram: 2 3 0 0 0 0 1 0 1 1
+
+Total # of neighbors = 1500273
+Ave neighs/atom = 5.8604414
+Ave special neighs/atom = 1.98
+Neighbor list builds = 25
+Dangerous builds = 0
+Total wall time: 0:00:01
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220526" command to generate textual and HTML reports for the profiling session.
