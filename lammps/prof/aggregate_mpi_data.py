@@ -30,8 +30,8 @@ for fname in files:
             print(params)
             bench = params[0].replace(".scaled","")
             times_dict = {"Benchmark" : bench} # mapping func : time%
-            times_dict['Size'] = int(params[3][:-1])
-            times_dict['Processes'] = int(params[1][:-1])
+            times_dict['Size'] = int(params[len(params)-2][:-1])
+            times_dict['Processes'] = int(params[len(params)-4][:-1])
 
             for line in file:
                 if line.find("Function summary for all Ranks") >= 0:
