@@ -1,6 +1,6 @@
 start_dir=$(pwd)
 cd "../lammps/bench"
-echo $pwd
+
 for n in {1,2,4,8,16,32,64}; do
 #        for iter in {1..5}; do
 		ont=1
