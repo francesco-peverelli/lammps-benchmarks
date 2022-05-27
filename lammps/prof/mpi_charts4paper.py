@@ -26,7 +26,7 @@ mpi_funcs = ["MPI_Scan", "MPI_Comm_dup", "MPI_Comm_size", "MPI_Alltoallv", "MPI_
 
 data = pd.read_csv("aggregate_mpi_stats.csv", sep=',')
 
-data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:-6])
+data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 
 mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
 
@@ -47,6 +47,7 @@ top_vals = take(top_N, vals.items())
 top_funcs = [top_val[0] for top_val in top_vals]
 
 mpi_func_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=top_funcs)
+print(mpi_func_data)
 g2 = sns.catplot(data=mpi_func_data, col='Processes', hue='variable', row='Benchmark', x='Size', y='value', \
     kind='bar', palette='CMRmap')
 g2.set_axis_labels("Problem Size [K atoms]","MPI Function Time [%]")

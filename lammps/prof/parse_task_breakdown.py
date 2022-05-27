@@ -15,8 +15,8 @@ for fname in files:
             file = open(fname, "r")
             params = fname.split('_')
             bench = params[0].replace(".scaled","")
-            size = int(params[3][:-1])
-            processes = int(params[1][:-1])
+            size = int(params[len(params)-2][:-1])
+            processes = int(params[len(params)-4][:-1])
             in_header = False
             skip_line = False
             read_vals = False

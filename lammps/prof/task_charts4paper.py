@@ -21,7 +21,7 @@ def take(n, iterable):
 
 data = pd.read_csv("task_breakdown.csv", sep=',')
 
-data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:-6])
+data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 
 #add missing sections
 phases = data['Section'].unique()
@@ -36,7 +36,7 @@ for ph in phases:
                 combo = [b, s, p, ph]
                 if len(data[(data['Benchmark'] == b) & (data['Processes'] == p) 
                     & (data['Size'] == s) & (data['Section'] == ph)]) == 0:
-                    entries = combo + [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                    entries = combo + [0.0, 0.0, 0.0, 0.0, 0.0]
                     new_data = pd.DataFrame([entries], columns=list(data.columns.values)) 
                     data = pd.concat([data, new_data], ignore_index = True, axis = 0)
 
