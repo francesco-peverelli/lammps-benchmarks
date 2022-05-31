@@ -30,4 +30,3 @@ for gpu,mpi in gpu_mpi_dict[problem_idx].items():
     os.system("nsys stats report1.qdrep -f csv -r apigpusum:base > " + start_dir + "/lammps_gpu/prof/" + bench_in + "_" + sys.argv[2] + "_g" + str(gpu) + "_nsys.csv")
     os.system("sed -i 1,4d " + start_dir + "/lammps_gpu/prof/" + bench_in + "_" + sys.argv[2] + "_g" + str(gpu) + "_nsys.csv")
     os.system("rm report1.*")
-    break

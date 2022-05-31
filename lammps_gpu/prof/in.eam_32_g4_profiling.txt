@@ -1,0 +1,93 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Lattice spacing in x,y,z = 3.615 3.615 3.615
+Created orthogonal box = (0 0 0) to (72.3 72.3 72.3)
+  2 by 2 by 3 MPI processor grid
+Created 32000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (72.3 72.3 72.3)
+  create_atoms CPU = 0.001 seconds
+Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for eam:
+-  with 3 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 15/16 GB, 1.5 GHZ (Mixed Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-3 on core 0...Done.
+Initializing Devices 0-3 on core 1...Done.
+Initializing Devices 0-3 on core 2...Done.
+
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.757 | 2.779 | 2.793 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1600      -113280            0   -106662.08    18703.562 
+      50     781.6906   -109873.35            0   -106640.13    52273.122 
+     100    801.83198    -109957.3            0   -106640.77    51322.827 
+Loop time of 0.135789 on 12 procs for 100 steps with 32000 atoms
+
+Performance: 318.142 ns/day, 0.075 hours/ns, 736.439 timesteps/s
+101.7% CPU use with 12 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.085031   | 0.091579   | 0.096674   |   1.1 | 67.44
+Neigh   | 0.0001178  | 0.00012607 | 0.00013855 |   0.0 |  0.09
+Comm    | 0.029666   | 0.032809   | 0.036048   |   1.1 | 24.16
+Output  | 0.0001208  | 0.00044813 | 0.00072321 |   0.0 |  0.33
+Modify  | 0.001447   | 0.0015383  | 0.0017228  |   0.2 |  1.13
+Other   |            | 0.009288   |            |       |  6.84
+
+Nlocal:        2666.67 ave        2714 max        2590 min
+Histogram: 2 2 0 0 0 0 1 1 1 5
+Nghost:         4558.5 ave        4619 max        4480 min
+Histogram: 3 0 0 1 0 0 1 5 1 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 12 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 13
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.0168 s.
+Neighbor copy:   0.0006 s.
+Neighbor build:  0.0040 s.
+Force calc:      0.0372 s.
+Device Overhead: 0.0402 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  2.51 MB.
+CPU Neighbor:    0.0123 s.
+CPU Cast/Pack:   0.0056 s.
+CPU Driver_Time: 0.0057 s.
+CPU Idle_Time:   0.0160 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:15
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220530" command to generate textual and HTML reports for the profiling session.
