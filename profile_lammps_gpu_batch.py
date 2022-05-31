@@ -1,6 +1,6 @@
 import os
 
-benchmarks= ["rhodo", "lj", "chain", "eam"]
+benchmarks= ["rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 sizes =  ["", ".scaled", ".scaled_864", ".scaled_2048"]
 katoms = ["32", "256", "864", "2048"]
 
