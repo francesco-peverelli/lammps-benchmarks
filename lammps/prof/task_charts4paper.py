@@ -9,6 +9,7 @@ import os
 import matplotlib.lines as lines
 import matplotlib.ticker as ticker
 from itertools import islice
+import sys
 #from plot_utils import *
 
 def take(n, iterable):
@@ -19,7 +20,10 @@ def take(n, iterable):
 #PALETTE_GW = [COLORS[r] for r in ["gw3","gw2","gw1"]]
 #HATCHES = ['', '/'*4, '\\'*4]
 
-data = pd.read_csv("task_breakdown.csv", sep=',')
+fname = sys.argv[1]
+fout = sys.argv[2]
+
+data = pd.read_csv(fname, sep=',')
 
 data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 
@@ -49,4 +53,4 @@ g = sns.catplot(data=data, col='Processes', row='Benchmark', x='Size', hue='Sect
     kind='bar', palette='mako')
 #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
 #g.set_xticklabels(sorted(phases))
-g.savefig("task_breakdown_data.png")
+g.savefig(fout + ".png")

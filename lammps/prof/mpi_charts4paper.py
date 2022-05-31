@@ -9,6 +9,7 @@ import os
 import matplotlib.lines as lines
 import matplotlib.ticker as ticker
 from itertools import islice
+import sys
 #from plot_utils import *
 
 def take(n, iterable):
@@ -24,7 +25,9 @@ mpi_funcs = ["MPI_Scan", "MPI_Comm_dup", "MPI_Comm_size", "MPI_Alltoallv", "MPI_
     "MPI_Barrier", "MPI_Sendrecv", "MPI_Waitany", "MPI_Cart_rank", "MPI_Cart_create", "MPI_Irecv", \
     "MPI_Cart_get", "MPI_Allreduce", "MPI_Comm_free", "MPI_Bcast", "MPI_Init", "MPI_Alltoall", "MPI_Send"]
 
-data = pd.read_csv("aggregate_mpi_stats.csv", sep=',')
+fname = sys.argv[1]
+fout = sys.argv[2]
+data = pd.read_csv(fname, sep=',')
 
 data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 
@@ -34,11 +37,14 @@ sns.set_style("whitegrid")
 g = sns.catplot(data=mpi_tot_data, col='Processes', hue='Benchmark', x='Size', y='value', \
     kind='point', palette='mako')
 g.set_axis_labels("Problem Size [K atoms]","MPI Total Time [%]")
-g.savefig("mpi_tot_data.png")
+g.savefig(fout + "_mpi_tot_data.png")
 
 top_N = 5
 vals = {}
 for f in mpi_funcs:
+    if f not in data.columns:
+        print(f + " not in data...")
+        continue
     vals[f] = data[f].mean()
 
 vals = {k: v for k, v in sorted(vals.items(), reverse=True, key=lambda item: item[1])}
@@ -51,4 +57,4 @@ print(mpi_func_data)
 g2 = sns.catplot(data=mpi_func_data, col='Processes', hue='variable', row='Benchmark', x='Size', y='value', \
     kind='bar', palette='CMRmap')
 g2.set_axis_labels("Problem Size [K atoms]","MPI Function Time [%]")
-g2.savefig("mpi_funcs.png")
+g2.savefig(fout + "_mpi_funcs.png")

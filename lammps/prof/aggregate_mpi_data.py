@@ -1,7 +1,8 @@
 import pandas as pd 
 import os 
+import sys
 
-experiments = ["chain", "chute", "eam", "lj", "rhodo"]
+experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 
@@ -19,16 +20,31 @@ mpi_funcs = set() # MPI functions
 mpi_data = []
 
 files = os.listdir(os.getcwd())
+filename = sys.argv[1]
 
 for fname in files:
-    if fname.endswith(".csv") and (fname != "aggregate_mpi_stats.csv"):
+    if fname.endswith(".csv") and fname.startswith("in."):
         try:
             file = open(fname, "r")
             in_mpi_calls = False
             in_total_time = False
             params = fname.split('_')
-            print(params)
             bench = params[0].replace(".scaled","")
+            exp_size = int(params[len(params)-2][:-1])
+            exp_proc = int(params[len(params)-4][:-1])
+            print(bench)
+            print(exp_size)
+            print(exp_proc)
+            if (bench[3:] not in experiments):
+                print(bench[3:] + " not found!")
+                continue
+            if (exp_size not in nk_atoms):
+                print(exp_size + " not found!")
+                continue
+            if (exp_proc not in mpi_nproc):
+                print(exp_proc + " not found!")
+                continue
+            print(fname)
             times_dict = {"Benchmark" : bench} # mapping func : time%
             times_dict['Size'] = int(params[len(params)-2][:-1])
             times_dict['Processes'] = int(params[len(params)-4][:-1])
@@ -71,6 +87,7 @@ df = pd.DataFrame(columns=header)
 
 for row in mpi_data:
     df = df.append(row, ignore_index=True)
+print(df)
 col = df['MPI_Time']
 df.drop(labels=['MPI_Time'], axis=1,inplace = True)
 df.insert(1, 'MPI_Time', col)
@@ -80,6 +97,6 @@ df.insert(1, 'MPI_(%)', col)
 df = df.sort_values(['Benchmark','Size','Processes'])
 df.groupby(['Size','Processes'])
 print(df)
-df.to_csv("aggregate_mpi_stats.csv", index=False)
-df.to_excel("aggregate_mpi_stats.xlsx", index=False)
+df.to_csv(filename + ".csv", index=False)
+df.to_excel(filename + ".xlsx", index=False)
             

@@ -1,22 +1,33 @@
 import pandas as pd
 import os
+import sys
 
-experiments = ["chain", "chute", "eam", "lj", "rhodo"]
+experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 
 files = os.listdir(os.getcwd())
+filename = sys.argv[1]
 
 new_df = True
 
 for fname in files:
-    if fname.endswith("_profiling.txt") and (fname != "aggregate_mpi_stats.csv"):
+    if fname.endswith("_profiling.txt") and fname.startswith("in."):
         try:
             file = open(fname, "r")
             params = fname.split('_')
             bench = params[0].replace(".scaled","")
             size = int(params[len(params)-2][:-1])
             processes = int(params[len(params)-4][:-1])
+            if (bench[3:] not in experiments):
+                print(bench[3:] + " not found!")
+                continue
+            if (size not in nk_atoms):
+                print(size + " not found!")
+                continue
+            if (processes not in mpi_nproc):
+                print(processes + " not found!")
+                continue
             in_header = False
             skip_line = False
             read_vals = False
@@ -60,5 +71,5 @@ for fname in files:
 
 data = data.sort_values(['Benchmark','Size','Processes'])
 data.groupby(['Size','Processes'])
-data.to_csv("task_breakdown.csv", index=False)
-data.to_excel("task_breakdown.xlsx", index=False)
+data.to_csv(filename + ".csv", index=False)
+data.to_excel(filename + ".xlsx", index=False)
