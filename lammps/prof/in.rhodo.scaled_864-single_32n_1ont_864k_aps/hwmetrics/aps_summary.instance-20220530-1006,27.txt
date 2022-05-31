@@ -1,0 +1,47 @@
+/opt/intel/oneapi/vtune/2022.2.0/bin64/vtune -R summary -r /home/ubuntu/lammps/bench/aps_result_20220531/hwmetrics/results.instance-20220530-1006,27.* -q -format csv -csv-delimiter semicolon
+Hierarchy Level;Metric Name;Metric Value
+0;Elapsed Time;21.657705
+1;SP GFLOPS;4.181859
+1;DP GFLOPS;0.078640
+1;x87 GFLOPS;0.000001
+1;IPC;1.249752
+1;Average CPU Frequency;3185848932.993155
+1;Total Thread Count;
+1;CPU Time;20.615747
+0;Effective Physical Core Utilization;1.5% (0.956 out of 64)
+1;Effective Logical Core Utilization;0.7% (0.952 out of 128)
+0;Memory Bound;13.8
+1;Cache Bound;14.5
+1;DRAM Bound;1.6
+1;NUMA: % of Remote Accesses;1.5
+0;Vectorization;79.0
+1;Instruction Mix;
+2;SP FLOPs;6.1
+3;Packed;93.2
+4;128-bit;0.0
+4;256-bit;17.5
+4;512-bit;75.7
+3;Scalar;6.8
+2;DP FLOPs;1.2
+3;Packed;4.7
+4;128-bit;0.0
+4;256-bit;0.0
+4;512-bit;4.7
+3;Scalar;95.3
+2;x87 FLOPs;0.0
+2;Non-FP;92.8
+1;FP Arith/Mem Rd Instr. Ratio;0.280539
+1;FP Arith/Mem Wr Instr. Ratio;0.552219
+0;Collection and Platform Info;
+1;Application Command Line;env "OMP_NUM_THREADS=1" "KMP_AFFINITY=granularity=fine,compact,1,0" "../src/lmp_intel_cpu_intelmpi" "-in" "in.rhodo.scaled_864" "-pk" "intel" "0" "omp" "1" "mode" "single" "-sf" "intel" 
+1;Operating System;5.13.0-1028-oracle DISTRIB_ID=Ubuntu DISTRIB_RELEASE=20.04 DISTRIB_CODENAME=focal DISTRIB_DESCRIPTION="Ubuntu 20.04.4 LTS"
+1;MPI Process Rank;12
+1;Computer Name;instance-20220530-1006
+1;Result Size;3286278
+1;Collection start time;14:38:45 31/05/2022 UTC
+1;Collection stop time;14:39:07 31/05/2022 UTC
+1;Collector Type;Driverless Perf per-process counting
+1;CPU;
+2;Name;Intel(R) Xeon(R) Processor code named Icelake
+2;Frequency;2593983898
+2;Logical CPU Count;128
