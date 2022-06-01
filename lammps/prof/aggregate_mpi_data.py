@@ -2,7 +2,8 @@ import pandas as pd
 import os 
 import sys
 
-experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
+# modify to change the experiments to group together
+experiments = ["rhodo", "rhodo-single", "rhodo-double"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 
@@ -30,6 +31,7 @@ for fname in files:
             in_total_time = False
             params = fname.split('_')
             bench = params[0].replace(".scaled","")
+            print(params)
             exp_size = int(params[len(params)-2][:-1])
             exp_proc = int(params[len(params)-4][:-1])
             print(bench)
