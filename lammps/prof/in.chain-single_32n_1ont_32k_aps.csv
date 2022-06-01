@@ -56,7 +56,7 @@ Peak resident set node;instance-20220530-1006
 Average resident set size,MB;         4123.00
 Per rank
 Peak resident set size,MB;          132.00
-Peak resident set rank;15
+Peak resident set rank;25
 Average resident set size,MB;          128.84
 Virtual
 Per node
@@ -179,20 +179,20 @@ MPI Hotspot 5 - MPI_Sendrecv, % of Elapsed Time
   AVG;            7.76 ;
 
 OpenMP threads number, per Rank
-  MIN;            1.00 ;Rank 16
-  MAX;            1.00 ;Rank 1
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 31
   AVG;            1.00 ;
 
 Disk I/O Bound, s
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 16
-  MAX;            0.00 ;Rank 1
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 31
   AVG;            0.00 ;
 
 Resident Memory Usage per Rank, MB
 Total;         4123.00 ;all ranks
-  MIN;          126.00 ;Rank 26
-  MAX;          132.00 ;Rank 15
+  MIN;          126.00 ;Rank 11
+  MAX;          132.00 ;Rank 25
   AVG;          128.84 ;
 
 Resident Memory Usage per Node, MB
@@ -203,7 +203,7 @@ Total;         4123.00 ;all nodes
 
 Virtual Memory Usage per Rank, MB
 Total;       169756.00 ;all ranks
-  MIN;         5303.00 ;Rank 31
+  MIN;         5303.00 ;Rank 0
   MAX;         5309.00 ;Rank 18
   AVG;         5304.88 ;
 
@@ -252,7 +252,7 @@ Cache Stalls, % of Cycles
   OUTLIER BY STATISTIC;            9.50 ;Rank 2
 
 DRAM Stalls, % of Cycles
-  MIN;            0.20 ;Rank 31
+  MIN;            0.20 ;Rank 2
   MAX;            0.60 ;Rank 7
   AVG;            0.32 ;
 
@@ -279,20 +279,20 @@ Vectorization, %
   AVG;           51.26 ;
 
 SP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 16
-  MAX;            0.10 ;Rank 5
+  MIN;            0.00 ;Rank 0
+  MAX;            0.10 ;Rank 15
   AVG;            0.01 ;
-  OUTLIER BY STATISTIC;            0.10 ;Rank 5
-  OUTLIER BY STATISTIC;            0.10 ;Rank 11
   OUTLIER BY STATISTIC;            0.10 ;Rank 15
+  OUTLIER BY STATISTIC;            0.10 ;Rank 11
+  OUTLIER BY STATISTIC;            0.10 ;Rank 5
 
 Packed, % from SP FP
   MIN;           51.50 ;Rank 9
-  MAX;          100.00 ;Rank 1
+  MAX;          100.00 ;Rank 25
   AVG;           81.21 ;
 
 SP 128-bit, %
-  MIN;            0.00 ;Rank 1
+  MIN;            0.00 ;Rank 0
   MAX;            6.60 ;Rank 5
   AVG;            2.76 ;
 
@@ -303,11 +303,11 @@ SP 256-bit, %
 
 SP 512-bit, %
   MIN;            0.00 ;Rank 9
-  MAX;          100.00 ;Rank 0
+  MAX;          100.00 ;Rank 24
   AVG;           46.28 ;
 
 SP Scalar, % from SP FP
-  MIN;            0.00 ;Rank 1
+  MIN;            0.00 ;Rank 0
   MAX;           48.50 ;Rank 9
   AVG;           18.79 ;
 

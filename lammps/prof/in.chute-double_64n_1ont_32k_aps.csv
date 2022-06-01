@@ -56,7 +56,7 @@ Peak resident set node;instance-20220530-1006
 Average resident set size,MB;         7991.00
 Per rank
 Peak resident set size,MB;          128.00
-Peak resident set rank;32
+Peak resident set rank;53
 Average resident set size,MB;          124.86
 Virtual
 Per node
@@ -167,20 +167,20 @@ MPI Hotspot 5 - MPI_Sendrecv, % of Elapsed Time
   AVG;            1.61 ;
 
 OpenMP threads number, per Rank
-  MIN;            1.00 ;Rank 48
-  MAX;            1.00 ;Rank 31
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 63
   AVG;            1.00 ;
 
 Disk I/O Bound, s
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 Resident Memory Usage per Rank, MB
 Total;         7991.00 ;all ranks
-  MIN;          123.00 ;Rank 62
-  MAX;          128.00 ;Rank 32
+  MIN;          123.00 ;Rank 2
+  MAX;          128.00 ;Rank 53
   AVG;          124.86 ;
 
 Resident Memory Usage per Node, MB
@@ -191,7 +191,7 @@ Total;         7991.00 ;all nodes
 
 Virtual Memory Usage per Rank, MB
 Total;       650292.00 ;all ranks
-  MIN;        10158.00 ;Rank 48
+  MIN;        10158.00 ;Rank 4
   MAX;        10165.00 ;Rank 41
   AVG;        10160.81 ;
 
@@ -234,22 +234,22 @@ Cache Stalls, % of Cycles
   OUTLIER BY STATISTIC;           16.10 ;Rank 0
 
 DRAM Stalls, % of Cycles
-  MIN;            0.20 ;Rank 57
+  MIN;            0.20 ;Rank 3
   MAX;            4.70 ;Rank 32
   AVG;            0.53 ;
   OUTLIER BY STATISTIC;            4.70 ;Rank 32
   OUTLIER BY STATISTIC;            1.60 ;Rank 0
 
 NUMA, % of Remote Accesses
-  MIN;            0.10 ;Rank 23
+  MIN;            0.10 ;Rank 7
   MAX;            6.80 ;Rank 0
   AVG;            0.95 ;
   OUTLIER BY STATISTIC;            6.80 ;Rank 0
 
 SP GFLOPS
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP GFLOPS
@@ -259,7 +259,7 @@ Total;            0.04 ;all ranks
   AVG;            0.00 ;
 
 Vectorization, %
-  MIN;            0.00 ;Rank 60
+  MIN;            0.00 ;Rank 29
   MAX;           13.80 ;Rank 0
   AVG;            1.48 ;
   OUTLIER BY STATISTIC;           13.80 ;Rank 0
@@ -267,12 +267,12 @@ Vectorization, %
   OUTLIER BY STATISTIC;            6.90 ;Rank 26
 
 SP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 39
+  MIN;            0.00 ;Rank 0
   MAX;            2.20 ;Rank 32
   AVG;            0.08 ;
   OUTLIER BY STATISTIC;            2.20 ;Rank 32
@@ -280,22 +280,22 @@ DP FLOPs, % of uOps
   OUTLIER BY STATISTIC;            0.30 ;Rank 4
 
 DP Packed, % from DP FP
-  MIN;            0.00 ;Rank 60
+  MIN;            0.00 ;Rank 29
   MAX;           13.80 ;Rank 0
   AVG;            1.48 ;
 
 DP 128-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 256-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 512-bit, %
-  MIN;            0.00 ;Rank 60
+  MIN;            0.00 ;Rank 29
   MAX;           13.80 ;Rank 0
   AVG;            1.48 ;
 
@@ -306,7 +306,7 @@ DP Scalar, % from DP FP
 
 Non-FP, % of uOps
   MIN;           97.80 ;Rank 32
-  MAX;          100.00 ;Rank 37
+  MAX;          100.00 ;Rank 63
   AVG;           99.92 ;
   OUTLIER BY STATISTIC;           97.80 ;Rank 32
   OUTLIER BY STATISTIC;           99.70 ;Rank 4

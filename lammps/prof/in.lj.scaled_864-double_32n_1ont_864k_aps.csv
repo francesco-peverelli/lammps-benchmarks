@@ -56,7 +56,7 @@ Peak resident set node;instance-20220530-1006
 Average resident set size,MB;         4580.00
 Per rank
 Peak resident set size,MB;          146.00
-Peak resident set rank;5
+Peak resident set rank;16
 Average resident set size,MB;          143.12
 Virtual
 Per node
@@ -65,7 +65,7 @@ Peak memory consumption node;instance-20220530-1006
 Average memory consumption,MB;       177608.00
 Per rank
 Peak memory consumption,MB;         5554.00
-Peak memory consumption rank;3
+Peak memory consumption rank;9
 Average memory consumption,MB;         5550.25
 | Counters, Memory and Disk usage statistics for all Ranks
 Elapsed Time, s
@@ -169,20 +169,20 @@ MPI Hotspot 5 - MPI_Sendrecv, % of Elapsed Time
   AVG;            2.72 ;
 
 OpenMP threads number, per Rank
-  MIN;            1.00 ;Rank 16
-  MAX;            1.00 ;Rank 1
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 31
   AVG;            1.00 ;
 
 Disk I/O Bound, s
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 16
-  MAX;            0.00 ;Rank 1
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 31
   AVG;            0.00 ;
 
 Resident Memory Usage per Rank, MB
 Total;         4580.00 ;all ranks
-  MIN;          141.00 ;Rank 31
-  MAX;          146.00 ;Rank 5
+  MIN;          141.00 ;Rank 7
+  MAX;          146.00 ;Rank 16
   AVG;          143.12 ;
 
 Resident Memory Usage per Node, MB
@@ -194,7 +194,7 @@ Total;         4580.00 ;all nodes
 Virtual Memory Usage per Rank, MB
 Total;       177608.00 ;all ranks
   MIN;         5548.00 ;Rank 0
-  MAX;         5554.00 ;Rank 3
+  MAX;         5554.00 ;Rank 9
   AVG;         5550.25 ;
 
 Virtual Memory Usage per Node, MB
@@ -233,26 +233,26 @@ Cache Stalls, % of Cycles
   MAX;           13.30 ;Rank 0
   AVG;           11.55 ;
   OUTLIER BY STATISTIC;           13.30 ;Rank 0
-  OUTLIER BY STATISTIC;           13.00 ;Rank 16
   OUTLIER BY STATISTIC;           13.00 ;Rank 24
+  OUTLIER BY STATISTIC;           13.00 ;Rank 16
 
 DRAM Stalls, % of Cycles
-  MIN;            1.50 ;Rank 11
+  MIN;            1.50 ;Rank 3
   MAX;            2.90 ;Rank 16
   AVG;            1.82 ;
   OUTLIER BY STATISTIC;            2.90 ;Rank 16
   OUTLIER BY STATISTIC;            2.80 ;Rank 0
 
 NUMA, % of Remote Accesses
-  MIN;            0.70 ;Rank 30
+  MIN;            0.70 ;Rank 18
   MAX;            1.60 ;Rank 2
   AVG;            0.97 ;
   OUTLIER BY STATISTIC;            1.60 ;Rank 2
 
 SP GFLOPS
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 16
-  MAX;            0.00 ;Rank 1
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 31
   AVG;            0.00 ;
 
 DP GFLOPS
@@ -267,8 +267,8 @@ Vectorization, %
   AVG;           94.97 ;
 
 SP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 16
-  MAX;            0.00 ;Rank 1
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 31
   AVG;            0.00 ;
 
 DP FLOPs, % of uOps
