@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-benchmarks = ["rhodo-ew"]
+benchmarks = ["rhodo", "lj", "eam", "chain", "chute"]
 variants = ["",".scaled",".scaled_864",".scaled_2048"]
 dims = [32, 256, 864, 2048]
 

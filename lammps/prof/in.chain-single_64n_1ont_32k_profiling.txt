@@ -1,0 +1,78 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-16.796 -16.796 -16.796) to (16.796 16.796 16.796)
+  4 by 4 by 4 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  1 = max bonds/atom
+  reading bonds ...
+  31680 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     2 = max # of special neighbors
+  special bonds CPU = 0.124 seconds
+  read_data CPU = 0.652 seconds
+----------------------------------------------------------
+Using INTEL Package without Coprocessor.
+Compiler: Intel Classic C++ 20.21.5 / Intel(R) C++ g++ 9.3 mode
+SIMD compiler directives: Enabled
+Precision: single
+----------------------------------------------------------
+  generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 1 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 1.52
+  ghost atom cutoff = 1.52
+  binsize = 0.76, bins = 45 45 45
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/intel, perpetual
+      attributes: half, newton on, intel
+      pair build: half/bin/newton/intel
+      stencil: half/bin/3d
+      bin: intel
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.012
+WARNING: Communication cutoff 1.52 is shorter than a bond length based estimate of 1.855. This may lead to errors. (../comm.cpp:723)
+Per MPI rank memory allocation (min/avg/max) = 8.362 | 8.541 | 8.712 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0   0.97029772   0.44484083    20.494522    22.394764    4.6721834 
+     100   0.96955453   0.44441978    20.502972    22.401678    4.6791493 
+Loop time of 0.141387 on 64 procs for 100 steps with 32000 atoms
+
+Performance: 733304.591 tau/day, 707.277 timesteps/s
+94.0% CPU use with 64 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.0035276  | 0.004032   | 0.0047014  |   0.5 |  2.85
+Bond    | 0.00052521 | 0.00059415 | 0.00070557 |   0.0 |  0.42
+Neigh   | 0.053111   | 0.053211   | 0.053363   |   0.0 | 37.63
+Comm    | 0.009669   | 0.023729   | 0.0594     |   8.8 | 16.78
+Output  | 2.369e-05  | 2.8849e-05 | 3.9952e-05 |   0.0 |  0.02
+Modify  | 0.0026488  | 0.0029433  | 0.0033858  |   0.4 |  2.08
+Other   |            | 0.05685    |            |       | 40.21
+
+Nlocal:            500 ave         513 max         484 min
+Histogram: 1 4 5 6 8 10 12 12 4 2
+Nghost:        764.969 ave         786 max         743 min
+Histogram: 1 3 5 19 6 4 14 1 6 5
+Neighs:        2928.03 ave        3056 max        2802 min
+Histogram: 5 0 11 6 8 13 9 7 2 3
+
+Total # of neighbors = 187394
+Ave neighs/atom = 5.8560625
+Ave special neighs/atom = 1.98
+Neighbor list builds = 25
+Dangerous builds = 0
+Total wall time: 0:00:01
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220531" command to generate textual and HTML reports for the profiling session.
