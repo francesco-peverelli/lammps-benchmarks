@@ -7,7 +7,7 @@ Reading data file ...
   32000 atoms
   reading velocities ...
   32000 velocities
-  read_data CPU = 0.192 seconds
+  read_data CPU = 0.084 seconds
 Replicating atoms ...
   orthogonal box = (0 0 0) to (80 40 37.292229)
   8 by 4 by 2 MPI processor grid
@@ -36,20 +36,20 @@ Per MPI rank memory allocation (min/avg/max) = 10.18 | 10.18 | 10.18 Mbytes
 Step Atoms KinEng c_1 Volume 
        0   128000    3136556.5    6404.5051    119335.13 
      100   128000    3137168.3    6284.3873    119338.83 
-Loop time of 0.0900116 on 64 procs for 100 steps with 128000 atoms
+Loop time of 0.0268074 on 64 procs for 100 steps with 128000 atoms
 
-Performance: 9598.758 tau/day, 1110.967 timesteps/s
-90.1% CPU use with 64 MPI tasks x 1 OpenMP threads
+Performance: 32229.906 tau/day, 3730.313 timesteps/s
+95.5% CPU use with 64 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.006698   | 0.0090675  | 0.023976   |   2.5 | 10.07
-Neigh   | 0.0021457  | 0.0025555  | 0.0028106  |   0.6 |  2.84
-Comm    | 0.0064781  | 0.012973   | 0.03596    |   7.8 | 14.41
-Output  | 2.8422e-05 | 5.3128e-05 | 8.2475e-05 |   0.0 |  0.06
-Modify  | 0.0031515  | 0.0037292  | 0.004113   |   0.7 |  4.14
-Other   |            | 0.06163    |            |       | 68.47
+Pair    | 0.0066659  | 0.0087067  | 0.010603   |   1.6 | 32.48
+Neigh   | 0.0021502  | 0.002534   | 0.002829   |   0.6 |  9.45
+Comm    | 0.0061724  | 0.0067143  | 0.0073282  |   0.3 | 25.05
+Output  | 2.5606e-05 | 6.8556e-05 | 9.847e-05  |   0.0 |  0.26
+Modify  | 0.0031484  | 0.0036781  | 0.0041712  |   0.7 | 13.72
+Other   |            | 0.005106   |            |       | 19.05
 
 Nlocal:           2000 ave        2005 max        1997 min
 Histogram: 16 0 32 0 0 0 0 0 0 16
@@ -63,4 +63,4 @@ Ave neighs/atom = 3.853875
 Neighbor list builds = 2
 Dangerous builds = 0
 Total wall time: 0:00:00
-Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220531" command to generate textual and HTML reports for the profiling session.
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220601" command to generate textual and HTML reports for the profiling session.
