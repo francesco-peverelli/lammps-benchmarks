@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import sys
 
-experiments = ["rhodo", "lj", "chain", "eam"]
+experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 ngpus = [1, 2, 4, 6, 8]
 nk_atoms = [32, 256, 864, 2048]
 
@@ -32,6 +32,9 @@ for fname in files:
             if (ngpu not in ngpus):
                 print(str(ngpu) + " not found!")
                 continue
+            if os.stat(fname).st_size <= 1:
+                continue
+     
             in_header = False
             skip_line = False
             read_vals = False

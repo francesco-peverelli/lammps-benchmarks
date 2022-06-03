@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import sys
 
-experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
+experiments = ["rhodo", "rhodo-single", "rhodo-double"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 
@@ -15,8 +15,8 @@ for fname in files:
     if fname.endswith("_profiling.txt") and fname.startswith("in."):
         try:
             file = open(fname, "r")
-            params = fname.split('_')
-            bench = params[0].replace(".scaled","")
+            params = fname.replace(".scaled","").split('_')
+            bench = params[0]
             size = int(params[len(params)-2][:-1])
             processes = int(params[len(params)-4][:-1])
             if (bench[3:] not in experiments):

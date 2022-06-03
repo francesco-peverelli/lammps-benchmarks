@@ -29,14 +29,10 @@ for fname in files:
             file = open(fname, "r")
             in_mpi_calls = False
             in_total_time = False
-            params = fname.split('_')
-            bench = params[0].replace(".scaled","")
-            print(params)
+            params = fname.replace(".scaled","").split('_')
+            bench = params[0]
             exp_size = int(params[len(params)-2][:-1])
             exp_proc = int(params[len(params)-4][:-1])
-            print(bench)
-            print(exp_size)
-            print(exp_proc)
             if (bench[3:] not in experiments):
                 print(bench[3:] + " not found!")
                 continue
@@ -46,7 +42,7 @@ for fname in files:
             if (exp_proc not in mpi_nproc):
                 print(exp_proc + " not found!")
                 continue
-            print(fname)
+            print(params)
             times_dict = {"Benchmark" : bench} # mapping func : time%
             times_dict['Size'] = int(params[len(params)-2][:-1])
             times_dict['Processes'] = int(params[len(params)-4][:-1])

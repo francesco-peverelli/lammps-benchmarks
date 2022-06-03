@@ -2,7 +2,7 @@ import pandas as pd
 import os 
 import sys
 
-experiments = ["rhodo", "lj", "eam", "chain"]
+experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 ngpus = [1, 2, 4, 6, 8]
 nk_atoms = [32, 256, 864, 2048]
 
@@ -37,6 +37,9 @@ for fname in files:
                 print(str(ngpu) + " not found!")
                 continue
 
+            if os.stat(fname).st_size <= 1:
+                continue
+     
             data = pd.read_csv(fname)
             bench_col = data.shape[0] * [bench]
             size_col = data.shape[0] * [size]
