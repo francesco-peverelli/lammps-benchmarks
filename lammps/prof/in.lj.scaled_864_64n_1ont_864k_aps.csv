@@ -64,7 +64,7 @@ Peak resident set node;instance-20220526-1048
 Average resident set size,MB;         8650.00
 Per rank
 Peak resident set size,MB;          139.00
-Peak resident set rank;48
+Peak resident set rank;60
 Average resident set size,MB;          135.16
 Virtual
 Per node
@@ -73,7 +73,7 @@ Peak memory consumption node;instance-20220526-1048
 Average memory consumption,MB;       658194.00
 Per rank
 Peak memory consumption,MB;        10288.00
-Peak memory consumption rank;14
+Peak memory consumption rank;48
 Average memory consumption,MB;        10284.28
 | Counters, Memory and Disk usage statistics for all Ranks
 Elapsed Time, s
@@ -174,37 +174,37 @@ MPI Hotspot 5 - MPI_Sendrecv, % of Elapsed Time
   AVG;            0.33 ;
 
 OpenMP threads number, per Rank
-  MIN;            1.00 ;Rank 48
-  MAX;            1.00 ;Rank 31
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 63
   AVG;            1.00 ;
 
 Disk I/O Bound, s
 Total;            0.01 ;all ranks
-  MIN;            0.00 ;Rank 47
+  MIN;            0.00 ;Rank 0
   MAX;            0.01 ;Rank 50
   AVG;            0.00 ;
 
 Disk I/O Bound, % of Elapsed Time
-  MIN;            0.00 ;Rank 47
+  MIN;            0.00 ;Rank 0
   MAX;            0.33 ;Rank 50
   AVG;            0.01 ;
 
 Disk read, B
 Total;        45286.00 ;all ranks
-  MIN;            0.00 ;Rank 47
+  MIN;            0.00 ;Rank 0
   MAX;         1888.00 ;Rank 63
   AVG;          707.59 ;
 
 Disk write, B
 Total;          312.00 ;all ranks
-  MIN;            0.00 ;Rank 34
-  MAX;           13.00 ;Rank 42
+  MIN;            0.00 ;Rank 0
+  MAX;           13.00 ;Rank 63
   AVG;            4.88 ;
 
 Resident Memory Usage per Rank, MB
 Total;         8650.00 ;all ranks
-  MIN;          132.00 ;Rank 34
-  MAX;          139.00 ;Rank 48
+  MIN;          132.00 ;Rank 6
+  MAX;          139.00 ;Rank 60
   AVG;          135.16 ;
 
 Resident Memory Usage per Node, MB
@@ -216,7 +216,7 @@ Total;         8650.00 ;all nodes
 Virtual Memory Usage per Rank, MB
 Total;       658194.00 ;all ranks
   MIN;        10282.00 ;Rank 1
-  MAX;        10288.00 ;Rank 14
+  MAX;        10288.00 ;Rank 48
   AVG;        10284.28 ;
 
 Virtual Memory Usage per Node, MB
@@ -247,16 +247,16 @@ Average Physical Core Utilization, out of 4096 Physical Cores
   AVG;           19.76 ;
 
 Memory Stalls, % of Pipeline Slots
-  MIN;           14.20 ;Rank 48
+  MIN;           14.20 ;Rank 21
   MAX;           35.80 ;Rank 32
   AVG;           19.28 ;
   OUTLIER BY STATISTIC AND THRESHOLD;           35.80 ;Rank 32
   OUTLIER BY STATISTIC AND THRESHOLD;           29.80 ;Rank 2
-  OUTLIER BY THRESHOLD;           20.10 ;Rank 62
-  OUTLIER BY THRESHOLD;           20.10 ;Rank 59
-  OUTLIER BY THRESHOLD;           20.10 ;Rank 20
-  OUTLIER BY THRESHOLD;           20.10 ;Rank 16
   OUTLIER BY THRESHOLD;           20.10 ;Rank 10
+  OUTLIER BY THRESHOLD;           20.10 ;Rank 16
+  OUTLIER BY THRESHOLD;           20.10 ;Rank 20
+  OUTLIER BY THRESHOLD;           20.10 ;Rank 59
+  OUTLIER BY THRESHOLD;           20.10 ;Rank 62
   OUTLIER BY THRESHOLD;           20.20 ;Rank 9
   OUTLIER BY THRESHOLD;           20.40 ;Rank 5
   OUTLIER BY THRESHOLD;           20.70 ;Rank 3
@@ -267,8 +267,8 @@ Memory Stalls, % of Pipeline Slots
   OUTLIER BY THRESHOLD;           21.80 ;Rank 30
   OUTLIER BY THRESHOLD;           22.30 ;Rank 26
   OUTLIER BY THRESHOLD;           23.40 ;Rank 57
-  OUTLIER BY THRESHOLD;           24.00 ;Rank 58
   OUTLIER BY THRESHOLD;           24.00 ;Rank 34
+  OUTLIER BY THRESHOLD;           24.00 ;Rank 58
   OUTLIER BY THRESHOLD;           24.70 ;Rank 24
   OUTLIER BY THRESHOLD;           25.20 ;Rank 29
   OUTLIER BY THRESHOLD;           26.80 ;Rank 25
@@ -280,7 +280,7 @@ Cache Stalls, % of Cycles
   OUTLIER BY STATISTIC AND THRESHOLD;           20.40 ;Rank 32
 
 DRAM Stalls, % of Cycles
-  MIN;            3.80 ;Rank 42
+  MIN;            3.80 ;Rank 19
   MAX;            9.80 ;Rank 32
   AVG;            5.25 ;
   OUTLIER BY STATISTIC;            9.80 ;Rank 32
@@ -316,32 +316,32 @@ SP FLOPs, % of uOps
   OUTLIER BY STATISTIC;            4.00 ;Rank 2
 
 Packed, % from SP FP
-  MIN;          100.00 ;Rank 48
-  MAX;          100.00 ;Rank 31
+  MIN;          100.00 ;Rank 0
+  MAX;          100.00 ;Rank 63
   AVG;          100.00 ;
 
 SP 128-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 SP 256-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 SP 512-bit, %
-  MIN;          100.00 ;Rank 48
-  MAX;          100.00 ;Rank 31
+  MIN;          100.00 ;Rank 0
+  MAX;          100.00 ;Rank 63
   AVG;          100.00 ;
 
 SP Scalar, % from SP FP
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP FLOPs, % of uOps
-  MIN;            1.30 ;Rank 44
+  MIN;            1.30 ;Rank 21
   MAX;            5.50 ;Rank 32
   AVG;            1.99 ;
   OUTLIER BY STATISTIC;            5.50 ;Rank 32
@@ -352,13 +352,13 @@ DP Packed, % from DP FP
   AVG;           68.91 ;
 
 DP 128-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 256-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 512-bit, %

@@ -17,7 +17,7 @@ Finding 1-2 1-3 1-4 neighbors ...
      2 = max # of 1-2 neighbors
      2 = max # of special neighbors
   special bonds CPU = 0.002 seconds
-  read_data CPU = 0.963 seconds
+  read_data CPU = 0.113 seconds
 ----------------------------------------------------------
 Using INTEL Package without Coprocessor.
 Compiler: Intel Classic C++ 20.21.5 / Intel(R) C++ g++ 9.3 mode
@@ -46,21 +46,21 @@ Per MPI rank memory allocation (min/avg/max) = 21.32 | 21.51 | 21.64 Mbytes
 Step Temp E_pair E_mol TotEng Press 
        0   0.97029772   0.44484087    20.494523    22.394765    4.6721833 
      100   0.97863923   0.44257244    20.500755    22.411241    4.7076737 
-Loop time of 0.315851 on 16 procs for 100 steps with 32000 atoms
+Loop time of 0.0608409 on 16 procs for 100 steps with 32000 atoms
 
-Performance: 328255.825 tau/day, 316.605 timesteps/s
-85.6% CPU use with 16 MPI tasks x 1 OpenMP threads
+Performance: 1704116.771 tau/day, 1643.631 timesteps/s
+93.7% CPU use with 16 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.0076324  | 0.0096395  | 0.010233   |   0.8 |  3.05
-Bond    | 0.001974   | 0.0024493  | 0.0025835  |   0.4 |  0.78
-Neigh   | 0.12753    | 0.13272    | 0.21009    |   5.5 | 42.02
-Comm    | 0.025767   | 0.084987   | 0.11069    |  12.2 | 26.91
-Output  | 2.5922e-05 | 4.0731e-05 | 7.1502e-05 |   0.0 |  0.01
-Modify  | 0.0096426  | 0.01205    | 0.013526   |   0.9 |  3.81
-Other   |            | 0.07396    |            |       | 23.42
+Pair    | 0.0094868  | 0.0099252  | 0.010276   |   0.2 | 16.31
+Bond    | 0.0025106  | 0.00258    | 0.0030437  |   0.2 |  4.24
+Neigh   | 0.015903   | 0.015968   | 0.016034   |   0.0 | 26.25
+Comm    | 0.015448   | 0.016309   | 0.017092   |   0.4 | 26.81
+Output  | 4.2482e-05 | 5.5441e-05 | 6.8271e-05 |   0.0 |  0.09
+Modify  | 0.012209   | 0.012456   | 0.013545   |   0.3 | 20.47
+Other   |            | 0.003547   |            |       |  5.83
 
 Nlocal:           2000 ave        2025 max        1975 min
 Histogram: 1 2 1 2 2 1 3 1 1 2
@@ -74,5 +74,5 @@ Ave neighs/atom = 5.8554688
 Ave special neighs/atom = 1.98
 Neighbor list builds = 25
 Dangerous builds = 0
-Total wall time: 0:00:01
-Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220531" command to generate textual and HTML reports for the profiling session.
+Total wall time: 0:00:00
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220601" command to generate textual and HTML reports for the profiling session.

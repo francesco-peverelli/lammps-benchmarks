@@ -7,12 +7,12 @@ Reading data file ...
   32000 atoms
   reading velocities ...
   32000 velocities
-  read_data CPU = 0.293 seconds
+  read_data CPU = 0.089 seconds
 Replicating atoms ...
   orthogonal box = (0 0 0) to (160 80 37.292229)
   8 by 4 by 1 MPI processor grid
   512000 atoms
-  replicate CPU = 0.096 seconds
+  replicate CPU = 0.026 seconds
 14592 atoms in group bottom
 497408 atoms in group active
   generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
@@ -36,20 +36,20 @@ Per MPI rank memory allocation (min/avg/max) = 15.37 | 15.37 | 15.37 Mbytes
 Step Atoms KinEng c_1 Volume 
        0   512000     12546226    25618.021    477340.53 
      100   512000     12548673    25137.549    477355.32 
-Loop time of 0.466745 on 32 procs for 100 steps with 512000 atoms
+Loop time of 0.195685 on 32 procs for 100 steps with 512000 atoms
 
-Performance: 1851.117 tau/day, 214.250 timesteps/s
-95.3% CPU use with 32 MPI tasks x 1 OpenMP threads
+Performance: 4415.262 tau/day, 511.026 timesteps/s
+99.6% CPU use with 32 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.078473   | 0.096103   | 0.15796    |   5.4 | 20.59
-Neigh   | 0.016555   | 0.020846   | 0.032902   |   1.9 |  4.47
-Comm    | 0.01946    | 0.029049   | 0.056238   |   8.9 |  6.22
-Output  | 0.024014   | 0.024086   | 0.024235   |   0.0 |  5.16
-Modify  | 0.033895   | 0.041544   | 0.11559    |   6.7 |  8.90
-Other   |            | 0.2551     |            |       | 54.66
+Pair    | 0.07783    | 0.09438    | 0.096607   |   1.0 | 48.23
+Neigh   | 0.01691    | 0.021188   | 0.021838   |   0.5 | 10.83
+Comm    | 0.019186   | 0.020036   | 0.021049   |   0.4 | 10.24
+Output  | 0.00013099 | 0.00016458 | 0.00033514 |   0.0 |  0.08
+Modify  | 0.03433    | 0.041231   | 0.045666   |   1.1 | 21.07
+Other   |            | 0.01868    |            |       |  9.55
 
 Nlocal:          16000 ave       16000 max       16000 min
 Histogram: 32 0 0 0 0 0 0 0 0 0
@@ -63,4 +63,4 @@ Ave neighs/atom = 3.6410625
 Neighbor list builds = 2
 Dangerous builds = 0
 Total wall time: 0:00:00
-Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220531" command to generate textual and HTML reports for the profiling session.
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220601" command to generate textual and HTML reports for the profiling session.

@@ -30,8 +30,8 @@ Finding 1-2 1-3 1-4 neighbors ...
     12 = max # of 1-3 neighbors
     24 = max # of 1-4 neighbors
     26 = max # of special neighbors
-  special bonds CPU = 0.034 seconds
-  read_data CPU = 0.711 seconds
+  special bonds CPU = 0.008 seconds
+  read_data CPU = 0.231 seconds
 Replicating atoms ...
   orthogonal box = (-27.5 -38.5 -36.3646) to (82.5 115.5 109.0876)
   1 by 2 by 2 MPI processor grid
@@ -47,14 +47,14 @@ Finding 1-2 1-3 1-4 neighbors ...
     12 = max # of 1-3 neighbors
     24 = max # of 1-4 neighbors
     26 = max # of special neighbors
-  special bonds CPU = 0.151 seconds
-  replicate CPU = 0.294 seconds
+  special bonds CPU = 0.052 seconds
+  replicate CPU = 0.110 seconds
 Finding SHAKE clusters ...
    12936 = # of size 2 clusters
    29064 = # of size 3 clusters
     5976 = # of size 4 clusters
    33864 = # of frozen angles
-  find clusters CPU = 0.041 seconds
+  find clusters CPU = 0.024 seconds
 PPPM initialization ...
   using 12-bit tables for long-range coulomb (../kspace.cpp:340)
   G vector (1/distance) = 0.25045586
@@ -94,34 +94,34 @@ PotEng   =   -374426.7000 E_bond   =     20303.9346 E_angle  =     87370.9570
 E_dihed  =     41694.2744 E_impro  =      1708.1116 E_vdwl   =    -18463.0122 
 E_coul   =   1670246.7173 E_long   =  -2177287.6828 Press    =      -148.4187 
 Volume   =   2463960.2680 
----------------- Step       50 ----- CPU =     14.5362 (sec) ----------------
+---------------- Step       50 ----- CPU =      6.9019 (sec) ----------------
 TotEng   =   -202646.4036 KinEng   =    172008.0699 Temp     =       299.8121 
 PotEng   =   -374654.4735 E_bond   =     19774.0864 E_angle  =     86693.3945 
 E_dihed  =     41917.3408 E_impro  =      1817.0110 E_vdwl   =    -15944.8882 
 E_coul   =   1668431.3555 E_long   =  -2177342.7736 Press    =       238.9801 
 Volume   =   2464255.7543 
----------------- Step      100 ----- CPU =     30.6072 (sec) ----------------
+---------------- Step      100 ----- CPU =     13.2773 (sec) ----------------
 TotEng   =   -202323.0576 KinEng   =    172719.9527 Temp     =       301.0530 
 PotEng   =   -375043.0102 E_bond   =     20544.0815 E_angle  =     86258.0645 
 E_dihed  =     41590.0771 E_impro  =      1734.1513 E_vdwl   =    -15193.6650 
 E_coul   =   1667325.4448 E_long   =  -2177301.1645 Press    =        13.7661 
 Volume   =   2465083.9382 
-Loop time of 30.6073 on 4 procs for 100 steps with 256000 atoms
+Loop time of 13.2774 on 4 procs for 100 steps with 256000 atoms
 
-Performance: 0.565 ns/day, 42.510 hours/ns, 3.267 timesteps/s
-67.5% CPU use with 4 MPI tasks x 1 OpenMP threads
+Performance: 1.301 ns/day, 18.441 hours/ns, 7.532 timesteps/s
+99.7% CPU use with 4 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 8.4072     | 12.397     | 16.451     | 112.0 | 40.50
-Bond    | 0.46421    | 0.74696    | 1.0714     |  32.8 |  2.44
-Kspace  | 5.314      | 9.6427     | 13.982     | 134.5 | 31.50
-Neigh   | 2.3828     | 2.4237     | 2.4477     |   1.7 |  7.92
-Comm    | 1.4568     | 1.6732     | 2.0092     |  17.3 |  5.47
-Output  | 0.00027832 | 0.0003018  | 0.00035248 |   0.0 |  0.00
-Modify  | 2.8732     | 3.0525     | 3.2683     |  10.3 |  9.97
-Other   |            | 0.6707     |            |       |  2.19
+Pair    | 8.6549     | 8.675      | 8.6935     |   0.6 | 65.34
+Bond    | 0.47984    | 0.48302    | 0.48528    |   0.3 |  3.64
+Kspace  | 1.4396     | 1.4594     | 1.4807     |   1.4 | 10.99
+Neigh   | 1.0901     | 1.0909     | 1.0922     |   0.1 |  8.22
+Comm    | 0.39156    | 0.39383    | 0.39571    |   0.3 |  2.97
+Output  | 0.00027786 | 0.00029746 | 0.00034102 |   0.0 |  0.00
+Modify  | 1.1291     | 1.1326     | 1.1367     |   0.3 |  8.53
+Other   |            | 0.04239    |            |       |  0.32
 
 Nlocal:          64000 ave       64000 max       64000 min
 Histogram: 4 0 0 0 0 0 0 0 0 0
@@ -135,5 +135,5 @@ Ave neighs/atom = 375.87601
 Ave special neighs/atom = 7.431875
 Neighbor list builds = 11
 Dangerous builds = 0
-Total wall time: 0:00:32
-Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220531" command to generate textual and HTML reports for the profiling session.
+Total wall time: 0:00:14
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220601" command to generate textual and HTML reports for the profiling session.

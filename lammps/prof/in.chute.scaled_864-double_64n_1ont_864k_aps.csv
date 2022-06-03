@@ -171,14 +171,14 @@ MPI Hotspot 5 - MPI_Wait, % of Elapsed Time
   AVG;            1.16 ;
 
 OpenMP threads number, per Rank
-  MIN;            1.00 ;Rank 48
-  MAX;            1.00 ;Rank 31
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 63
   AVG;            1.00 ;
 
 Disk I/O Bound, s
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 Resident Memory Usage per Rank, MB
@@ -195,7 +195,7 @@ Total;         8174.00 ;all nodes
 
 Virtual Memory Usage per Rank, MB
 Total;       650380.00 ;all ranks
-  MIN;        10160.00 ;Rank 63
+  MIN;        10160.00 ;Rank 3
   MAX;        10166.00 ;Rank 40
   AVG;        10162.19 ;
 
@@ -232,12 +232,12 @@ Memory Stalls, % of Pipeline Slots
   AVG;           15.72 ;
 
 Cache Stalls, % of Cycles
-  MIN;           11.90 ;Rank 42
-  MAX;           15.20 ;Rank 30
+  MIN;           11.90 ;Rank 5
+  MAX;           15.20 ;Rank 44
   AVG;           13.32 ;
 
 DRAM Stalls, % of Cycles
-  MIN;            0.30 ;Rank 60
+  MIN;            0.30 ;Rank 34
   MAX;            1.90 ;Rank 0
   AVG;            0.76 ;
   OUTLIER BY STATISTIC;            1.90 ;Rank 0
@@ -253,8 +253,8 @@ NUMA, % of Remote Accesses
 
 SP GFLOPS
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP GFLOPS
@@ -264,48 +264,48 @@ Total;            1.57 ;all ranks
   AVG;            0.02 ;
 
 Vectorization, %
-  MIN;            0.30 ;Rank 35
+  MIN;            0.30 ;Rank 5
   MAX;            3.50 ;Rank 51
   AVG;            1.06 ;
 
 SP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP FLOPs, % of uOps
-  MIN;            0.90 ;Rank 61
+  MIN;            0.90 ;Rank 4
   MAX;            7.50 ;Rank 40
   AVG;            3.71 ;
 
 DP Packed, % from DP FP
-  MIN;            0.30 ;Rank 35
+  MIN;            0.30 ;Rank 5
   MAX;            3.50 ;Rank 51
   AVG;            1.06 ;
 
 DP 128-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 256-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 512-bit, %
-  MIN;            0.30 ;Rank 35
+  MIN;            0.30 ;Rank 5
   MAX;            3.50 ;Rank 51
   AVG;            1.06 ;
 
 DP Scalar, % from DP FP
   MIN;           96.50 ;Rank 51
-  MAX;           99.70 ;Rank 42
+  MAX;           99.70 ;Rank 58
   AVG;           98.94 ;
 
 Non-FP, % of uOps
   MIN;           92.50 ;Rank 40
-  MAX;           99.10 ;Rank 26
+  MAX;           99.10 ;Rank 61
   AVG;           96.29 ;
 
 FP Arith/Mem Rd Instr. Ratio

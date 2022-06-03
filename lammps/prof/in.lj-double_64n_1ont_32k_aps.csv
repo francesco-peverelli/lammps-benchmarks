@@ -56,7 +56,7 @@ Peak resident set node;instance-20220530-1006
 Average resident set size,MB;         8103.00
 Per rank
 Peak resident set size,MB;          131.00
-Peak resident set rank;0
+Peak resident set rank;49
 Average resident set size,MB;          126.61
 Virtual
 Per node
@@ -171,20 +171,20 @@ MPI Hotspot 5 - MPI_Bcast, % of Elapsed Time
   AVG;            0.93 ;
 
 OpenMP threads number, per Rank
-  MIN;            1.00 ;Rank 48
-  MAX;            1.00 ;Rank 31
+  MIN;            1.00 ;Rank 0
+  MAX;            1.00 ;Rank 63
   AVG;            1.00 ;
 
 Disk I/O Bound, s
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 Resident Memory Usage per Rank, MB
 Total;         8103.00 ;all ranks
-  MIN;          123.00 ;Rank 50
-  MAX;          131.00 ;Rank 0
+  MIN;          123.00 ;Rank 6
+  MAX;          131.00 ;Rank 49
   AVG;          126.61 ;
 
 Resident Memory Usage per Node, MB
@@ -241,20 +241,20 @@ Cache Stalls, % of Cycles
   OUTLIER BY STATISTIC;           14.20 ;Rank 32
 
 DRAM Stalls, % of Cycles
-  MIN;            0.30 ;Rank 58
+  MIN;            0.30 ;Rank 16
   MAX;            4.70 ;Rank 32
   AVG;            0.75 ;
   OUTLIER BY STATISTIC;            4.70 ;Rank 32
 
 NUMA, % of Remote Accesses
-  MIN;            0.30 ;Rank 58
+  MIN;            0.30 ;Rank 18
   MAX;           11.00 ;Rank 0
   AVG;            2.43 ;
   OUTLIER BY STATISTIC;           11.00 ;Rank 0
 
 SP GFLOPS
 Total;            0.00 ;all ranks
-  MIN;            0.00 ;Rank 48
+  MIN;            0.00 ;Rank 0
   MAX;            0.00 ;Rank 42
   AVG;            0.00 ;
 
@@ -277,12 +277,12 @@ Vectorization, %
   OUTLIER BY THRESHOLD;           69.00 ;Rank 58
 
 SP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP FLOPs, % of uOps
-  MIN;            0.00 ;Rank 33
+  MIN;            0.00 ;Rank 13
   MAX;            1.40 ;Rank 32
   AVG;            0.11 ;
   OUTLIER BY STATISTIC;            1.40 ;Rank 32
@@ -293,13 +293,13 @@ DP Packed, % from DP FP
   AVG;           81.09 ;
 
 DP 128-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 256-bit, %
-  MIN;            0.00 ;Rank 48
-  MAX;            0.00 ;Rank 31
+  MIN;            0.00 ;Rank 0
+  MAX;            0.00 ;Rank 63
   AVG;            0.00 ;
 
 DP 512-bit, %
@@ -314,7 +314,7 @@ DP Scalar, % from DP FP
 
 Non-FP, % of uOps
   MIN;           98.60 ;Rank 32
-  MAX;          100.00 ;Rank 46
+  MAX;          100.00 ;Rank 62
   AVG;           99.89 ;
   OUTLIER BY STATISTIC;           98.60 ;Rank 32
 

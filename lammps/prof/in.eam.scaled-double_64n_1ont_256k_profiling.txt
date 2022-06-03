@@ -5,7 +5,7 @@ Created orthogonal box = (0 0 0) to (144.6 144.6 144.6)
   4 by 4 by 4 MPI processor grid
 Created 256000 atoms
   using lattice units in orthogonal box = (0 0 0) to (144.6 144.6 144.6)
-  create_atoms CPU = 0.029 seconds
+  create_atoms CPU = 0.002 seconds
 Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
 ----------------------------------------------------------
 Using INTEL Package without Coprocessor.
@@ -34,20 +34,20 @@ Step Temp E_pair E_mol TotEng Press
        0         1600      -906240            0   -853295.25    18704.085 
       50    780.37025   -878942.76            0   -853119.94    52325.542 
      100    798.91514   -879560.79            0   -853124.32    51436.878 
-Loop time of 1.5279 on 64 procs for 100 steps with 256000 atoms
+Loop time of 0.239187 on 64 procs for 100 steps with 256000 atoms
 
-Performance: 28.274 ns/day, 0.849 hours/ns, 65.449 timesteps/s
-76.6% CPU use with 64 MPI tasks x 1 OpenMP threads
+Performance: 180.612 ns/day, 0.133 hours/ns, 418.082 timesteps/s
+91.9% CPU use with 64 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.58582    | 0.67562    | 0.78974    |   6.9 | 44.22
-Neigh   | 0.017879   | 0.022029   | 0.073935   |   4.6 |  1.44
-Comm    | 0.39221    | 0.55253    | 0.6767     |   8.6 | 36.16
-Output  | 0.0032939  | 0.012452   | 0.019137   |   7.0 |  0.81
-Modify  | 0.0036211  | 0.0043014  | 0.0051698  |   0.5 |  0.28
-Other   |            | 0.261      |            |       | 17.08
+Pair    | 0.15797    | 0.17175    | 0.18106    |   1.8 | 71.81
+Neigh   | 0.017788   | 0.02179    | 0.023731   |   1.3 |  9.11
+Comm    | 0.026654   | 0.037867   | 0.054279   |   4.9 | 15.83
+Output  | 0.00011349 | 0.00022132 | 0.00033979 |   0.0 |  0.09
+Modify  | 0.0030786  | 0.0041403  | 0.0050346  |   0.7 |  1.73
+Other   |            | 0.003419   |            |       |  1.43
 
 Nlocal:           4000 ave        4077 max        3943 min
 Histogram: 4 5 10 11 10 12 6 3 2 1
@@ -60,5 +60,5 @@ Total # of neighbors = 9658204
 Ave neighs/atom = 37.727359
 Neighbor list builds = 15
 Dangerous builds = 0
-Total wall time: 0:00:01
-Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220531" command to generate textual and HTML reports for the profiling session.
+Total wall time: 0:00:00
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220601" command to generate textual and HTML reports for the profiling session.
