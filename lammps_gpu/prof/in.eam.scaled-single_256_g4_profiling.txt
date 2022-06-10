@@ -1,0 +1,98 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Lattice spacing in x,y,z = 3.615 3.615 3.615
+Created orthogonal box = (0 0 0) to (144.6 144.6 144.6)
+  2 by 4 by 4 MPI processor grid
+Created 256000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (144.6 144.6 144.6)
+  create_atoms CPU = 0.003 seconds
+Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for eam:
+-  with 8 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 13/16 GB, 1.5 GHZ (Single Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-3 on core 0...Done.
+Initializing Devices 0-3 on core 1...Done.
+Initializing Devices 0-3 on core 2...Done.
+Initializing Devices 0-3 on core 3...Done.
+Initializing Devices 0-3 on core 4...Done.
+Initializing Devices 0-3 on core 5...Done.
+Initializing Devices 0-3 on core 6...Done.
+Initializing Devices 0-3 on core 7...Done.
+
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 5.358 | 5.44 | 5.484 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1600   -906239.99            0   -853295.24    18704.155 
+      50    780.37026   -878942.76            0   -853119.94    52325.549 
+     100    798.91531   -879560.79            0   -853124.31    51436.918 
+Loop time of 0.337241 on 32 procs for 100 steps with 256000 atoms
+
+Performance: 128.098 ns/day, 0.187 hours/ns, 296.524 timesteps/s
+97.2% CPU use with 32 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.21468    | 0.22638    | 0.23704    |   1.2 | 67.13
+Neigh   | 0.00040117 | 0.00044107 | 0.0004733  |   0.0 |  0.13
+Comm    | 0.068427   | 0.076361   | 0.085409   |   1.5 | 22.64
+Output  | 0.00028277 | 0.0013062  | 0.0022984  |   1.6 |  0.39
+Modify  | 0.0036312  | 0.0041053  | 0.0048466  |   0.3 |  1.22
+Other   |            | 0.02865    |            |       |  8.49
+
+Nlocal:           8000 ave        8075 max        7907 min
+Histogram: 1 2 1 2 6 8 4 3 1 4
+Nghost:        9130.47 ave        9224 max        9054 min
+Histogram: 2 3 3 4 7 7 2 1 2 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 32 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 15
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.0442 s.
+Neighbor copy:   0.0009 s.
+Neighbor build:  0.0119 s.
+Force calc:      0.0785 s.
+Device Overhead: 0.1012 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  11.42 MB.
+CPU Neighbor:    0.0320 s.
+CPU Cast/Pack:   0.0132 s.
+CPU Driver_Time: 0.0052 s.
+CPU Idle_Time:   0.0359 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:41
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220609" command to generate textual and HTML reports for the profiling session.

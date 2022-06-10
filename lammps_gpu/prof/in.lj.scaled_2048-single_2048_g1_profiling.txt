@@ -1,0 +1,102 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Lattice spacing in x,y,z = 1.6795962 1.6795962 1.6795962
+Created orthogonal box = (0 0 0) to (134.3677 134.3677 134.3677)
+  2 by 2 by 4 MPI processor grid
+Created 2048000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (134.3677 134.3677 134.3677)
+  create_atoms CPU = 0.027 seconds
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for lj/cut:
+-  with 16 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 11/16 GB, 1.5 GHZ (Single Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Device 0 on core 0...Done.
+Initializing Device 0 on core 1...Done.
+Initializing Device 0 on core 2...Done.
+Initializing Device 0 on core 3...Done.
+Initializing Device 0 on core 4...Done.
+Initializing Device 0 on core 5...Done.
+Initializing Device 0 on core 6...Done.
+Initializing Device 0 on core 7...Done.
+Initializing Device 0 on core 8...Done.
+Initializing Device 0 on core 9...Done.
+Initializing Device 0 on core 10...Done.
+Initializing Device 0 on core 11...Done.
+Initializing Device 0 on core 12...Done.
+Initializing Device 0 on core 13...Done.
+Initializing Device 0 on core 14...Done.
+Initializing Device 0 on core 15...Done.
+
+  generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 28.25 | 28.48 | 28.61 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1.44   -6.7733685            0   -4.6133695   -5.0196697 
+     100   0.75921978   -5.7611317            0   -4.6223026   0.19208775 
+Loop time of 1.08672 on 16 procs for 100 steps with 2048000 atoms
+
+Performance: 39752.645 tau/day, 92.020 timesteps/s
+96.9% CPU use with 16 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.43026    | 0.46638    | 0.51296    |   3.2 | 42.92
+Neigh   | 3.252e-06  | 4.4882e-06 | 6.46e-06   |   0.0 |  0.00
+Comm    | 0.36815    | 0.40924    | 0.43672    |   3.1 | 37.66
+Output  | 0.00078023 | 0.007997   | 0.015276   |   5.0 |  0.74
+Modify  | 0.12613    | 0.13137    | 0.13705    |   0.9 | 12.09
+Other   |            | 0.07174    |            |       |  6.60
+
+Nlocal:         128000 ave      128170 max      127822 min
+Histogram: 1 2 2 1 2 1 2 2 1 2
+Nghost:        49229.9 ave       49414 max       49086 min
+Histogram: 3 2 1 2 2 1 1 1 2 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 16 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 5
+Dangerous builds not checked
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.2396 s.
+Neighbor copy:   0.0006 s.
+Neighbor build:  0.0391 s.
+Force calc:      0.0973 s.
+Device Overhead: 0.1912 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  104.52 MB.
+CPU Neighbor:    0.0485 s.
+CPU Cast/Pack:   0.1716 s.
+CPU Driver_Time: 0.0040 s.
+CPU Idle_Time:   0.2660 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:21
+Intel(R) VTune(TM) Profiler 2022.2.0 collection completed successfully. Use the "aps --report /home/ubuntu/lammps/bench/aps_result_20220609" command to generate textual and HTML reports for the profiling session.
