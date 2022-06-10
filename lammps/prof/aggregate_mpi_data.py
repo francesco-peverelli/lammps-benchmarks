@@ -30,6 +30,10 @@ for fname in files:
             in_mpi_calls = False
             in_total_time = False
             params = fname.replace(".scaled","").split('_')
+            if params[1].endswith('-double'):
+                params[0] += '-double'
+            elif params[1].endswith('-single'):
+                params[0] += '-single'
             bench = params[0]
             exp_size = int(params[len(params)-2][:-1])
             exp_proc = int(params[len(params)-4][:-1])

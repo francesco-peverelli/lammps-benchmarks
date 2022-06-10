@@ -16,6 +16,10 @@ for fname in files:
         try:
             file = open(fname, "r")
             params = fname.replace(".scaled","").split('_')
+            if params[1].endswith('-double'):
+                params[0] += '-double'
+            elif params[1].endswith('-single'):
+                params[0] += '-single'
             bench = params[0]
             size = int(params[len(params)-2][:-1])
             processes = int(params[len(params)-4][:-1])
