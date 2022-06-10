@@ -18,7 +18,7 @@ start_dir=os.getcwd()
 bench_dir="../lammps/bench/"
 bench_in=sys.argv[1] 
 bench_name = bench_in
-bench_in += "-single"
+bench_in += "-double"
 os.chdir(bench_dir)
 
 for gpu,mpi in gpu_mpi_dict[problem_idx].items():
