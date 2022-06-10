@@ -22,7 +22,7 @@ bench_in += "-double"
 os.chdir(bench_dir)
 
 for gpu,mpi in gpu_mpi_dict[problem_idx].items():
-    bench_cmd="nsys profile mpiexec -mps -np " + str(mpi) + " env OMP_NUM_THREADS=1 ../bin/lmp_intel_cpu_intelmpi-single -in " + bench_name + " -sf gpu -pk gpu " + str(gpu) + ""
+    bench_cmd="nsys profile mpiexec -mps -np " + str(mpi) + " env OMP_NUM_THREADS=1 ../bin/lmp_intel_cpu_intelmpi-double -in " + bench_name + " -sf gpu -pk gpu " + str(gpu) + ""
     tag = bench_in + "_" + str(gpu) + "g_" + str(mpi) + "n_"+ sys.argv[2]
     cmd = bench_cmd + " > " + start_dir + "/lammps_gpu/prof/" + bench_in + "_" + sys.argv[2] + "_g" + str(gpu) + "_profiling.txt"
     print("running " + cmd)
