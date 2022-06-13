@@ -34,8 +34,8 @@ data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
 
 sns.set_style("whitegrid")
-g = sns.catplot(data=mpi_tot_data, col='Processes', hue='Benchmark', x='Size', y='value', \
-    kind='point', palette='mako')
+g = sns.catplot(data=mpi_tot_data, hue='Processes', x='Benchmark', col='Size', y='value', \
+    kind='bar', palette='mako')
 g.set_axis_labels("Problem Size [K atoms]","MPI Total Time [%]")
 g.savefig(fout + "_mpi_tot_data.png")
 

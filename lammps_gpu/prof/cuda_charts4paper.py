@@ -62,7 +62,7 @@ filt_df.groupby(['Size','GPUs','Operation'])
 print(df)
 sns.set_style("whitegrid")
 g = sns.catplot(data=filt_df, col='GPUs', row='Benchmark', x='Size', hue='Operation', y='Time(%)', \
-    kind='bar', palette='mako')
+    kind='bar', palette='Paired')
 #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
 #g.set_xticklabels(sorted(phases))
 g.savefig(fout + ".png")

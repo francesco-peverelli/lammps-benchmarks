@@ -3,7 +3,7 @@ import os
 import sys
 
 # modify to change the experiments to group together
-experiments = ["rhodo", "rhodo-single", "rhodo-double"]
+experiments = ["rhodo", "lj", "eam", "chain", "chute"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 
@@ -60,8 +60,8 @@ for fname in files:
                     in_total_time = False
                     tokens = line.split(";")
                     tokens = [x.strip() for x in tokens]
-                    times_dict['MPI_Time'] = float(tokens[2])
-                    times_dict['MPI_(%)'] = float(tokens[3])
+                    times_dict['MPI_Time'] = float(tokens[3])
+                    times_dict['MPI_(%)'] = float(tokens[5])
                     if 'MPI_Time' not in mpi_funcs:
                         mpi_funcs.add('MPI_Time')
                     if 'MPI_(%)' not in mpi_funcs:
