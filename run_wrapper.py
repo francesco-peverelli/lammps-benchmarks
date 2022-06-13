@@ -29,7 +29,7 @@ parser.add_argument('--dir', dest='dir', type=str,
 help='[OPTIONAL]\tAllows to specify the directory where the benchmark should be run, this script\'s directory by default')
 parser.add_argument('--gpu-power', dest='gpu_power',type=int,
 help='[OPTIONAL]\tAllows to monitor gpu power draw (requires nvidia-smi)')
-parser.add_argument('--cpu-power', dest='cpu_power',type=bool,
+parser.add_argument('--cpu-power', dest='cpu_power',type=int,
 help='[OPTIONAL]\tAllows to monitor gpu power draw (requires powerstat)')
 parser.add_argument('--gpu-threshold', dest='gpu_threshold',type=int,
 help='[OPTIONAL]\tAllows to set a minimum threshold (Watt) for GPU power average')
@@ -109,7 +109,7 @@ try:
             gpu_avg += mean(filter(lambda v: v > th, float_watts))
 
     cpu_avg = 0
-    if args.cpu_power is not None:
+    if (args.cpu_power is not None) and int(args.cpu_power) == 1:
         os.system("sudo kill $(ps aux | grep 'powerstat' | awk '{print $2}') &> /dev/null")
         #os.killpg(os.getpgid(pow_proc.pid), signal.SIGTERM)
         pow_proc.wait()
