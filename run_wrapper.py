@@ -70,7 +70,9 @@ try:
         smi_proc = subprocess.Popen('nvidia-smi -i ' + id_str + ' --loop-ms=500 --format=csv --query-gpu=power.draw,gpu_uuid > ' + out_dir + '/' + timestamp + '_nv-smi.txt', shell=True, preexec_fn=sid)
 
     if args.cpu_power is not None:
-        if sid is None:
+        try:
+            sid
+        except NameError:
             sid=os.setsid
         pow_proc = subprocess.Popen('sudo powerstat 0.5 7200 -R -n > ' + out_dir + '/' + timestamp + '_powerstat.txt', shell=True, preexec_fn=sid)
 
