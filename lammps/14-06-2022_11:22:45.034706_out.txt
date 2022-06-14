@@ -1,0 +1,138 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-27.5 -38.5 -36.3646) to (27.5 38.5 36.3615)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  4 = max bonds/atom
+  scanning angles ...
+  8 = max angles/atom
+  scanning dihedrals ...
+  18 = max dihedrals/atom
+  scanning impropers ...
+  2 = max impropers/atom
+  reading bonds ...
+  27723 bonds
+  reading angles ...
+  40467 angles
+  reading dihedrals ...
+  56829 dihedrals
+  reading impropers ...
+  1034 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+    12 = max # of 1-3 neighbors
+    24 = max # of 1-4 neighbors
+    26 = max # of special neighbors
+  special bonds CPU = 0.017 seconds
+  read_data CPU = 0.224 seconds
+Replicating atoms ...
+  orthogonal box = (-27.5 -38.5 -36.3646) to (137.5 192.5 181.8137)
+  1 by 1 by 1 MPI processor grid
+  864000 atoms
+  748521 bonds
+  1092609 angles
+  1534383 dihedrals
+  27918 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+    12 = max # of 1-3 neighbors
+    24 = max # of 1-4 neighbors
+    26 = max # of special neighbors
+  special bonds CPU = 0.444 seconds
+  replicate CPU = 0.714 seconds
+Finding SHAKE clusters ...
+   43659 = # of size 2 clusters
+   98091 = # of size 3 clusters
+   20169 = # of size 4 clusters
+  114291 = # of frozen angles
+  find clusters CPU = 0.197 seconds
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:340)
+  G vector (1/distance) = 0.29001067
+  grid = 96 128 125
+  stencil order = 7
+  estimated absolute RMS force accuracy = 0.0038658226
+  estimated relative force accuracy = 1.164181e-05
+  using single precision MKL FFT
+  3d grid and FFT values/proc = 1927590 1536000
+----------------------------------------------------------
+Using INTEL Package without Coprocessor.
+Compiler: Intel Classic C++ 20.21.5 / Intel(R) C++ g++ 9.3 mode
+SIMD compiler directives: Enabled
+Precision: mixed
+----------------------------------------------------------
+  generated 2278 of 2278 mixed pair_coeff terms from arithmetic mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 5 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 12
+  ghost atom cutoff = 12
+  binsize = 6, bins = 28 39 37
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/charmm/coul/long/intel, perpetual
+      attributes: half, newton on, intel
+      pair build: half/bin/newton/intel
+      stencil: half/bin/3d
+      bin: intel
+Setting up Verlet run ...
+  Unit style    : real
+  Current step  : 0
+  Time step     : 2
+Per MPI rank memory allocation (min/avg/max) = 8863 | 8863 | 8863 Mbytes
+---------------- Step        0 ----- CPU =      0.0000 (sec) ----------------
+TotEng   =   -684695.9929 KinEng   =    579010.4447 Temp     =       299.0277 
+PotEng   =  -1263706.4376 E_bond   =     68525.6859 E_angle  =    294877.1223 
+E_dihed  =    140718.2350 E_impro  =      5764.8965 E_vdwl   =    -62312.3838 
+E_coul   =   6792165.6890 E_long   =  -8503445.6825 Press    =      -152.4327 
+Volume   =   8315865.9045 
+---------------- Step       50 ----- CPU =     94.1786 (sec) ----------------
+TotEng   =   -683988.4182 KinEng   =    580534.0409 Temp     =       299.8146 
+PotEng   =  -1264522.4591 E_bond   =     66735.6546 E_angle  =    292593.0046 
+E_dihed  =    141466.7550 E_impro  =      6132.7697 E_vdwl   =    -53800.6233 
+E_coul   =   6786084.8481 E_long   =  -8503734.8678 Press    =       235.2226 
+Volume   =   8316842.2508 
+---------------- Step      100 ----- CPU =    190.4310 (sec) ----------------
+TotEng   =   -682769.3761 KinEng   =    582926.6485 Temp     =       301.0502 
+PotEng   =  -1265696.0246 E_bond   =     69333.6406 E_angle  =    291110.2591 
+E_dihed  =    140362.2113 E_impro  =      5853.5348 E_vdwl   =    -51316.7060 
+E_coul   =   6782520.5689 E_long   =  -8503559.5331 Press    =        12.5824 
+Volume   =   8319585.4858 
+Loop time of 190.431 on 1 procs for 100 steps with 864000 atoms
+
+Performance: 0.091 ns/day, 264.488 hours/ns, 0.525 timesteps/s
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 117.82     | 117.82     | 117.82     |   0.0 | 61.87
+Bond    | 7.3961     | 7.3961     | 7.3961     |   0.0 |  3.88
+Kspace  | 25.364     | 25.364     | 25.364     |   0.0 | 13.32
+Neigh   | 13.992     | 13.992     | 13.992     |   0.0 |  7.35
+Comm    | 5.6088     | 5.6088     | 5.6088     |   0.0 |  2.95
+Output  | 0.0028536  | 0.0028536  | 0.0028536  |   0.0 |  0.00
+Modify  | 19.78      | 19.78      | 19.78      |   0.0 | 10.39
+Other   |            | 0.4686     |            |       |  0.25
+
+Nlocal:         864000 ave      864000 max      864000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:         347554 ave      347554 max      347554 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3.24757e+08 ave 3.24757e+08 max 3.24757e+08 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3.2475663e+08
+Ave neighs/atom = 375.87573
+Ave special neighs/atom = 7.431875
+Neighbor list builds = 11
+Dangerous builds = 0
+Total wall time: 0:03:16
