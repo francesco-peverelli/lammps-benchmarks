@@ -1,0 +1,105 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Lattice spacing in x,y,z = 3.615 3.615 3.615
+Created orthogonal box = (0 0 0) to (216.9 216.9 216.9)
+  3 by 3 by 4 MPI processor grid
+Created 864000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (216.9 216.9 216.9)
+  create_atoms CPU = 0.008 seconds
+Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for eam:
+-  with 18 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 10/16 GB, 1.5 GHZ (Single Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-1 on core 0...Done.
+Initializing Devices 0-1 on core 1...Done.
+Initializing Devices 0-1 on core 2...Done.
+Initializing Devices 0-1 on core 3...Done.
+Initializing Devices 0-1 on core 4...Done.
+Initializing Devices 0-1 on core 5...Done.
+Initializing Devices 0-1 on core 6...Done.
+Initializing Devices 0-1 on core 7...Done.
+Initializing Devices 0-1 on core 8...Done.
+Initializing Devices 0-1 on core 9...Done.
+Initializing Devices 0-1 on core 10...Done.
+Initializing Devices 0-1 on core 11...Done.
+Initializing Devices 0-1 on core 12...Done.
+Initializing Devices 0-1 on core 13...Done.
+Initializing Devices 0-1 on core 14...Done.
+Initializing Devices 0-1 on core 15...Done.
+Initializing Devices 0-1 on core 16...Done.
+Initializing Devices 0-1 on core 17...Done.
+
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 8.947 | 8.947 | 8.947 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1600   -3058559.9            0   -2879870.9    18704.312 
+      50    780.51286   -2966447.6            0   -2879279.4    52309.352 
+     100    798.57092     -2968477            0   -2879292.1    51460.494 
+Loop time of 0.817296 on 36 procs for 100 steps with 864000 atoms
+
+Performance: 52.857 ns/day, 0.454 hours/ns, 122.355 timesteps/s
+92.8% CPU use with 36 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.53621    | 0.55632    | 0.57438    |   1.3 | 68.07
+Neigh   | 0.0031653  | 0.003353   | 0.003476   |   0.1 |  0.41
+Comm    | 0.1534     | 0.16365    | 0.1788     |   1.8 | 20.02
+Output  | 0.0010185  | 0.0037003  | 0.0063886  |   2.3 |  0.45
+Modify  | 0.019274   | 0.020437   | 0.021362   |   0.3 |  2.50
+Other   |            | 0.06983    |            |       |  8.54
+
+Nlocal:          24000 ave       24181 max       23794 min
+Histogram: 1 0 3 3 11 5 6 5 1 1
+Nghost:          16865 ave       17071 max       16685 min
+Histogram: 1 1 5 6 5 11 3 3 0 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 36 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 15
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.1072 s.
+Neighbor copy:   0.0008 s.
+Neighbor build:  0.0310 s.
+Force calc:      0.2069 s.
+Device Overhead: 0.2061 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  19.46 MB.
+CPU Neighbor:    0.0440 s.
+CPU Cast/Pack:   0.0391 s.
+CPU Driver_Time: 0.0037 s.
+CPU Idle_Time:   0.1112 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:34

@@ -1,0 +1,248 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-27.5 -38.5 -36.3646) to (27.5 38.5 36.3615)
+  2 by 3 by 2 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  4 = max bonds/atom
+  scanning angles ...
+  8 = max angles/atom
+  scanning dihedrals ...
+  18 = max dihedrals/atom
+  scanning impropers ...
+  2 = max impropers/atom
+  reading bonds ...
+  27723 bonds
+  reading angles ...
+  40467 angles
+  reading dihedrals ...
+  56829 dihedrals
+  reading impropers ...
+  1034 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+    12 = max # of 1-3 neighbors
+    24 = max # of 1-4 neighbors
+    26 = max # of special neighbors
+  special bonds CPU = 0.005 seconds
+  read_data CPU = 0.351 seconds
+Finding SHAKE clusters ...
+    1617 = # of size 2 clusters
+    3633 = # of size 3 clusters
+     747 = # of size 4 clusters
+    4233 = # of frozen angles
+  find clusters CPU = 0.003 seconds
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:340)
+  G vector (1/distance) = 0.24883488
+  grid = 25 32 32
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.035547797
+  estimated relative force accuracy = 0.00010705113
+  using single precision MKL FFT
+  3d grid and FFT values/proc = 6426 2400
+
+--------------------------------------------------------------------------
+- Using acceleration for pppm:
+-  with 3 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 15/16 GB, 1.5 GHZ (Single Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-3 on core 0...Done.
+Initializing Devices 0-3 on core 1...Done.
+Initializing Devices 0-3 on core 2...Done.
+
+
+--------------------------------------------------------------------------
+- Using acceleration for lj/charmm/coul/long:
+-  with 3 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 15/16 GB, 1.5 GHZ (Single Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Single Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-3 on core 0...Done.
+Initializing Devices 0-3 on core 1...Done.
+Initializing Devices 0-3 on core 2...Done.
+
+  generated 2278 of 2278 mixed pair_coeff terms from arithmetic mixing rule
+Setting up Verlet run ...
+  Unit style    : real
+  Current step  : 0
+  Time step     : 2
+Per MPI rank memory allocation (min/avg/max) = 18.46 | 18.55 | 18.69 Mbytes
+---------------- Step        0 ----- CPU =      0.0000 (sec) ----------------
+TotEng   =    -25356.2686 KinEng   =     21444.8313 Temp     =       299.0397 
+PotEng   =    -46801.0999 E_bond   =      2537.9940 E_angle  =     10921.3742 
+E_dihed  =      5211.7865 E_impro  =       213.5116 E_vdwl   =     -2307.8634 
+E_coul   =    207025.8394 E_long   =   -270403.7421 Press    =      -149.3320 
+Volume   =    307995.0335 
+---------------- Step       50 ----- CPU =      0.2250 (sec) ----------------
+TotEng   =    -25330.0894 KinEng   =     21500.9986 Temp     =       299.8229 
+PotEng   =    -46831.0881 E_bond   =      2471.7037 E_angle  =     10836.5109 
+E_dihed  =      5239.6320 E_impro  =       227.1219 E_vdwl   =     -1993.2895 
+E_coul   =    206797.6343 E_long   =   -270410.4013 Press    =       237.6496 
+Volume   =    308031.6777 
+---------------- Step      100 ----- CPU =      0.4360 (sec) ----------------
+TotEng   =    -25290.7915 KinEng   =     21591.9043 Temp     =       301.0905 
+PotEng   =    -46882.6958 E_bond   =      2567.9807 E_angle  =     10781.9576 
+E_dihed  =      5198.7494 E_impro  =       216.7865 E_vdwl   =     -1902.6677 
+E_coul   =    206659.4798 E_long   =   -270404.9821 Press    =         6.7273 
+Volume   =    308134.2326 
+---------------- Step      150 ----- CPU =      0.6396 (sec) ----------------
+TotEng   =    -25258.1193 KinEng   =     21529.6691 Temp     =       300.2227 
+PotEng   =    -46787.7884 E_bond   =      2556.3456 E_angle  =     10852.7830 
+E_dihed  =      5265.2322 E_impro  =       203.0687 E_vdwl   =     -2066.1625 
+E_coul   =    206797.4320 E_long   =   -270396.4875 Press    =       251.4591 
+Volume   =    308515.2425 
+---------------- Step      200 ----- CPU =      0.8445 (sec) ----------------
+TotEng   =    -25078.8885 KinEng   =     21571.1568 Temp     =       300.8012 
+PotEng   =    -46650.0452 E_bond   =      2488.6928 E_angle  =     11073.4383 
+E_dihed  =      5221.7525 E_impro  =       232.8563 E_vdwl   =     -2167.6178 
+E_coul   =    206902.9543 E_long   =   -270402.1217 Press    =        20.8419 
+Volume   =    308997.5407 
+---------------- Step      250 ----- CPU =      1.0578 (sec) ----------------
+TotEng   =    -24944.3913 KinEng   =     21547.6525 Temp     =       300.4735 
+PotEng   =    -46492.0438 E_bond   =      2542.5554 E_angle  =     11105.5235 
+E_dihed  =      5239.6498 E_impro  =       212.3511 E_vdwl   =     -2168.6782 
+E_coul   =    206988.6532 E_long   =   -270412.0986 Press    =      -169.8409 
+Volume   =    309388.1280 
+---------------- Step      300 ----- CPU =      1.2715 (sec) ----------------
+TotEng   =    -24999.4437 KinEng   =     21498.0370 Temp     =       299.7816 
+PotEng   =    -46497.4807 E_bond   =      2558.0386 E_angle  =     10922.0122 
+E_dihed  =      5210.9913 E_impro  =       222.1591 E_vdwl   =     -2217.0131 
+E_coul   =    207192.8748 E_long   =   -270386.5436 Press    =      -368.9886 
+Volume   =    309663.7331 
+---------------- Step      350 ----- CPU =      1.4852 (sec) ----------------
+TotEng   =    -25128.4565 KinEng   =     21463.1257 Temp     =       299.2948 
+PotEng   =    -46591.5822 E_bond   =      2581.1775 E_angle  =     10950.1791 
+E_dihed  =      5250.7273 E_impro  =       212.7206 E_vdwl   =     -2174.9931 
+E_coul   =    206989.7264 E_long   =   -270401.1200 Press    =      -335.8790 
+Volume   =    309801.8013 
+---------------- Step      400 ----- CPU =      1.6845 (sec) ----------------
+TotEng   =    -25206.3519 KinEng   =     21430.9395 Temp     =       298.8460 
+PotEng   =    -46637.2914 E_bond   =      2526.2041 E_angle  =     10967.5505 
+E_dihed  =      5206.0378 E_impro  =       213.3736 E_vdwl   =     -2179.5999 
+E_coul   =    207044.8340 E_long   =   -270415.6915 Press    =       190.9055 
+Volume   =    309817.0662 
+---------------- Step      450 ----- CPU =      1.8888 (sec) ----------------
+TotEng   =    -25165.7094 KinEng   =     21433.9726 Temp     =       298.8883 
+PotEng   =    -46599.6820 E_bond   =      2497.8185 E_angle  =     10958.5999 
+E_dihed  =      5239.4492 E_impro  =       225.3994 E_vdwl   =     -2297.3052 
+E_coul   =    207160.8584 E_long   =   -270384.5021 Press    =       147.4800 
+Volume   =    309777.4516 
+---------------- Step      500 ----- CPU =      2.0894 (sec) ----------------
+TotEng   =    -24964.6277 KinEng   =     21642.8336 Temp     =       301.8007 
+PotEng   =    -46607.4613 E_bond   =      2569.3684 E_angle  =     10958.6770 
+E_dihed  =      5263.3411 E_impro  =       217.1979 E_vdwl   =     -2192.4617 
+E_coul   =    206969.2703 E_long   =   -270392.8542 Press    =      -298.5407 
+Volume   =    309738.6905 
+---------------- Step      550 ----- CPU =      2.2944 (sec) ----------------
+TotEng   =    -24916.8575 KinEng   =     21665.8859 Temp     =       302.1222 
+PotEng   =    -46582.7434 E_bond   =      2520.8348 E_angle  =     10944.7581 
+E_dihed  =      5215.4723 E_impro  =       225.5774 E_vdwl   =     -1956.0887 
+E_coul   =    206862.0018 E_long   =   -270395.2991 Press    =       421.6379 
+Volume   =    309664.9152 
+---------------- Step      600 ----- CPU =      2.4943 (sec) ----------------
+TotEng   =    -25027.8296 KinEng   =     21645.4868 Temp     =       301.8377 
+PotEng   =    -46673.3163 E_bond   =      2564.7130 E_angle  =     10887.5820 
+E_dihed  =      5261.6611 E_impro  =       222.3947 E_vdwl   =     -2163.9283 
+E_coul   =    206960.5271 E_long   =   -270406.2660 Press    =        70.8290 
+Volume   =    309795.5786 
+Loop time of 2.49435 on 12 procs for 600 steps with 32000 atoms
+
+Performance: 41.566 ns/day, 0.577 hours/ns, 240.544 timesteps/s
+97.1% CPU use with 12 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.26559    | 0.31811    | 0.35784    |   5.1 | 12.75
+Bond    | 0.55526    | 0.62016    | 0.70563    |   6.0 | 24.86
+Kspace  | 0.49896    | 0.57095    | 0.64809    |   6.4 | 22.89
+Neigh   | 0.047464   | 0.048336   | 0.048877   |   0.2 |  1.94
+Comm    | 0.21748    | 0.23214    | 0.25899    |   3.5 |  9.31
+Output  | 0.00084591 | 0.00087278 | 0.0011319  |   0.0 |  0.03
+Modify  | 0.58583    | 0.66498    | 0.7315     |   6.6 | 26.66
+Other   |            | 0.0388     |            |       |  1.56
+
+Nlocal:        2666.67 ave        2729 max        2608 min
+Histogram: 1 0 3 3 1 0 1 0 0 3
+Nghost:        13241.2 ave       13321 max       13140 min
+Histogram: 1 0 2 2 0 1 1 2 1 2
+Neighs:              0 ave           0 max           0 min
+Histogram: 12 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Ave special neighs/atom = 7.431875
+Neighbor list builds = 66
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.0155 s.
+Neighbor copy:   0.0367 s.
+Neighbor build:  0.1214 s.
+Force calc:      0.3684 s.
+Device Overhead: 0.1970 s.
+Average split:   1.0000.
+Lanes / atom:    8.
+Vector width:    32.
+Max Mem / Proc:  13.05 MB.
+CPU Neighbor:    0.0264 s.
+CPU Cast/Pack:   0.0685 s.
+CPU Driver_Time: 0.0104 s.
+CPU Idle_Time:   0.0021 s.
+---------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------
+    Device Time Info (average) for kspace: 
+---------------------------------------------------------------------
+Data Out:        0.0087 s.
+Data In:         0.0452 s.
+Kernel (map):    0.2169 s.
+Kernel (rho):    0.0688 s.
+Force interp:    0.1194 s.
+Total rho:       0.2943 s.
+Total interp:    0.1646 s.
+Force copy:      0.0086 s.
+Total:           0.4675 s.
+CPU Poisson:     0.4166 s.
+CPU Data Cast:   0.0059 s.
+CPU Idle Time:   0.1341 s.
+Max Mem / Proc:  0.74 MB.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:13
