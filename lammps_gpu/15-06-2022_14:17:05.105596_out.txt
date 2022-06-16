@@ -1,0 +1,219 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-27.5 -38.5 -36.3646) to (27.5 38.5 36.3615)
+  3 by 4 by 4 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  4 = max bonds/atom
+  scanning angles ...
+  8 = max angles/atom
+  scanning dihedrals ...
+  18 = max dihedrals/atom
+  scanning impropers ...
+  2 = max impropers/atom
+  reading bonds ...
+  27723 bonds
+  reading angles ...
+  40467 angles
+  reading dihedrals ...
+  56829 dihedrals
+  reading impropers ...
+  1034 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+    12 = max # of 1-3 neighbors
+    24 = max # of 1-4 neighbors
+    26 = max # of special neighbors
+  special bonds CPU = 0.006 seconds
+  read_data CPU = 0.380 seconds
+Replicating atoms ...
+  orthogonal box = (-27.5 -38.5 -36.3646) to (192.5 269.5 254.5398)
+  3 by 4 by 4 MPI processor grid
+  2048000 atoms
+  1774272 bonds
+  2589888 angles
+  3637056 dihedrals
+  66176 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+    12 = max # of 1-3 neighbors
+    24 = max # of 1-4 neighbors
+    26 = max # of special neighbors
+  special bonds CPU = 0.087 seconds
+  replicate CPU = 0.207 seconds
+Finding SHAKE clusters ...
+  103488 = # of size 2 clusters
+  232512 = # of size 3 clusters
+   47808 = # of size 4 clusters
+  270912 = # of frozen angles
+  find clusters CPU = 0.045 seconds
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:340)
+  G vector (1/distance) = 0.28895511
+  grid = 160 216 200
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.0041094504
+  estimated relative force accuracy = 1.2375488e-05
+  using single precision MKL FFT
+  3d grid and FFT values/proc = 208620 172800
+
+--------------------------------------------------------------------------
+- Using acceleration for pppm:
+-  with 8 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 13/16 GB, 1.5 GHZ (Mixed Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 4: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 5: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-5 on core 0...Done.
+Initializing Devices 0-5 on core 1...Done.
+Initializing Devices 0-5 on core 2...Done.
+Initializing Devices 0-5 on core 3...Done.
+Initializing Devices 0-5 on core 4...Done.
+Initializing Devices 0-5 on core 5...Done.
+Initializing Devices 0-5 on core 6...Done.
+Initializing Devices 0-5 on core 7...Done.
+
+
+--------------------------------------------------------------------------
+- Using acceleration for lj/charmm/coul/long:
+-  with 8 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 13/16 GB, 1.5 GHZ (Mixed Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 4: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+Device 5: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Mixed Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-5 on core 0...Done.
+Initializing Devices 0-5 on core 1...Done.
+Initializing Devices 0-5 on core 2...Done.
+Initializing Devices 0-5 on core 3...Done.
+Initializing Devices 0-5 on core 4...Done.
+Initializing Devices 0-5 on core 5...Done.
+Initializing Devices 0-5 on core 6...Done.
+Initializing Devices 0-5 on core 7...Done.
+
+  generated 2278 of 2278 mixed pair_coeff terms from arithmetic mixing rule
+Setting up Verlet run ...
+  Unit style    : real
+  Current step  : 0
+  Time step     : 2
+Per MPI rank memory allocation (min/avg/max) = 144.6 | 145.1 | 146.8 Mbytes
+---------------- Step        0 ----- CPU =      0.0000 (sec) ----------------
+TotEng   =  -1622956.7963 KinEng   =   1372469.2022 Temp     =       299.0274 
+PotEng   =  -2995425.9984 E_bond   =    162431.6167 E_angle  =    698967.9493 
+E_dihed  =    333554.3360 E_impro  =     13664.7415 E_vdwl   =   -147703.3196 
+E_coul   =  16027004.6016 E_long   = -20083345.9239 Press    =      -152.7301 
+Volume   =  19711682.1440 
+---------------- Step       50 ----- CPU =      6.0256 (sec) ----------------
+TotEng   =  -1621276.8814 KinEng   =   1376091.5795 Temp     =       299.8167 
+PotEng   =  -2997368.4609 E_bond   =    158187.5105 E_angle  =    693551.4470 
+E_dihed  =    335327.4554 E_impro  =     14536.6877 E_vdwl   =   -127521.1576 
+E_coul   =  16012574.1651 E_long   = -20084024.5689 Press    =       235.0720 
+Volume   =  19713991.3255 
+---------------- Step      100 ----- CPU =     12.1943 (sec) ----------------
+TotEng   =  -1618405.6637 KinEng   =   1381722.0517 Temp     =       301.0434 
+PotEng   =  -3000127.7154 E_bond   =    164347.2637 E_angle  =    690038.4585 
+E_dihed  =    332714.0085 E_impro  =     13875.9921 E_vdwl   =   -121635.1777 
+E_coul   =  16004156.9432 E_long   = -20083625.2038 Press    =        12.6252 
+Volume   =  19720477.3721 
+Loop time of 12.1944 on 48 procs for 100 steps with 2048000 atoms
+
+Performance: 1.417 ns/day, 16.937 hours/ns, 8.200 timesteps/s
+96.0% CPU use with 48 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.44346    | 0.92458    | 1.3007     |  35.1 |  7.58
+Bond    | 1.5304     | 1.5733     | 1.6281     |   2.6 | 12.90
+Kspace  | 4.4205     | 4.5143     | 4.6297     |   3.5 | 37.02
+Neigh   | 0.26756    | 0.27105    | 0.27388    |   0.2 |  2.22
+Comm    | 0.48003    | 0.66071    | 0.73155    |   9.0 |  5.42
+Output  | 0.00058899 | 0.00059898 | 0.00066599 |   0.0 |  0.00
+Modify  | 3.4416     | 3.8583     | 4.636      |  17.9 | 31.64
+Other   |            | 0.3916     |            |       |  3.21
+
+Nlocal:        42666.7 ave       42689 max       42636 min
+Histogram: 16 0 0 0 0 0 0 16 0 16
+Nghost:          55817 ave       55834 max       55807 min
+Histogram: 16 16 0 0 0 0 0 0 0 16
+Neighs:              0 ave           0 max           0 min
+Histogram: 48 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Ave special neighs/atom = 7.431875
+Neighbor list builds = 11
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.0225 s.
+Neighbor copy:   0.1523 s.
+Neighbor build:  0.3056 s.
+Force calc:      0.3616 s.
+Device Overhead: 0.0873 s.
+Average split:   1.0000.
+Lanes / atom:    8.
+Vector width:    32.
+Max Mem / Proc:  198.74 MB.
+CPU Neighbor:    0.0852 s.
+CPU Cast/Pack:   0.2389 s.
+CPU Driver_Time: 0.0017 s.
+CPU Idle_Time:   0.0018 s.
+---------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------
+    Device Time Info (average) for kspace: 
+---------------------------------------------------------------------
+Data Out:        0.0182 s.
+Data In:         0.5992 s.
+Kernel (map):    0.2008 s.
+Kernel (rho):    0.0253 s.
+Force interp:    0.0563 s.
+Total rho:       0.2443 s.
+Total interp:    0.6556 s.
+Force copy:      0.0498 s.
+Total:           0.9496 s.
+CPU Poisson:     4.3460 s.
+CPU Data Cast:   0.0332 s.
+CPU Idle Time:   0.2112 s.
+Max Mem / Proc:  34.74 MB.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:59
