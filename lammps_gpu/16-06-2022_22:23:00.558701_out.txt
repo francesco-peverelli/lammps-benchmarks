@@ -1,0 +1,99 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Lattice spacing in x,y,z = 3.615 3.615 3.615
+Created orthogonal box = (0 0 0) to (289.2 289.2 289.2)
+  3 by 4 by 4 MPI processor grid
+Created 2048000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (289.2 289.2 289.2)
+  create_atoms CPU = 0.016 seconds
+Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for eam:
+-  with 6 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 14/16 GB, 1.5 GHZ (Double Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 4: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 5: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 6: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 7: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-7 on core 0...Done.
+Initializing Devices 0-7 on core 1...Done.
+Initializing Devices 0-7 on core 2...Done.
+Initializing Devices 0-7 on core 3...Done.
+Initializing Devices 0-7 on core 4...Done.
+Initializing Devices 0-7 on core 5...Done.
+
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 13.15 | 14.88 | 15.85 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1600     -7249920            0   -6826360.6    18704.149 
+      50    780.81547   -7031660.9            0   -6824959.8    52291.364 
+     100    798.21786   -7036295.3            0   -6824987.4    51479.467 
+Loop time of 1.20269 on 48 procs for 100 steps with 2048000 atoms
+
+Performance: 35.919 ns/day, 0.668 hours/ns, 83.147 timesteps/s
+94.6% CPU use with 48 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.7026     | 0.76363    | 0.82694    |   4.1 | 63.49
+Neigh   | 0.0098394  | 0.010423   | 0.011117   |   0.3 |  0.87
+Comm    | 0.21596    | 0.25464    | 0.2912     |   3.8 | 21.17
+Output  | 0.0012756  | 0.0061044  | 0.013857   |   4.9 |  0.51
+Modify  | 0.052944   | 0.055983   | 0.058629   |   0.5 |  4.65
+Other   |            | 0.1119     |            |       |  9.31
+
+Nlocal:        42666.7 ave       42983 max       42305 min
+Histogram: 4 8 3 1 2 5 4 13 4 4
+Nghost:        23453.6 ave       23637 max       23284 min
+Histogram: 3 3 5 6 9 10 4 2 3 3
+Neighs:              0 ave           0 max           0 min
+Histogram: 48 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 15
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.2979 s.
+Neighbor copy:   0.0021 s.
+Neighbor build:  0.0092 s.
+Force calc:      0.1338 s.
+Device Overhead: 0.0752 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  39.97 MB.
+CPU Neighbor:    0.0651 s.
+CPU Cast/Pack:   0.1655 s.
+CPU Driver_Time: 0.0037 s.
+CPU Idle_Time:   0.1253 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:46

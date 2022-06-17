@@ -1,0 +1,94 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Lattice spacing in x,y,z = 3.615 3.615 3.615
+Created orthogonal box = (0 0 0) to (72.3 72.3 72.3)
+  2 by 3 by 3 MPI processor grid
+Created 32000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (72.3 72.3 72.3)
+  create_atoms CPU = 0.002 seconds
+Reading eam potential file Cu_u3.eam with DATE: 2007-06-11
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for eam:
+-  with 3 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 15/16 GB, 1.5 GHZ (Double Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 4: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 5: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-5 on core 0...Done.
+Initializing Devices 0-5 on core 1...Done.
+Initializing Devices 0-5 on core 2...Done.
+
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.702 | 2.753 | 2.778 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1600      -113280            0   -106662.09    18703.573 
+      50    781.69049   -109873.35            0   -106640.13    52273.088 
+     100      801.832    -109957.3            0   -106640.77    51322.821 
+Loop time of 0.129382 on 18 procs for 100 steps with 32000 atoms
+
+Performance: 333.896 ns/day, 0.072 hours/ns, 772.906 timesteps/s
+92.2% CPU use with 18 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.085569   | 0.090247   | 0.098109   |   1.0 | 69.75
+Neigh   | 7.8411e-05 | 8.6951e-05 | 9.8676e-05 |   0.0 |  0.07
+Comm    | 0.024186   | 0.028389   | 0.031387   |   1.0 | 21.94
+Output  | 0.00018143 | 0.00044621 | 0.00073342 |   0.0 |  0.34
+Modify  | 0.00087548 | 0.0009748  | 0.0011358  |   0.0 |  0.75
+Other   |            | 0.009238   |            |       |  7.14
+
+Nlocal:        1777.78 ave        1834 max        1687 min
+Histogram: 2 0 0 1 5 2 0 1 2 5
+Nghost:        3532.89 ave        3601 max        3437 min
+Histogram: 2 1 0 2 1 2 2 2 4 2
+Neighs:              0 ave           0 max           0 min
+Histogram: 18 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 13
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.0146 s.
+Neighbor copy:   0.0004 s.
+Neighbor build:  0.0039 s.
+Force calc:      0.0370 s.
+Device Overhead: 0.0361 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  1.94 MB.
+CPU Neighbor:    0.0024 s.
+CPU Cast/Pack:   0.0057 s.
+CPU Driver_Time: 0.0043 s.
+CPU Idle_Time:   0.0186 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:16

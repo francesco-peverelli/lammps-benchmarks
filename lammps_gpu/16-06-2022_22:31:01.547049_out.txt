@@ -1,0 +1,106 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-16.796 -16.796 -16.796) to (16.796 16.796 16.796)
+  2 by 2 by 3 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  1 = max bonds/atom
+  reading bonds ...
+  31680 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     2 = max # of special neighbors
+  special bonds CPU = 0.002 seconds
+  read_data CPU = 0.182 seconds
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for lj/cut:
+-  with 3 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 15/16 GB, 1.5 GHZ (Double Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-3 on core 0...Done.
+Initializing Devices 0-3 on core 1...Done.
+Initializing Devices 0-3 on core 2...Done.
+
+  generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.012
+WARNING: Communication cutoff 1.52 is shorter than a bond length based estimate of 1.855. This may lead to errors. (../comm.cpp:723)
+Per MPI rank memory allocation (min/avg/max) = 3.971 | 3.972 | 3.974 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0   0.97029772   0.44484087    20.494523    22.394765    4.6721833 
+     100   0.96991678   0.43771369    20.506863    22.399406    4.6968823 
+Loop time of 0.136117 on 12 procs for 100 steps with 32000 atoms
+
+Performance: 761695.661 tau/day, 734.660 timesteps/s
+97.7% CPU use with 12 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.04788    | 0.053453   | 0.062443   |   1.7 | 39.27
+Bond    | 0.0085846  | 0.0095747  | 0.010252   |   0.5 |  7.03
+Neigh   | 0.0022166  | 0.0023524  | 0.0024768  |   0.2 |  1.73
+Comm    | 0.019373   | 0.02382    | 0.027371   |   1.6 | 17.50
+Output  | 5.4876e-05 | 0.00012745 | 0.00016357 |   0.0 |  0.09
+Modify  | 0.024847   | 0.026627   | 0.028283   |   0.8 | 19.56
+Other   |            | 0.02016    |            |       | 14.81
+
+Nlocal:        2666.67 ave        2682 max        2637 min
+Histogram: 1 1 0 0 1 0 3 1 2 3
+Nghost:        2071.25 ave        2093 max        2059 min
+Histogram: 2 0 5 2 1 0 0 0 1 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 12 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Ave special neighs/atom = 1.98
+Neighbor list builds = 25
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.0115 s.
+Neighbor copy:   0.0197 s.
+Neighbor build:  0.0086 s.
+Force calc:      0.0127 s.
+Device Overhead: 0.0359 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  1.00 MB.
+CPU Neighbor:    0.0057 s.
+CPU Cast/Pack:   0.0055 s.
+CPU Driver_Time: 0.0026 s.
+CPU Idle_Time:   0.0134 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:11
