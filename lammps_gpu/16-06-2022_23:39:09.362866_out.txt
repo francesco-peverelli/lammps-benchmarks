@@ -1,0 +1,125 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-16.796 -16.796 -16.796) to (16.796 16.796 16.796)
+  3 by 4 by 4 MPI processor grid
+  reading atoms ...
+  32000 atoms
+  reading velocities ...
+  32000 velocities
+  scanning bonds ...
+  1 = max bonds/atom
+  reading bonds ...
+  31680 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     2 = max # of special neighbors
+  special bonds CPU = 0.006 seconds
+  read_data CPU = 0.195 seconds
+Replicating atoms ...
+  orthogonal box = (-16.796 -16.796 -16.796) to (83.98 83.98 83.98)
+  3 by 4 by 4 MPI processor grid
+  864000 atoms
+  855360 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     2 = max # of special neighbors
+  special bonds CPU = 0.012 seconds
+  replicate CPU = 0.040 seconds
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- GPU package (short-range, long-range and three-body potentials):
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+
+--------------------------------------------------------------------------
+- Using acceleration for lj/cut:
+-  with 6 proc(s) per device.
+-  Horizontal vector operations: ENABLED
+-  Shared memory system: No
+--------------------------------------------------------------------------
+Device 0: Tesla V100-SXM2-16GB, 80 CUs, 14/16 GB, 1.5 GHZ (Double Precision)
+Device 1: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 2: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 3: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 4: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 5: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 6: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+Device 7: Tesla V100-SXM2-16GB, 80 CUs, 1.5 GHZ (Double Precision)
+--------------------------------------------------------------------------
+
+Initializing Device and compiling on process 0...Done.
+Initializing Devices 0-7 on core 0...Done.
+Initializing Devices 0-7 on core 1...Done.
+Initializing Devices 0-7 on core 2...Done.
+Initializing Devices 0-7 on core 3...Done.
+Initializing Devices 0-7 on core 4...Done.
+Initializing Devices 0-7 on core 5...Done.
+
+  generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.012
+WARNING: Communication cutoff 1.52 is shorter than a bond length based estimate of 1.855. This may lead to errors. (../comm.cpp:723)
+Per MPI rank memory allocation (min/avg/max) = 9.781 | 9.784 | 9.788 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0   0.97026852   0.44484087    20.494523    22.394765    4.6721833 
+     100   0.97290118    0.4416544    20.502922    22.403926    4.6830215 
+Loop time of 0.70028 on 48 procs for 100 steps with 864000 atoms
+
+Performance: 148055.054 tau/day, 142.800 timesteps/s
+98.5% CPU use with 48 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.17983    | 0.20198    | 0.2192     |   2.6 | 28.84
+Bond    | 0.073894   | 0.075533   | 0.077871   |   0.3 | 10.79
+Neigh   | 0.032828   | 0.03401    | 0.034797   |   0.2 |  4.86
+Comm    | 0.10951    | 0.12413    | 0.13758    |   2.0 | 17.73
+Output  | 0.00016268 | 0.0012414  | 0.0019926  |   1.5 |  0.18
+Modify  | 0.1518     | 0.15772    | 0.16566    |   0.8 | 22.52
+Other   |            | 0.1057     |            |       | 15.09
+
+Nlocal:          18000 ave       18048 max       17932 min
+Histogram: 2 1 3 3 5 10 9 5 9 1
+Nghost:        6663.04 ave        6763 max        6601 min
+Histogram: 5 3 6 15 8 4 2 3 1 1
+Neighs:              0 ave           0 max           0 min
+Histogram: 48 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Ave special neighs/atom = 1.98
+Neighbor list builds = 25
+Dangerous builds = 0
+
+
+---------------------------------------------------------------------
+      Device Time Info (average): 
+---------------------------------------------------------------------
+Data Transfer:   0.1046 s.
+Neighbor copy:   0.0390 s.
+Neighbor build:  0.0213 s.
+Force calc:      0.0412 s.
+Device Overhead: 0.0697 s.
+Average split:   1.0000.
+Lanes / atom:    4.
+Vector width:    32.
+Max Mem / Proc:  6.38 MB.
+CPU Neighbor:    0.0611 s.
+CPU Cast/Pack:   0.0425 s.
+CPU Driver_Time: 0.0028 s.
+CPU Idle_Time:   0.0601 s.
+---------------------------------------------------------------------
+
+Total wall time: 0:00:45
