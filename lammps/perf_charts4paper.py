@@ -11,7 +11,7 @@ import matplotlib.lines as lines
 import matplotlib.ticker as ticker
 from itertools import islice
 
-benchmarks = ['rhodo', 'lj', 'eam', 'chain', 'chute']
+benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
 sizes = [32, 256, 864, 2048]
 procs = [1, 2, 4, 8, 16, 32, 64]
 do_power = False
@@ -41,7 +41,7 @@ bench_df = bench_df[bench_df['PERFORMANCE'].isnull() == 0]
 for s in sizes:
     bench_df['TAG'] = bench_df['TAG'].apply(lambda x: x.replace('scaled_' + str(s) + '_','scaled_'))
     bench_df['TAG'] = bench_df['TAG'].apply(lambda x: x.replace('scaled_' + str(s) + '-','scaled-'))
-tmp = bench_df[['chute' in x for x in bench_df['TAG']]]
+#tmp = bench_df[['chute' in x for x in bench_df['TAG']]]
 #for index, row in tmp.iterrows():
 #    print(row)
 
@@ -69,8 +69,11 @@ bench_df['PAREFF'] = bench_df['PERFORMANCE']
 bench_df = bench_df.sort_values(['NAME','SIZE','PROCS'])
 
 # Compute parallel efficiency column
+max_min_p  = [0] * len(sizes)
 divisor = []
 for b in benchmarks:
+    sc = 0
+    min_p = [10000] * len(sizes)
     for s in sizes:
         for p in procs:
             i = 0
@@ -80,9 +83,18 @@ for b in benchmarks:
             (bench_df['NAME'] == b)].PAREFF / procs[i]
                 c = len(series.values)
                 i = i + 1 
+                if procs[i-1] < min_p[sc]:
+                    min_p[sc] = procs[i-1]
             if p < i:
                 continue
             divisor.append((series.values[0] * p) / 100)
+        sc += 1
+    print(min_p)
+    for sk in range(0,len(sizes)):
+        if max_min_p[sk] < min_p[sk]:
+            max_min_p[sk] = min_p[sk]
+
+print(max_min_p)
 bench_df['PAREFF'] = bench_df['PAREFF'].divide(divisor)
 bench_df.to_csv('elaborated.csv',sep=';')
 

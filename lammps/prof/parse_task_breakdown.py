@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import sys
 
-experiments = ["rhodo", "rhodo-single", "rhodo-double"]
+experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 

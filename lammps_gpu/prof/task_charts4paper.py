@@ -47,6 +47,7 @@ for ph in phases:
 #mpi_tot_data = data.melt(id_vars=["GPUs", "Size", "Benchmark"], value_vars=["MPI_(%)"])
 data = data.sort_values(['Benchmark','Size','GPUs','Section'])
 data.groupby(['Size','GPUs','Section'])
+data = data.groupby(['Benchmark','Size','GPUs','Section'],as_index=False).mean()
 print(data)
 sns.set_style("whitegrid")
 g = sns.catplot(data=data, col='GPUs', row='Benchmark', x='Size', hue='Section', y='%total', \

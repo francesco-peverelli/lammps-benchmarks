@@ -30,7 +30,7 @@ fout = sys.argv[2]
 data = pd.read_csv(fname, sep=',')
 
 data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
-
+print(data)
 mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
 
 sns.set_style("whitegrid")

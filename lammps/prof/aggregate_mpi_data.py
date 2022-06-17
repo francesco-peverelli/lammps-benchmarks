@@ -3,7 +3,7 @@ import os
 import sys
 
 # modify to change the experiments to group together
-experiments = ["rhodo", "lj", "eam", "chain", "chute"]
+experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
 mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
 nk_atoms = [32, 256, 864, 2048]
 
