@@ -1,8 +1,12 @@
 import os
 
-benchmarks= ["rhodo", "lj", "eam", "chain"]
-sizes =  ["", ".scaled", ".scaled_864", ".scaled_2048"]
-katoms = ["32", "256", "864", "2048"]
+#benchmarks= ["rhodo", "lj", "eam", "chain"]
+#sizes =  ["", ".scaled", ".scaled_864", ".scaled_2048"]
+#katoms = ["32", "256", "864", "2048"]
+benchmarks= ["chain"]
+sizes =  [".scaled", ".scaled_864", ".scaled_2048"]
+katoms = ["256", "864", "2048"]
+
 
 for b in benchmarks:
     snum = 0
