@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 from itertools import islice
 import sys
 
-benchmarks = ['rhodo','chain','lj','eam']
+benchmarks = ['rhodo','rhodo-e-5','rhodo-e-6','rhodo-e-7']
 sizes = [32, 256, 864, 2048]
 procs = [1, 2, 4, 6, 8]
 do_power = False
@@ -64,12 +64,8 @@ bench_df['GPU'] = bench_df['GPU'].apply(lambda x: int(x.replace('g','')))
 bench_df['MPI'] = bench_df['MPI'].apply(lambda x: int(x.replace('n','')))
 bench_df['NAME'] = bench_df['NAME'].apply(lambda x: x.replace('.scaled','').replace('in.','').replace('.test',''))
 
-print(bench_df)
-
 # Convert all to timesteps/s
 bench_df['PERFORMANCE'] = bench_df.apply(lambda x: convert_to_tss(x.PERFORMANCE, bench_units[x.NAME.split('-')[0]],bench_ts[x.NAME.split('-')[0]]), axis=1)
-
-print(bench_df)
 
 if do_power:
     bench_df['POWEREFF'] = bench_df['PERFORMANCE'] / bench_df['POWER']
@@ -81,21 +77,34 @@ bench_df = bench_df[[x in benchmarks for x in bench_df['NAME']]]
 
 # Compute parallel efficiency column
 divisor = []
+base_p_nums = []
 for b in benchmarks:
+    max_min_p = 0
+    for s in sizes:
+        min_p = np.Inf
+        for p in procs:
+            series = bench_df[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & 
+                (bench_df['NAME'] == b)]
+            if (min_p > p) and (len(series) > 0):
+                min_p = p
+        if max_min_p < min_p:
+            max_min_p = min_p
+    base_p_nums.append(max_min_p)
+
+for b in benchmarks:
+    s_index = 0
     for s in sizes:
         for p in procs:
-            i = 0
-            c = 0
-            while c == 0:
-                series = bench_df[(bench_df['GPU'] == procs[i]) & (bench_df['SIZE'] == s) & 
-            (bench_df['NAME'] == b)].PAREFF / procs[i]
-                c = len(series.values)
-                i = i + 1 
-            if p < i:
-                continue
-            divisor.append((series.values[0] * p) / 100)
+            if p < base_p_nums[s_index]:
+                bench_df.loc[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = np.NAN
+            else:
+                perf = bench_df[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b)].PAREFF
+                perf_0 = bench_df[(bench_df['GPU'] == base_p_nums[s_index]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b)].PERFORMANCE
+                div = (p / base_p_nums[s_index]) * perf_0
+                bench_df.loc[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = (float(perf) / float(div)) * 100.0    
+        s_index = s_index + 1
 
-bench_df['PAREFF'] = bench_df['PAREFF'].divide(divisor)
+bench_df = bench_df[bench_df['PAREFF'].isnull() == 0]
 bench_df.to_csv('elaborated.csv',sep=';')
 
 df = bench_df

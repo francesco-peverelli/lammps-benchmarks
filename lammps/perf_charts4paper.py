@@ -38,6 +38,15 @@ bench_df = data
 bench_df = bench_df[['kokkos' not in x for x in bench_df['TAG']]]
 bench_df = bench_df[['testkmp' not in x for x in bench_df['TAG']]]
 bench_df = bench_df[bench_df['PERFORMANCE'].isnull() == 0]
+first = True
+for b in benchmarks:
+    tmp = bench_df[[b in benchmarks for x in bench_df['TAG']]]
+    if first:
+        bench_df = tmp
+        first = False
+    else:
+        pd.concat([bench_df, tmp])
+
 for s in sizes:
     bench_df['TAG'] = bench_df['TAG'].apply(lambda x: x.replace('scaled_' + str(s) + '_','scaled_'))
     bench_df['TAG'] = bench_df['TAG'].apply(lambda x: x.replace('scaled_' + str(s) + '-','scaled-'))
@@ -69,33 +78,35 @@ bench_df['PAREFF'] = bench_df['PERFORMANCE']
 bench_df = bench_df.sort_values(['NAME','SIZE','PROCS'])
 
 # Compute parallel efficiency column
-max_min_p  = [0] * len(sizes)
 divisor = []
+base_p_nums = []
 for b in benchmarks:
-    sc = 0
-    min_p = [10000] * len(sizes)
+    max_min_p = 0
+    for s in sizes:
+        min_p = np.Inf
+        for p in procs:
+            series = bench_df[(bench_df['PROCS'] == p) & (bench_df['SIZE'] == s) & 
+                (bench_df['NAME'] == b)]
+            if (min_p > p) and (len(series) > 0):
+                min_p = p
+        if max_min_p < min_p:
+            max_min_p = min_p
+    base_p_nums.append(max_min_p)
+
+for b in benchmarks:
+    s_index = 0
     for s in sizes:
         for p in procs:
-            i = 0
-            c = 0
-            while c == 0:
-                series = bench_df[(bench_df['PROCS'] == procs[i]) & (bench_df['SIZE'] == s) & 
-            (bench_df['NAME'] == b)].PAREFF / procs[i]
-                c = len(series.values)
-                i = i + 1 
-                if procs[i-1] < min_p[sc]:
-                    min_p[sc] = procs[i-1]
-            if p < i:
-                continue
-            divisor.append((series.values[0] * p) / 100)
-        sc += 1
-    print(min_p)
-    for sk in range(0,len(sizes)):
-        if max_min_p[sk] < min_p[sk]:
-            max_min_p[sk] = min_p[sk]
+            if p < base_p_nums[s_index]:
+                bench_df.loc[(bench_df['PROCS'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = np.NAN
+            else:
+                perf = bench_df[(bench_df['PROCS'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b)].PAREFF
+                perf_0 = bench_df[(bench_df['PROCS'] == base_p_nums[s_index]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b)].PERFORMANCE
+                div = (p / base_p_nums[s_index]) * perf_0
+                bench_df.loc[(bench_df['PROCS'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = (float(perf) / float(div)) * 100.0    
+        s_index = s_index + 1
 
-print(max_min_p)
-bench_df['PAREFF'] = bench_df['PAREFF'].divide(divisor)
+bench_df = bench_df[bench_df['PAREFF'].isnull() == 0]
 bench_df.to_csv('elaborated.csv',sep=';')
 
 df = bench_df
