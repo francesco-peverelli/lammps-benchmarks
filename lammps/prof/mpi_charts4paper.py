@@ -31,11 +31,13 @@ data = pd.read_csv(fname, sep=',')
 
 data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 print(data)
-mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
+mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], 
+    value_vars=["MPI_(%)","Max_MPI_(%)","Min_MPI_(%)","MPI_Imb_(%)", "Max_Imb_(%)","Min_Imb_(%)"])
+print(mpi_tot_data)
 
 sns.set_style("whitegrid")
-g = sns.catplot(data=mpi_tot_data, hue='Processes', x='Benchmark', col='Size', y='value', \
-    kind='bar', palette='mako')
+g = sns.catplot(data=mpi_tot_data, x='Processes', hue ='variable', row='Benchmark', col='Size', y='value', \
+    kind='bar', palette='Paired')
 g.set_axis_labels("Problem Size [K atoms]","MPI Total Time [%]")
 g.savefig(fout + "_mpi_tot_data.png")
 
@@ -53,7 +55,6 @@ top_vals = take(top_N, vals.items())
 top_funcs = [top_val[0] for top_val in top_vals]
 
 mpi_func_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=top_funcs)
-print(mpi_func_data)
 g2 = sns.catplot(data=mpi_func_data, col='Processes', hue='variable', row='Benchmark', x='Size', y='value', \
     kind='bar', palette='CMRmap')
 g2.set_axis_labels("Problem Size [K atoms]","MPI Function Time [%]")

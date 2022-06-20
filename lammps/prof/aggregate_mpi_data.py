@@ -46,22 +46,46 @@ for fname in files:
             if (exp_proc not in mpi_nproc):
                 print(exp_proc + " not found!")
                 continue
-            print(params)
             times_dict = {"Benchmark" : bench} # mapping func : time%
             times_dict['Size'] = int(params[len(params)-2][:-1])
             times_dict['Processes'] = int(params[len(params)-4][:-1])
+            
+            mpi_dict = {'Max_MPI_(%)' : 0.0, 'Min_MPI_(%)': 100.0,\
+                'Max_Imb_(%)' : 0.0, 'Min_Imb_(%)' : 100.0}
 
             for line in file:
                 if line.find("Function summary for all Ranks") >= 0:
                     in_mpi_calls = True
                 if line[0:7] == "| TOTAL":
                     in_mpi_calls = False
+                if in_total_time:
+                    tokens = line.split(";")
+                    tokens = [x.strip() for x in tokens]
+                    # get min and max MPI% and Imbalance% + avg Imbalance %
+                    if tokens[0].isdigit():
+                        tokens = [float(x) for x in tokens]
+                        #update max %
+                        if tokens[3] > mpi_dict['Max_MPI_(%)']:
+                            mpi_dict['Max_MPI_(%)'] = tokens[3]
+                        #update min %
+                        if tokens[3] < mpi_dict['Min_MPI_(%)']:
+                            mpi_dict['Min_MPI_(%)'] = tokens[3]
+                        #update max imb. %
+                        if tokens[5] > mpi_dict['Max_Imb_(%)']:
+                            mpi_dict['Max_Imb_(%)'] = tokens[5] 
+                        #update min imb. %
+                        if tokens[5] < mpi_dict['Min_Imb_(%)']:
+                            mpi_dict['Min_Imb_(%)'] = tokens[5]
                 if in_total_time  and (line[0:7] == "| TOTAL"):
                     in_total_time = False
                     tokens = line.split(";")
                     tokens = [x.strip() for x in tokens]
-                    times_dict['MPI_Time'] = float(tokens[3])
-                    times_dict['MPI_(%)'] = float(tokens[5])
+                    times_dict['MPI_Time'] = float(tokens[2])
+                    times_dict['MPI_(%)'] = float(tokens[3])
+                    times_dict['MPI_Imb_(%)'] = float(tokens[5])
+                    for key in mpi_dict:
+                        times_dict[key] = mpi_dict[key]
+                        mpi_funcs.add(key)
                     if 'MPI_Time' not in mpi_funcs:
                         mpi_funcs.add('MPI_Time')
                     if 'MPI_(%)' not in mpi_funcs:
@@ -89,16 +113,31 @@ df = pd.DataFrame(columns=header)
 
 for row in mpi_data:
     df = df.append(row, ignore_index=True)
-print(df)
 col = df['MPI_Time']
 df.drop(labels=['MPI_Time'], axis=1,inplace = True)
 df.insert(1, 'MPI_Time', col)
+col = df['Min_Imb_(%)']
+df.drop(labels=['Min_Imb_(%)'], axis=1,inplace = True)
+df.insert(1, 'Min_Imb_(%)', col)
+col = df['Max_Imb_(%)']
+df.drop(labels=['Max_Imb_(%)'], axis=1,inplace = True)
+df.insert(1, 'Max_Imb_(%)', col)
+col = df['MPI_Imb_(%)']
+df.drop(labels=['MPI_Imb_(%)'], axis=1,inplace = True)
+df.insert(1, 'MPI_Imb_(%)', col)
 col = df['MPI_(%)']
 df.drop(labels=['MPI_(%)'], axis=1,inplace = True)
 df.insert(1, 'MPI_(%)', col)
+col = df['Min_MPI_(%)']
+df.drop(labels=['Min_MPI_(%)'], axis=1,inplace = True)
+df.insert(1, 'Min_MPI_(%)', col)
+col = df['Max_MPI_(%)']
+df.drop(labels=['Max_MPI_(%)'], axis=1,inplace = True)
+df.insert(1, 'Max_MPI_(%)', col)
 df = df.sort_values(['Benchmark','Size','Processes'])
 df.groupby(['Size','Processes'])
-print(df)
 df.to_csv(filename + ".csv", index=False)
 df.to_excel(filename + ".xlsx", index=False)
+
+print(df)
             
