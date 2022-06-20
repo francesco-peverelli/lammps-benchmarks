@@ -11,7 +11,7 @@ import matplotlib.lines as lines
 import matplotlib.ticker as ticker
 from itertools import islice
 
-benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
+benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
 sizes = [32, 256, 864, 2048]
 procs = [1, 2, 4, 8, 16, 32, 64]
 do_power = False

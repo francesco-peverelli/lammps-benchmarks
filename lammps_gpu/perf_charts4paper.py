@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 from itertools import islice
 import sys
 
-benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
+benchmarks = ['rhodo','chain','lj','eam']
 sizes = [32, 256, 864, 2048]
 procs = [1, 2, 4, 6, 8]
 do_power = False
@@ -28,7 +28,6 @@ def convert_to_tss(time,unit, ts_v):
     if unit == 'lj':
         return (time / (24*60*60)) * (1/ts_v)
     elif unit == 'metal':
-        print(((time*1000) / (24*60*60)) * (1/ts_v))
         return ((time*1000) / (24*60*60)) * (1/ts_v)
     elif unit == 'real':
         return ((time*1e6) / (24*60*60)) * (1/ts_v)
@@ -40,6 +39,15 @@ bench_df = data
 bench_df = bench_df[['kokkos' not in x for x in bench_df['TAG']]]
 bench_df = bench_df[['testkmp' not in x for x in bench_df['TAG']]]
 bench_df = bench_df[bench_df['PERFORMANCE'].isnull() == 0]
+first = True
+for b in benchmarks:
+    tmp = bench_df[[b in benchmarks for x in bench_df['TAG']]]
+    if first:
+        bench_df = tmp
+        first = False
+    else:
+        pd.concat([bench_df, tmp])
+
 for s in sizes:
     bench_df['TAG'] = bench_df['TAG'].apply(lambda x: x.replace('scaled_' + str(s) + '_','scaled_'))
     bench_df['TAG'] = bench_df['TAG'].apply(lambda x: x.replace('scaled_' + str(s) + '-','scaled-'))
@@ -55,8 +63,14 @@ bench_df['SIZE'] = bench_df['SIZE'].apply(lambda x: 2048 if x == '2M' else int(x
 bench_df['GPU'] = bench_df['GPU'].apply(lambda x: int(x.replace('g','')))
 bench_df['MPI'] = bench_df['MPI'].apply(lambda x: int(x.replace('n','')))
 bench_df['NAME'] = bench_df['NAME'].apply(lambda x: x.replace('.scaled','').replace('in.','').replace('.test',''))
+
+print(bench_df)
+
 # Convert all to timesteps/s
 bench_df['PERFORMANCE'] = bench_df.apply(lambda x: convert_to_tss(x.PERFORMANCE, bench_units[x.NAME.split('-')[0]],bench_ts[x.NAME.split('-')[0]]), axis=1)
+
+print(bench_df)
+
 if do_power:
     bench_df['POWEREFF'] = bench_df['PERFORMANCE'] / bench_df['POWER']
 bench_df = bench_df[bench_df['GPU'] <= 64]
@@ -67,14 +81,12 @@ bench_df = bench_df[[x in benchmarks for x in bench_df['NAME']]]
 
 # Compute parallel efficiency column
 divisor = []
-print(bench_df[['rhodo' in x for x in bench_df['NAME']]])
 for b in benchmarks:
     for s in sizes:
         for p in procs:
             i = 0
             c = 0
             while c == 0:
-                print(str(i) + ' ' + str(c) + ' ' + str(p) + ' ' + str(b))
                 series = bench_df[(bench_df['GPU'] == procs[i]) & (bench_df['SIZE'] == s) & 
             (bench_df['NAME'] == b)].PAREFF / procs[i]
                 c = len(series.values)
@@ -82,7 +94,6 @@ for b in benchmarks:
             if p < i:
                 continue
             divisor.append((series.values[0] * p) / 100)
-print(len(divisor))
 
 bench_df['PAREFF'] = bench_df['PAREFF'].divide(divisor)
 bench_df.to_csv('elaborated.csv',sep=';')
