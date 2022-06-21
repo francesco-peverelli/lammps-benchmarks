@@ -48,8 +48,9 @@ def main(fname, fout):
             continue
         vals[f] = data[f].mean()
 
+    #top 5 used in the benchmark
     vals = {k: v for k, v in sorted(vals.items(), reverse=True, key=lambda item: item[1])}
-
+    #TODO add others?
     top_vals = take(top_N, vals.items())
     top_funcs = [top_val[0] for top_val in top_vals]
 
