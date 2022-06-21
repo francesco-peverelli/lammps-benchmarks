@@ -76,11 +76,10 @@ def main(benchmarks, sizes, procs, do_power):
     bench_df = bench_df.sort_values(['NAME','SIZE','PROCS'])
 
     # Compute parallel efficiency column
-    divisor = []
     base_p_nums = []
-    for b in benchmarks:
+    for s in sizes:
         max_min_p = 0
-        for s in sizes:
+        for b in benchmarks:
             min_p = np.Inf
             for p in procs:
                 series = bench_df[(bench_df['PROCS'] == p) & (bench_df['SIZE'] == s) & 
@@ -91,8 +90,8 @@ def main(benchmarks, sizes, procs, do_power):
                 max_min_p = min_p
         base_p_nums.append(max_min_p)
 
-    s_index = 0
     for b in benchmarks:
+        s_index = 0
         for s in sizes:
             for p in procs:
                 if p < base_p_nums[s_index]:
@@ -102,7 +101,7 @@ def main(benchmarks, sizes, procs, do_power):
                     perf_0 = bench_df[(bench_df['PROCS'] == base_p_nums[s_index]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b)].PERFORMANCE
                     div = (p / base_p_nums[s_index]) * perf_0
                     bench_df.loc[(bench_df['PROCS'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = (float(perf) / float(div)) * 100.0    
-        s_index = s_index + 1
+            s_index = s_index + 1
 
     bench_df = bench_df[bench_df['PAREFF'].isnull() == 0]
     bench_df.to_csv('elaborated.csv',sep=';')
@@ -130,6 +129,11 @@ def main(benchmarks, sizes, procs, do_power):
             g.set_axis_labels("MPI Processes","Performance " + scale)
             g.savefig(str(s) + 'k_power_data.png')
 
+    #Exclude the runs with no counterpart for other sizes in parallel efficiency graph
+    s_idx = 0
+    for s in sizes:
+        df = df[(df['SIZE'] != s) | (df['PROCS'] >= base_p_nums[s_idx])]
+        s_idx = s_idx + 1
     sns.set_style("whitegrid")
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='PAREFF', \
         kind='point', palette='mako')
@@ -137,7 +141,6 @@ def main(benchmarks, sizes, procs, do_power):
     scale = '[timestep/s]'
     g.set_axis_labels("MPI Processes","Parallel Efficiency(%)")
     g.savefig('parallel_efficiency_data.png')
-    print('-------')
 
 if __name__ == "__main__": 
     main()
