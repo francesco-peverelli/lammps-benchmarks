@@ -20,37 +20,35 @@ def take(n, iterable):
 #PALETTE_GW = [COLORS[r] for r in ["gw3","gw2","gw1"]]
 #HATCHES = ['', '/'*4, '\\'*4]
 
-fname = sys.argv[1]
-fout = sys.argv[2]
+def main(fname, fout):
 
-data = pd.read_csv(fname, sep=',')
+    data = pd.read_csv(fname, sep=',')
 
-data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
+    data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
 
-#add missing sections
-phases = data['Section'].unique()
-bench = data['Benchmark'].unique()
-procs = data['Processes'].unique()
-sizes = data['Size'].unique()
+    #add missing sections
+    phases = data['Section'].unique()
+    bench = data['Benchmark'].unique()
+    procs = data['Processes'].unique()
+    sizes = data['Size'].unique()
 
-for ph in phases:
-    for b in bench:
-        for p in procs:
-            for s in sizes:
-                combo = [b, s, p, ph]
-                if len(data[(data['Benchmark'] == b) & (data['Processes'] == p) 
-                    & (data['Size'] == s) & (data['Section'] == ph)]) == 0:
-                    entries = combo + [0.0, 0.0, 0.0, 0.0, 0.0]
-                    new_data = pd.DataFrame([entries], columns=list(data.columns.values)) 
-                    data = pd.concat([data, new_data], ignore_index = True, axis = 0)
+    for ph in phases:
+        for b in bench:
+            for p in procs:
+                for s in sizes:
+                    combo = [b, s, p, ph]
+                    if len(data[(data['Benchmark'] == b) & (data['Processes'] == p) 
+                        & (data['Size'] == s) & (data['Section'] == ph)]) == 0:
+                        entries = combo + [0.0, 0.0, 0.0, 0.0, 0.0]
+                        new_data = pd.DataFrame([entries], columns=list(data.columns.values)) 
+                        data = pd.concat([data, new_data], ignore_index = True, axis = 0)
 
-#mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
-data = data.sort_values(['Benchmark','Size','Processes','Section'])
-data.groupby(['Size','Processes','Section'])
-print(data)
-sns.set_style("whitegrid")
-g = sns.catplot(data=data, col='Processes', row='Benchmark', x='Size', hue='Section', y='%total', \
-    kind='bar', palette='mako')
-#g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
-#g.set_xticklabels(sorted(phases))
-g.savefig(fout + ".png")
+    #mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
+    data = data.sort_values(['Benchmark','Size','Processes','Section'])
+    data.groupby(['Size','Processes','Section'])
+    sns.set_style("whitegrid")
+    g = sns.catplot(data=data, col='Processes', row='Benchmark', x='Size', hue='Section', y='%total', \
+        kind='bar', palette='mako')
+    #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
+    #g.set_xticklabels(sorted(phases))
+    g.savefig(fout + ".png")
