@@ -20,7 +20,7 @@ def take(n, iterable):
 #PALETTE_GW = [COLORS[r] for r in ["gw3","gw2","gw1"]]
 #HATCHES = ['', '/'*4, '\\'*4]
 
-def main(fname, fout):
+def main(fname, fout, fig_extns):
 
     data = pd.read_csv(fname, sep=',')
 
@@ -51,4 +51,4 @@ def main(fname, fout):
         kind='bar', palette='mako')
     #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
     #g.set_xticklabels(sorted(phases))
-    g.savefig(fout + ".png")
+    g.savefig(fout + fig_extns)

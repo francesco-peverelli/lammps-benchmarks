@@ -20,7 +20,7 @@ def take(n, iterable):
 #PALETTE_GW = [COLORS[r] for r in ["gw3","gw2","gw1"]]
 #HATCHES = ['', '/'*4, '\\'*4]
 
-def main(fname, fout):
+def main(fname, fout, fig_extns):
     mpi_funcs = ["MPI_Scan", "MPI_Comm_dup", "MPI_Comm_size", "MPI_Alltoallv", "MPI_Cart_shift", \
         "MPI_Finalize", "MPI_Wait", "MPI_Reduce", "MPI_Comm_rank", "MPI_Allgather", "MPI_Reduce_scatter", \
         "MPI_Barrier", "MPI_Sendrecv", "MPI_Waitany", "MPI_Cart_rank", "MPI_Cart_create", "MPI_Irecv", \
@@ -38,7 +38,7 @@ def main(fname, fout):
     g = sns.catplot(data=mpi_tot_data, x='Processes', hue ='variable', row='Benchmark', col='Size', y='value', \
         kind='bar', palette='Paired')
     g.set_axis_labels("Problem Size [K atoms]","MPI Total Time [%]")
-    g.savefig(fout + "_mpi_tot_data.png")
+    g.savefig(fout + "_mpi_tot_data"+fig_extns)
 
     top_N = 5
     vals = {}
@@ -58,7 +58,7 @@ def main(fname, fout):
     g2 = sns.catplot(data=mpi_func_data, col='Processes', hue='variable', row='Benchmark', x='Size', y='value', \
         kind='bar', palette='CMRmap')
     g2.set_axis_labels("Problem Size [K atoms]","MPI Function Time [%]")
-    g2.savefig(fout + "_mpi_funcs.png")
+    g2.savefig(fout + "_mpi_funcsi"+fig_extns)
 
 if __name__ == "__main__": 
     main()
