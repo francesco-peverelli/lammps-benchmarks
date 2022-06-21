@@ -63,12 +63,14 @@ def main(benchmarks, sizes, procs, do_power):
     bench_df['PROCS'] = bench_df['PROCS'].apply(lambda x: int(x.replace('n','')))
     bench_df['NAME'] = bench_df['NAME'].apply(lambda x: x.replace('.scaled','').replace('in.','').replace('.test',''))
 
+    #clean benchmark
     bench_df = bench_df[[x in benchmarks for x in bench_df['NAME']]]
 
     # Convert all to timesteps/s
     bench_df['PERFORMANCE'] = bench_df.apply(lambda x: convert_to_tss(x.PERFORMANCE, bench_units[x.NAME.split('-')[0]],bench_ts[x.NAME.split('-')[0]]), axis=1)
     if do_power:
         bench_df['POWEREFF'] = bench_df['PERFORMANCE'] / bench_df['POWER']
+    #filtering
     bench_df = bench_df[bench_df['PROCS'] <= 64]
     bench_df['PAREFF'] = bench_df['PERFORMANCE']
     bench_df = bench_df.sort_values(['NAME','SIZE','PROCS'])
@@ -104,7 +106,10 @@ def main(benchmarks, sizes, procs, do_power):
 
     bench_df = bench_df[bench_df['PAREFF'].isnull() == 0]
     bench_df.to_csv('elaborated.csv',sep=';')
+    #end of parallel efficiency
 
+    #find a way with multiple indipendent y axis!!!!!!!!!!!!1
+    #TODO add experiment name
     df = bench_df
     for s in sizes:
         sns.set_style("whitegrid")
@@ -113,7 +118,7 @@ def main(benchmarks, sizes, procs, do_power):
         #g.set(yscale="log")
         scale = '[timestep/s]'
         g.set_axis_labels("MPI Processes","Performance " + scale)
-        g.savefig(str(s) + 'k_test_perf_data.png')
+        g.savefig(str(s) + 'k_perf_data.png')
 
     if do_power:
         for s in sizes:
@@ -123,7 +128,7 @@ def main(benchmarks, sizes, procs, do_power):
             #g.set(yscale="log")
             scale = '[timestep/s/Watt]'
             g.set_axis_labels("MPI Processes","Performance " + scale)
-            g.savefig(str(s) + 'k_test_power_data.png')
+            g.savefig(str(s) + 'k_power_data.png')
 
     sns.set_style("whitegrid")
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='PAREFF', \

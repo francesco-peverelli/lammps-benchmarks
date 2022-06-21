@@ -2,11 +2,6 @@ import pandas as pd
 import os 
 import sys
 
-# modify to change the experiments to group together
-experiments = ["rhodo", "rhodo-e-5", "rhodo-e-6", "rhodo-e-7"]
-mpi_nproc = [1, 2, 4, 8, 16, 32, 64]
-nk_atoms = [32, 256, 864, 2048]
-
 def get_file_name(bench, nproc, nk_atoms):
     name = "in." + bench 
     if nk_atoms > 32 and ((bench == "chain") or (bench == "rhodo")):
@@ -17,7 +12,7 @@ def get_file_name(bench, nproc, nk_atoms):
     name += "_" + str(nproc) + "n_1ont_" + str(nk_atoms) + "k_aps.csv"
     return name
 
-def main(filename):
+def main(filename, experiments, mpi_nproc, nk_atoms):
 
     mpi_funcs = set() # MPI functions
     mpi_data = []
