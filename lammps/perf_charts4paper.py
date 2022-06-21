@@ -11,7 +11,7 @@ import matplotlib.lines as lines
 import matplotlib.ticker as ticker
 from itertools import islice
 
-def main(benchmarks, sizes, procs, do_power):
+def main(benchmarks, sizes, procs, do_power, fname):
     benchmarks = sorted(benchmarks)
     sizes = sorted(sizes)
     procs = sorted(procs)
@@ -117,7 +117,7 @@ def main(benchmarks, sizes, procs, do_power):
         #g.set(yscale="log")
         scale = '[timestep/s]'
         g.set_axis_labels("MPI Processes","Performance " + scale)
-        g.savefig(str(s) + 'k_perf_data.png')
+        g.savefig(fname + '_' + str(s) + 'k_perf.png')
 
     if do_power:
         for s in sizes:
@@ -127,7 +127,7 @@ def main(benchmarks, sizes, procs, do_power):
             #g.set(yscale="log")
             scale = '[timestep/s/Watt]'
             g.set_axis_labels("MPI Processes","Performance " + scale)
-            g.savefig(str(s) + 'k_power_data.png')
+            g.savefig(fname + '_' + str(s) + 'k_power.png')
 
     #Exclude the runs with no counterpart for other sizes in parallel efficiency graph
     s_idx = 0
@@ -140,7 +140,7 @@ def main(benchmarks, sizes, procs, do_power):
     g.set(yscale="log")
     scale = '[timestep/s]'
     g.set_axis_labels("MPI Processes","Parallel Efficiency(%)")
-    g.savefig('parallel_efficiency_data.png')
+    g.savefig(fname + '_parallel_efficiency.png')
 
 if __name__ == "__main__": 
     main()

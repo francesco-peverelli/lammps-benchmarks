@@ -20,7 +20,7 @@ experiment_name = 'rhodo_precision'
 
 #TODO give the experiment name for this
 #perf, // efficiency
-perf_charts4paper.main(benchmarks, sizes, procs, do_power)
+perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name)
 
 os.chdir('./prof')
 
