@@ -2,6 +2,8 @@ import pandas as pd
 import os
 import sys
 
+do_debug = False
+
 def main(experiments, ngpus, nk_atoms, filename):
 
     files = os.listdir(os.getcwd())
@@ -11,22 +13,24 @@ def main(experiments, ngpus, nk_atoms, filename):
         if fname.endswith("_profiling.txt") and fname.startswith("in."):
             try:
                 file = open(fname, "r")
-                print(fname)
                 params = fname.split('_')
                 bench = params[0].replace(".scaled","")
                 if params[len(params)-3].endswith('k'):
                     size = int(params[len(params)-3][:-1])
                 else:
                     size = int(params[len(params)-3])
-                ngpu = int(params[len(params)-2][1:])
+                ngpu = int(params[len(params)-2][1:])           
                 if (bench[3:] not in experiments):
-                    print(bench[3:] + " not found!")
+                    if do_debug:
+                        print(bench[3:] + " not found!")
                     continue
                 if (size not in nk_atoms):
-                    print(str(size) + " not found!")
+                    if do_debug:
+                        print(str(size) + " not found!")
                     continue
                 if (ngpu not in ngpus):
-                    print(str(ngpu) + " not found!")
+                    if do_debug:
+                        print(str(ngpu) + " not found!")
                     continue
                 if os.stat(fname).st_size <= 1:
                     continue

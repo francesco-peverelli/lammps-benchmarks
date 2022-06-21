@@ -44,7 +44,6 @@ def main(fname, fout):
                 partial_df = filt_df[(filt_df['Benchmark'] == b) & (filt_df['GPUs'] == g) & (filt_df['Size'] == s)]
                 tot_time = float(partial_df['Total Time (ns)'].sum())
                 partial_df['Time(%)'] = 100 * (partial_df['Total Time (ns)'].div(tot_time))
-                print(partial_df)
                 if first:
                     df = partial_df
                     first = False

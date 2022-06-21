@@ -20,7 +20,7 @@ def take(n, iterable):
 #PALETTE_GW = [COLORS[r] for r in ["gw3","gw2","gw1"]]
 #HATCHES = ['', '/'*4, '\\'*4]
 
-def main(fout, fname):
+def main(fname, fout):
 
     data = pd.read_csv(fname, sep=',')
 

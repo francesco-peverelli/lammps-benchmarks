@@ -15,7 +15,7 @@ perf_charts4paper.main(benchmarks, sizes, procs, do_power)
 
 os.chdir('./prof')
 
-prof.aggregate_gpu_data.main(experiment_name + '_gpu', benchmarks, procs, sizes)
+prof.aggregate_gpu_data.main(benchmarks, procs, sizes, experiment_name + '_gpu')
 prof.cuda_charts4paper.main(experiment_name + '_gpu.csv', experiment_name + '_gpu')
 prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
 prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks')

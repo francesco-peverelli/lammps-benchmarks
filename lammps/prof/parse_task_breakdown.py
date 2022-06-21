@@ -1,6 +1,9 @@
+from distutils.log import debug
 import pandas as pd
 import os
 import sys
+
+do_debug = False
 
 def main(experiments, mpi_nproc, nk_atoms, filename):
 
@@ -17,15 +20,18 @@ def main(experiments, mpi_nproc, nk_atoms, filename):
                     params[0] += '-single'
                 bench = params[0]
                 size = int(params[len(params)-2][:-1])
-                processes = int(params[len(params)-4][:-1])
+                processes = int(params[len(params)-4][:-1])  
                 if (bench[3:] not in experiments):
-                    print(bench[3:] + " not found!")
+                    if do_debug:
+                        print(bench[3:] + " not found!")
                     continue
                 if (size not in nk_atoms):
-                    print(size + " not found!")
+                    if do_debug:
+                        print(size + " not found!")
                     continue
                 if (processes not in mpi_nproc):
-                    print(processes + " not found!")
+                    if do_debug:
+                        print(processes + " not found!")
                     continue
                 in_header = False
                 skip_line = False
