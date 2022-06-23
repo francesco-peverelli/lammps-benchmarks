@@ -11,7 +11,20 @@ import matplotlib.lines as lines
 import matplotlib.ticker as ticker
 from itertools import islice
 
-def main(benchmarks, sizes, procs, do_power, fname):
+def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    plt.rcParams["font.family"] = ["serif"]
+    plt.rcParams["font.size"] = 32
+    plt.rcParams["xtick.major.size"]= 5.5     # major tick size in points
+    plt.rcParams["axes.titlesize"]= 25     # major tick size in points
+    
+    plt.rcParams['hatch.linewidth'] = 0.6
+   
+    plt.rcParams['axes.labelpad'] = 5 
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+
     benchmarks = sorted(benchmarks)
     sizes = sorted(sizes)
     procs = sorted(procs)
@@ -110,15 +123,47 @@ def main(benchmarks, sizes, procs, do_power, fname):
     #find a way with multiple indipendent y axis!!!!!!!!!!!!1
     #TODO add experiment name
     df = bench_df
-    for s in sizes:
-        sns.set_style("whitegrid")
-        g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='PROCS', y='PERFORMANCE', \
-            kind='point', palette='mako')
-        #g.set(yscale="log")
-        scale = '[timestep/s]'
-        g.set_axis_labels("MPI Processes","Performance " + scale)
-        g.savefig(fname + '_' + str(s) + 'k_perf.png')
+    ########################eliminating for unique catplot##################
+    # for s in sizes:
+    #     sns.set_style("whitegrid")
+    #     g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='PROCS', y='PERFORMANCE', \
+    #         kind='point', palette='mako')
+    #     #g.set(yscale="log")
+    #     scale = '[timestep/s]'
+    #     g.set_axis_labels("MPI Processes","Performance " + scale)
+    #     g.savefig(experiment_name + str(s) + 'k_perf'+fig_extns)
+    ########################end of  unique catplot##################
+    
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    # plt.rcParams["font.family"] = ["Palatino"]
 
+    plt.rcParams.update({
+      "text.usetex": True,
+      "font.family": "serif",
+      "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 28
+    plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 28   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+   
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    scale_points=1.75
+    g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='PERFORMANCE', \
+            kind='point', palette='mako', scale =scale_points, sharey=False)
+    scale = '[timestep/s]'
+    g.set_axis_labels("MPI Processes","Performance " + scale)
+    g.savefig(experiment_name + 'k_perf'+fig_extns)
+    
+
+        
     if do_power:
         for s in sizes:
             sns.set_style("whitegrid")
@@ -127,20 +172,50 @@ def main(benchmarks, sizes, procs, do_power, fname):
             #g.set(yscale="log")
             scale = '[timestep/s/Watt]'
             g.set_axis_labels("MPI Processes","Performance " + scale)
-            g.savefig(fname + '_' + str(s) + 'k_power.png')
+            g.savefig(experiment_name + str(s) + 'k_power_data' + fig_extns)
+
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    # plt.rcParams["font.family"] = ["Palatino"]
+
+    plt.rcParams.update({
+      "text.usetex": True,
+      "font.family": "serif",
+      "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 28
+    plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 28   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+   
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    scale_points=1.75
 
     #Exclude the runs with no counterpart for other sizes in parallel efficiency graph
     s_idx = 0
     for s in sizes:
         df = df[(df['SIZE'] != s) | (df['PROCS'] >= base_p_nums[s_idx])]
         s_idx = s_idx + 1
-    sns.set_style("whitegrid")
+    sns.set_style("whitegrid", {"font.family":"Palatino"})
+
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='PAREFF', \
-        kind='point', palette='mako')
+        kind='point', palette='mako', scale = scale_points)
     g.set(yscale="log")
     scale = '[timestep/s]'
-    g.set_axis_labels("MPI Processes","Parallel Efficiency(%)")
-    g.savefig(fname + '_parallel_efficiency.png')
+    #g.set_xticklabels(g.get_xticklabels(), rotation=20, horizontalalignment='right')
+    #g.set_yticklabels(g.get_yticklabels(),rotation=10, horizontalalignment='right')
+    # ylabels = ['{:,.2f}'.format(x) + 'K' for x in g.get_xticks()/1000]
+    # g.set_xticklabels(ylabels)
+    g.set_axis_labels("MPI Processes","Parallel Efficiency(\%)")
+    # g.set_ylabels("Parallel Efficiency(%)",labelpad=-5)
+    g.savefig(experiment_name+'parallel_efficiency_data'+fig_extns)
+    print('-------')
 
 if __name__ == "__main__": 
     main()
