@@ -8,7 +8,7 @@ import prof.task_charts4paper
 #bench kind
 
 #bench_units = { 'rhodo', 'lj', 'eam', 'chain', 'chute'}
-benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
+benchmarks = ['lj', 'lj-single', 'lj-double']
 #atom #
 sizes = [32, 256, 864, 2048]
 #proc MPI
@@ -16,7 +16,7 @@ procs = [1, 2, 4, 8, 16, 32, 64]
 #for now falzo
 do_power = False
 #collection bench name
-experiment_name = 'rhodo_precision'
+experiment_name = 'lj_precision'
 
 #TODO give the experiment name for this
 #perf, // efficiency

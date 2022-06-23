@@ -5,13 +5,13 @@ import prof.parse_task_breakdown
 import prof.task_charts4paper
 import prof.aggregate_gpu_data
 
-benchmarks = ['rhodo','rhodo-e-5','rhodo-e-6','rhodo-e-7']
+benchmarks = ['chain','chain-single','chain-double']
 sizes = [32, 256, 864, 2048]
 procs = [1, 2, 4, 6, 8]
 do_power = False
-experiment_name = 'rhodo_kspace'
+experiment_name = 'chain_precision'
     
-perf_charts4paper.main(benchmarks, sizes, procs, do_power)
+perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name)
 
 os.chdir('./prof')
 
