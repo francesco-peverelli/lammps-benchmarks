@@ -174,6 +174,34 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
             g.set_axis_labels("MPI Processes","Performance " + scale)
             g.savefig(experiment_name + str(s) + 'k_power_data' + fig_extns)
 
+        # Reset matplotlib settings;
+        plt.rcdefaults()
+        # plt.rcParams["font.family"] = ["Palatino"]
+
+        plt.rcParams.update({
+        "text.usetex": True,
+        "font.family": "serif",
+        "font.serif": ["Palatino"],
+        })
+        plt.rcParams["font.size"] = 28
+        plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
+        plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
+        plt.rcParams["legend.fontsize"]= 28   # major tick size in points
+        plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+        # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+        plt.rcParams['hatch.linewidth'] = 0.6
+    
+        plt.rcParams['axes.labelpad'] = 0
+        plt.rcParams['pdf.fonttype'] = 42
+        plt.rcParams['ps.fonttype'] = 42
+        scale_points=1.75
+        g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='POWEREFF', \
+                kind='point', palette='mako', scale =scale_points, sharey=False)
+        scale = '[timestep/s/Watt]'
+        g.set_axis_labels("MPI Processes","Performance " + scale)
+        g.savefig(experiment_name + 'k_power_data' + fig_extns)
+
     # Reset matplotlib settings;
     plt.rcdefaults()
     # plt.rcParams["font.family"] = ["Palatino"]
