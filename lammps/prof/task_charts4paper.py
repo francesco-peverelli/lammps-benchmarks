@@ -65,10 +65,10 @@ def main(fname, fout, fig_extns):
     "font.family": "serif",
     "font.serif": ["Palatino"],
     })
-    plt.rcParams["font.size"] = 28
-    plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
-    plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
-    plt.rcParams["legend.fontsize"]= 28   # major tick size in points
+    plt.rcParams["font.size"] = 30
+    plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 30   # major tick size in points
     plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
@@ -92,7 +92,7 @@ def main(fname, fout, fig_extns):
     # print(data)
     data=data.groupby(['Benchmark','Size','Processes','Section']).mean()
     g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
-                x='Category', hue='Section', weights='%total', multiple="stack", palette='mako', bins=mprocs, binrange=(0,mprocs))
+                x='Category', hue='Section', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
     g.set_axis_labels("MPI Processes","Run Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     #x=x
