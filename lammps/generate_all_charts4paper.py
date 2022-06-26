@@ -9,7 +9,6 @@ import prof.task_charts4paper
 fig_extns='.pdf'
 #bench kind
 
-#bench_units = { 'rhodo', 'lj', 'eam', 'chain', 'chute'}
 #benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
 benchmarks = ['rhodo', 'lj', 'eam', 'chain', 'chute']
 #atom #

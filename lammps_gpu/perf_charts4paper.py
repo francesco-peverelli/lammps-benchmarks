@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 from itertools import islice
 import sys
 
-def main(benchmarks, sizes, procs, do_power):
+def main(benchmarks, sizes, procs, do_power, fname):
 
     benchmarks = sorted(benchmarks)
     sizes = sorted(sizes)
@@ -111,7 +111,7 @@ def main(benchmarks, sizes, procs, do_power):
         #g.set(yscale="log")
         scale = '[timestep/s]'
         g.set_axis_labels("GPU devices","Performance " + scale)
-        g.savefig(str(s) + 'k_test_perf_data.png')
+        g.savefig(fname + '_' + str(s) + 'k_perf.png')
 
     if do_power:
         for s in sizes:
@@ -121,7 +121,7 @@ def main(benchmarks, sizes, procs, do_power):
             #g.set(yscale="log")
             scale = '[timestep/s/Watt]'
             g.set_axis_labels("GPU devices","Performance " + scale)
-            g.savefig(str(s) + 'k_test_power_data.png')
+            g.savefig(fname + '_' + str(s) + 'k_power.png')
 
     #Exclude the runs with no counterpart for other sizes in parallel efficiency graph
     s_idx = 0
@@ -136,4 +136,4 @@ def main(benchmarks, sizes, procs, do_power):
     g.set(yscale="log")
     scale = '[timestep/s]'
     g.set_axis_labels("GPU devices","Parallel Efficiency(%)")
-    g.savefig('parallel_efficiency_data.png')
+    g.savefig(fname + '_parallel_efficiency.png')
