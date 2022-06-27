@@ -49,6 +49,66 @@ def main(fname, fout, fig_extns):
     sns.set_style("whitegrid")
     g = sns.catplot(data=data, col='Processes', row='Benchmark', x='Size', hue='Section', y='%total', \
         kind='bar', palette='mako')
+    g.savefig(fout + fig_extns)
+
+    data.drop('min time', inplace=True, axis=1)
+    data.drop('avg time', inplace=True, axis=1)
+    data.drop('max time', inplace=True, axis=1)
+    data.drop('%varavg', inplace=True, axis=1)
+
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 30
+    plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 30   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    
+    procsmap = {}
+    categorical_value = 0
+    for p in procs:
+        procsmap[p] = categorical_value
+        categorical_value += 1
+    data['Category'] = data['Processes']
+    data['Category'] = data['Category'].apply(lambda x: procsmap[x])
+    mprocs = data['Category'].max()+1
+   
+    # print(data)
+    data=data.groupby(['Benchmark','Size','Processes','Section']).mean()
+    g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
+                x='Category', hue='Section', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
+    g.set_axis_labels("MPI Processes","Run Time [\%]")
+    x = np.arange(0+0.5,categorical_value+0.5, 1)
+    #x=x
+    g.set(xticks=x)
+    #procs=list(procs)
+    #procs.insert(0,0)
+    # print(procs)
+    g.set_xticklabels(procs)
+    g.set_titles(row_template="B.={row_name}",col_template="Size={col_name}")
+
+    #g= sns.displot(data=data_mod, col='Size', row='Benchmark', \
+     #           x='Processes', hue='Section', multiple="stack", palette='mako')
+    
+    # for p in procs:
+    #     for b in bench:
+    #         print(data[(data['Benchmark'] == b) & (data['Processes'] == p) ].columns.values)
+    #         g.map_dataframe(sns.displot(data=data[(data['Benchmark'] == b) & (data['Processes'] == p) ], \
+    #             x='Size', hue='Section', multiple="stack", palette='mako'))
+            # sns.displot(data=data[(data['Benchmark'] == b) & (data['Processes'] == p) ], x='Size', y='%total', hue='Section', multiple="stack" )
     #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
     #g.set_xticklabels(sorted(phases))
-    g.savefig(fout + fig_extns)
+    
+    g.savefig(fout + "_stacked" + fig_extns)
