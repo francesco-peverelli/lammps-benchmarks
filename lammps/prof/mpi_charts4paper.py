@@ -27,6 +27,9 @@ def main(fname, fout, fig_extns):
         "MPI_Cart_get", "MPI_Allreduce", "MPI_Comm_free", "MPI_Bcast", "MPI_Init", "MPI_Alltoall", "MPI_Send"]
 
     data = pd.read_csv(fname, sep=',')
+    mpi_percentage = ["MPI_(%)","Max_MPI_(%)","Min_MPI_(%)","MPI_Imb_(%)", "Max_Imb_(%)","Min_Imb_(%)"]
+    mpi_percentage_nomaxmin=["Max_MPI_(%)","Min_MPI_(%)","MPI_Imb_(%)", "Max_Imb_(%)","Min_Imb_(%)"]
+
 
     # Reset matplotlib settings;
     plt.rcdefaults()
@@ -48,9 +51,14 @@ def main(fname, fout, fig_extns):
     plt.rcParams['pdf.fonttype'] = 42
     plt.rcParams['ps.fonttype'] = 42
 
+    #add missing sections
+    bench = data['Benchmark'].unique()
+    procs = data['Processes'].unique()
+    sizes = data['Size'].unique()
+
     data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
     mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"],    \
-    value_vars=["MPI_(%)","Max_MPI_(%)","Min_MPI_(%)","MPI_Imb_(%)", "Max_Imb_(%)","Min_Imb_(%)"])
+    value_vars=mpi_percentage)
 
     sns.set_style("whitegrid")
     g = sns.catplot(data=mpi_tot_data, x='Processes', hue ='variable', row='Benchmark', col='Size', y='value', \
@@ -92,7 +100,7 @@ def main(fname, fout, fig_extns):
     plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
     plt.rcParams["legend.fontsize"]= 30   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.05    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6
@@ -113,13 +121,98 @@ def main(fname, fout, fig_extns):
     vals = {k: v for k, v in sorted(vals.items(), reverse=True, key=lambda item: item[1])}
     #TODO add others?
     top_vals = take(top_N, vals.items())
+    # print()
+    # print(vals)
+    # print()
+    # print(top_vals)
+    # print()
     top_funcs = [top_val[0] for top_val in top_vals]
+    # print(top_funcs)
+    # # print()
+    # mpi_func_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=top_funcs)
+    # # print(mpi_func_data)
+    # # print()
+########################################
+    original_data=data.copy()
+
+    original_data.drop(top_funcs, inplace=True, axis=1)
+    original_data.drop(mpi_percentage, inplace=True, axis=1)
+    original_data.drop('MPI_Time', inplace=True, axis=1)
+
+    # print(original_data.columns.values.tolist())
+    # print(original_data)
+    # print()
+
+    idxess=['Benchmark','Processes','Size']
+    tmp=set(original_data.columns.values.tolist())-set(idxess)-set(top_funcs)
+    # print(tmp)
+    # print()
+    # original_data.drop(idxess, inplace=True, axis=1)
+    original_data['others'] = original_data[tmp].sum(axis=1)
+    # print(original_data['others'])
+    # print()
+##########################
+    # # mpi_func_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=top_funcs)
+    # # print(mpi_func_data)
+    # # print()
+    # g2 = sns.catplot(data=mpi_func_data, col='Processes', hue='variable', row='Benchmark', x='Size', y='value', \
+    #     kind='bar', palette='CMRmap')
+    # g2.set_axis_labels("Problem Size [K atoms]","MPI Function Time [%]")
+    # g2.savefig(fout + "_mpi_funcsi"+fig_extns)
+
+    ##################
+    # print(top_funcs)
+    top_funcs.append('others')
+    # print(top_funcs)
+    data['others']=original_data['others'] 
 
     mpi_func_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=top_funcs)
-    g2 = sns.catplot(data=mpi_func_data, col='Processes', hue='variable', row='Benchmark', x='Size', y='value', \
-        kind='bar', palette='CMRmap')
-    g2.set_axis_labels("Problem Size [K atoms]","MPI Function Time [%]")
-    g2.savefig(fout + "_mpi_funcsi"+fig_extns)
+    # print(mpi_func_data)
+    # print()
+
+ # Reset matplotlib settings;
+    plt.rcdefaults()
+    plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 30
+    plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 30   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    
+    procsmap = {}
+    categorical_value = 0
+    for p in procs:
+        procsmap[p] = categorical_value
+        categorical_value += 1
+    mpi_func_data['Category'] = mpi_func_data['Processes']
+    mpi_func_data['Category'] = mpi_func_data['Category'].apply(lambda x: procsmap[x])
+    mprocs = mpi_func_data['Category'].max()+1
+   
+    # print(mpi_func_data)
+    mpi_func_data=mpi_func_data.groupby(['Benchmark','Size','Processes','variable']).mean()
+    g2= sns.displot(data=mpi_func_data, col='Size', row='Benchmark', kind='hist',\
+                x='Category', hue='variable', weights='value', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
+    g2.set_axis_labels("Processes","MPI Function Time [\%]")
+    x = np.arange(0+0.5,categorical_value+0.5, 1)
+    #x=x
+    g2.set(xticks=x)
+    #procs=list(procs)
+    #procs.insert(0,0)
+    # print(procs)
+    g2.set_xticklabels(procs)
+    g2.set_titles(row_template="B.={row_name}",col_template="Size={col_name}")
+    g2.savefig(fout + "_mpi_funcsi_stacked"+fig_extns)
 
 if __name__ == "__main__": 
     main()

@@ -34,6 +34,27 @@ def main(fname, fout,fig_extns):
     gpus = data['GPUs'].unique()
     sizes = data['Size'].unique()
 
+  # Reset matplotlib settings;
+    plt.rcdefaults()
+    plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 30
+    plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 30   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.05    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+
+
     filt_df = data[data['Time(%)'] > -10.0]
     filt_df = filt_df[filt_df['Category'] != 'CUDA_API']
     first = True
@@ -49,13 +70,46 @@ def main(fname, fout,fig_extns):
                     first = False
                 else:
                     df = pd.concat([df, partial_df], ignore_index = True, axis = 0)
+                if(s==2048):
+                    print(partial_df)
+                
 
     #mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
     filt_df = df.sort_values(['Benchmark','Size','GPUs','Operation'])
+    original_data = filt_df.copy()
     filt_df.groupby(['Size','GPUs','Operation'])
-    sns.set_style("whitegrid")
+    # sns.set_style("whitegrid")
     g = sns.catplot(data=filt_df, col='GPUs', row='Benchmark', x='Size', hue='Operation', y='Time(%)', \
         kind='bar', palette='Paired')
     #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
     #g.set_xticklabels(sorted(phases))
     g.savefig(fout + fig_extns)
+
+    original_data.drop('Average (ns)', inplace=True, axis=1)
+    original_data.drop('Minimum (ns)', inplace=True, axis=1)
+    original_data.drop('Maximum (ns)', inplace=True, axis=1)
+    original_data.drop('StdDev (ns)', inplace=True, axis=1)
+    original_data.drop('Total Time (ns)', inplace=True, axis=1)
+
+
+    procsmap = {}
+    categorical_value = 0
+    for p in sizes:
+        procsmap[p] = categorical_value
+        categorical_value += 1
+    data=original_data
+    data['Category'] = data['Size']
+
+    data['Category'] = data['Category'].apply(lambda x: procsmap[x])
+    mprocs = data['Category'].max()+1
+
+    data=data.groupby(['Benchmark','Size', 'GPUs','Operation']).mean()
+    g= sns.displot(data=data, col='GPUs', row='Benchmark', kind='hist',\
+                x='Category', hue='Operation', weights='Time(%)', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
+    g.set_axis_labels("Sizes","Run Time [\%]")
+    x = np.arange(0+0.5,categorical_value+0.5, 1)
+    g.set(xticks=x)
+    g.set_xticklabels(sizes)
+    g.set_titles(row_template="B.={row_name}",col_template="GPUs={col_name}")
+    g.savefig(fout + "_stacked" + fig_extns)
+
