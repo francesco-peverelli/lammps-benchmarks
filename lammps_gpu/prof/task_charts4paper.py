@@ -89,7 +89,6 @@ def main(fname, fout, fig_extns):
         categorical_value += 1
     data=original_data
     data['Category'] = data['Size']
-
     data['Category'] = data['Category'].apply(lambda x: procsmap[x])
     mprocs = data['Category'].max()+1
    
