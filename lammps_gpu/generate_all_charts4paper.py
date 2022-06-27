@@ -6,7 +6,7 @@ import prof.task_charts4paper
 import prof.aggregate_gpu_data
 
 # benchmarks = ['chain','chain-single','chain-double']
-benchmarks = ['rhodo', 'lj']
+benchmarks = ['rhodo', 'lj', 'eam', 'chain']
 
 fig_extns='.pdf'
 

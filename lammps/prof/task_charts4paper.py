@@ -97,7 +97,7 @@ def main(fname, fout, fig_extns):
     #procs.insert(0,0)
     # print(procs)
     g.set_xticklabels(procs)
-    g.set_titles(row_template="B.={row_name}",col_template="Size={col_name}")
+    g.set_titles(row_template="B.={row_name}",col_template="S.={col_name}")
 
     #g= sns.displot(data=data_mod, col='Size', row='Benchmark', \
      #           x='Processes', hue='Section', multiple="stack", palette='mako')

@@ -193,4 +193,4 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     g.set(yscale="log")
     scale = '[timestep/s]'
     g.set_axis_labels("GPU devices","Parallel Efficiency(%)")
-    g.savefig(fname + '_parallel_efficiency'+fig_extns)
+    g.savefig(experiment_name + '_parallel_efficiency'+fig_extns)

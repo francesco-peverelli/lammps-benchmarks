@@ -84,25 +84,25 @@ def main(fname, fout, fig_extns):
 
     procsmap = {}
     categorical_value = 0
-    for p in sizes:
+    for p in procs:
         procsmap[p] = categorical_value
         categorical_value += 1
     data=original_data
-    data['Category'] = data['Size']
+    data['Category'] = data['GPUs']
 
     data['Category'] = data['Category'].apply(lambda x: procsmap[x])
     mprocs = data['Category'].max()+1
    
     data=data.groupby(['Benchmark','Size', 'GPUs','Section']).mean()
-    g= sns.displot(data=data, col='GPUs', row='Benchmark', kind='hist',\
+    g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
                 x='Category', hue='Section', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
-    g.set_axis_labels("Sizes","Run Time [\%]")
+    g.set_axis_labels("GPUs","Run Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     #x=x
     g.set(xticks=x)
     #procs=list(procs)
     #procs.insert(0,0)
     # print(procs)
-    g.set_xticklabels(sizes)
-    g.set_titles(row_template="B.={row_name}",col_template="GPUs={col_name}")
+    g.set_xticklabels(procs)
+    g.set_titles(row_template="B.={row_name}",col_template="Size={col_name}")
     g.savefig(fout + "_stacked" + fig_extns)
