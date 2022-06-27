@@ -12,7 +12,12 @@ import matplotlib.ticker as ticker
 from itertools import islice
 import sys
 
-def main(benchmarks, sizes, procs, do_power, fname,fig_extns):
+def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
+
+    gpu_mpi_dict = [{1 : 6, 2 : 12, 4 : 12, 6 : 18, 8 : 24},
+        {1 : 16, 2 : 28, 4 : 32, 6 : 48, 8 : 48},
+        {1 : 36, 2 : 36, 4 : 36, 6 : 48, 8 : 48},
+        {1 : 16, 2 : 48, 4 : 48, 6 : 48, 8 : 48}]
 
     benchmarks = sorted(benchmarks)
     sizes = sorted(sizes)
@@ -71,6 +76,18 @@ def main(benchmarks, sizes, procs, do_power, fname,fig_extns):
     bench_df = bench_df.sort_values(['NAME','SIZE','GPU'])
 
     bench_df = bench_df[[x in benchmarks for x in bench_df['NAME']]] 
+    
+    #filter pairs MPI/GPUs
+    s_index = 0
+    for s in sizes:
+        for p in procs:
+            index = bench_df[(bench_df['SIZE'] == s) & (bench_df['GPU'] == p) & (bench_df['MPI'] != gpu_mpi_dict[s_index][p])].index
+            print(index)
+            print(str(s) + ' ' + str(p) + ' ' + str(s_index) + ' ' + str(gpu_mpi_dict[s_index][p]))
+            bench_df = bench_df.drop(index)
+        s_index = s_index + 1
+   
+    print(bench_df[bench_df['NAME'] == 'chain']) 
 
     # Compute parallel efficiency column
     base_p_nums = []
@@ -92,47 +109,87 @@ def main(benchmarks, sizes, procs, do_power, fname,fig_extns):
         for s in sizes:
             for p in procs:
                 if p < base_p_nums[s_index]:
-                    bench_df.loc[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = np.NAN
+                    bench_df.loc[(bench_df['GPU'] == p) & (bench_df['MPI'] == gpu_mpi_dict[s_index][p]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = np.NAN
                 else:
-                    perf = bench_df.loc[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF']
-                    perf_0 = bench_df.loc[(bench_df['GPU'] == base_p_nums[s_index]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PERFORMANCE']
+                    perf = bench_df.loc[(bench_df['GPU'] == p) & (bench_df['MPI'] == gpu_mpi_dict[s_index][p]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF']
+                    perf_0 = bench_df.loc[(bench_df['GPU'] == base_p_nums[s_index]) & (bench_df['MPI'] == gpu_mpi_dict[s_index][base_p_nums[s_index]]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PERFORMANCE']
                     div = (p / base_p_nums[s_index]) * perf_0
-                    bench_df.loc[(bench_df['GPU'] == p) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = (float(perf) / float(div)) * 100.0    
+                    bench_df.loc[(bench_df['GPU'] == p) & (bench_df['MPI'] == gpu_mpi_dict[s_index][p]) & (bench_df['SIZE'] == s) & (bench_df['NAME'] == b),'PAREFF'] = (float(perf) / float(div)) * 100.0    
             s_index = s_index + 1
 
     bench_df = bench_df[bench_df['PAREFF'].isnull() == 0]
     bench_df.to_csv('elaborated.csv',sep=';')
 
+    print(bench_df[bench_df['NAME'] == 'chain'])
     df = bench_df
-    for s in sizes:
-        sns.set_style("whitegrid")
-        g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='GPU', y='PERFORMANCE', \
-            kind='point', palette='mako')
-        #g.set(yscale="log")
-        scale = '[timestep/s]'
-        g.set_axis_labels("GPU devices","Performance " + scale)
-        g.savefig(fname + '_' + str(s) + 'k_perf'+fig_extns)
+   
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    # plt.rcParams["font.family"] = ["Palatino"]
 
+    plt.rcParams.update({
+      "text.usetex": True,
+      "font.family": "serif",
+      "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 28
+    plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 28   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+   
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    scale_points=1.75
+    g = sns.catplot(data=df, col='SIZE', hue='NAME', x='GPU', y='PERFORMANCE', \
+            kind='point', palette='mako', scale =scale_points, sharey=False)
+    scale = '[timestep/s]'
+    g.set_axis_labels("GPU devices","Performance " + scale)
+    g.savefig(experiment_name + 'k_perf'+fig_extns)
+    
     if do_power:
-        for s in sizes:
-            sns.set_style("whitegrid")
-            g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='GPU', y='POWEREFF', \
-                kind='point', palette='mako')
-            #g.set(yscale="log")
-            scale = '[timestep/s/Watt]'
-            g.set_axis_labels("GPU devices","Performance " + scale)
-            g.savefig(fname + '_' + str(s) + 'k_power'+fig_extns)
+        g = sns.catplot(data=df, col='SIZE', hue='NAME', x='GPU', y='POWEREFF', \
+            kind='point', palette='mako', scale =scale_points, sharey=False)
+        scale = '[timestep/s/Watt]'
+        g.set_axis_labels("GPU devices","Energy Efficiency " + scale)
+        g.savefig(experiment_name + 'k_power'+fig_extns)
+ 
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    # plt.rcParams["font.family"] = ["Palatino"]
 
+    plt.rcParams.update({
+      "text.usetex": True,
+      "font.family": "serif",
+      "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 28
+    plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 28   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+   
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    scale_points=1.75
+ 
     #Exclude the runs with no counterpart for other sizes in parallel efficiency graph
     s_idx = 0
     for s in sizes:
         df = df[(df['SIZE'] != s) | (df['GPU'] >= base_p_nums[s_idx])]
         s_idx = s_idx + 1
+    sns.set_style("whitegrid", {"font.family":"Palatino"})
 
-    df.to_csv('elaborated.csv',sep=';')
-    sns.set_style("whitegrid")
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='GPU', y='PAREFF', \
-        kind='point', palette='mako')
+        kind='point', palette='mako', scale = scale_points)
     g.set(yscale="log")
     scale = '[timestep/s]'
     g.set_axis_labels("GPU devices","Parallel Efficiency(%)")

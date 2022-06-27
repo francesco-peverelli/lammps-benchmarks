@@ -57,42 +57,37 @@ def main(fname, fout, fig_extns):
     sizes = data['Size'].unique()
 
     data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
-    data['Processes'] = data['Processes'].apply(lambda x: int(x))
-    data['Size'] = data['Size'].apply(lambda x: int(x))
-    # print(data)
     mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"],    \
     value_vars=mpi_percentage)
-    # print(mpi_tot_data)
 
     sns.set_style("whitegrid")
     g = sns.catplot(data=mpi_tot_data, x='Processes', hue ='variable', row='Benchmark', col='Size', y='value', \
          kind='bar', palette='Paired')
     g.savefig(fout + "_mpi_old"+fig_extns)
-    
-    procs = mpi_tot_data['Processes'].unique()
-    procsmap = {}
-    categorical_value = 0
-    for p in procs:
-        procsmap[p] = categorical_value
-        categorical_value += 1
-    mpi_tot_data['Category'] = mpi_tot_data['Processes']
-    mpi_tot_data['Category'] = mpi_tot_data['Category'].apply(lambda x: procsmap[x])
-    mprocs = mpi_tot_data['Category'].max()+1
 
-    mpi_tot_data=mpi_tot_data.groupby(['Benchmark','Size','Processes','variable']).mean()
-    g= sns.displot(data=mpi_tot_data, col='Size', row='Benchmark', kind='hist',\
-                x='Processes', hue='variable', weights='value', multiple="stack", palette='PuBu'\
-                , bins=mprocs, binrange=(0,mprocs))
-    g.set_titles(row_template="B.={row_name}",col_template="Size={col_name}")
-        
-    g.set_axis_labels("Problem Size [K atoms]","MPI Tot-al Time [\%]")
+    mpi_tot_data['Processes'] = mpi_tot_data['Processes'].apply(lambda x: int(x)) 
+    mpi_tot_data['Size'] = mpi_tot_data['Size'].apply(lambda x: int(x)) 
+
+    # Plot MPI total runtime % per rank, min max and average
+    mpi_time_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_(%)") 
+        | (mpi_tot_data['variable'] == "Max_MPI_(%)")
+        | (mpi_tot_data['variable'] == "Min_MPI_(%)")]
+
+    g=sns.catplot(data=mpi_time_data, hue='Size', col='Benchmark', kind='bar',\
+                x='Processes', y='value', palette='PuBu')
+    g.set_axis_labels("MPI Processes", "MPI Time [\%]")
     g.savefig(fout + "_mpi_tot_data"+fig_extns)
+                #, bins=mprocs, binrange=(0,mprocs))
 
-    # g= sns.displot(data=mpi_tot_data, col='Size', kind='hist',\
-    #             x='Benchmark', hue='Processes', weights='variable', multiple="stack", palette='PuBu'\
-    #             , bins=mprocs, binrange=(0,mprocs))
-    g.set_axis_labels("Problem Size [K atoms]","MPI Total Time [\%]")
-    g.savefig(fout + "_mpi_tot_version"+fig_extns)
+    # Plot MPI total imbalance % per rank, min max and average
+    mpi_imb_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_Imb_(%)") 
+        | (mpi_tot_data['variable'] == "Max_Imb_(%)")
+        | (mpi_tot_data['variable'] == "Min_Imb_(%)")]
+
+    g=sns.catplot(data=mpi_imb_data, hue='Size', col='Benchmark', kind='bar',\
+                x='Processes', y='value', palette='PuBu')
+    g.set_axis_labels("MPI Processes", "MPI imbalance [\%]")
+    g.savefig(fout + "_mpi_imb_data"+fig_extns)
 
     # Reset matplotlib settings;
     plt.rcdefaults()

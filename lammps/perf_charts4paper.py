@@ -162,7 +162,13 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     g.set_axis_labels("MPI Processes","Performance " + scale)
     g.savefig(experiment_name + 'k_perf'+fig_extns)
     
-
+    if do_power:
+        g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='POWEREFF', \
+            kind='point', palette='mako', scale =scale_points, sharey=False)
+        scale = '[timestep/s/Watt]'
+        g.set_axis_labels("MPI Processes","Energy Efficiency " + scale)
+        g.savefig(experiment_name + 'k_power'+fig_extns)
+ 
         
     if do_power:
         for s in sizes:
@@ -243,7 +249,6 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     g.set_axis_labels("MPI Processes","Parallel Efficiency(\%)")
     # g.set_ylabels("Parallel Efficiency(%)",labelpad=-5)
     g.savefig(experiment_name+'parallel_efficiency_data'+fig_extns)
-    print('-------')
 
 if __name__ == "__main__": 
     main()

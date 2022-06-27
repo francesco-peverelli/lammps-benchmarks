@@ -11,8 +11,11 @@ benchmarks = ['rhodo', 'lj']
 fig_extns='.pdf'
 
 sizes = [32, 256, 864, 2048]
+#proc MPI
 procs = [1, 2, 4, 6, 8]
+#for now falzo
 do_power = False
+
 experiment_name = 'gpu_bench'
 # experiment_name = 'chain_precision'
     
