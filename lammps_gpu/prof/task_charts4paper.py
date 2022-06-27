@@ -67,15 +67,15 @@ def main(fname, fout, fig_extns):
     original_data = data.copy()
 
     #mpi_tot_data = data.melt(id_vars=["GPUs", "Size", "Benchmark"], value_vars=["MPI_(%)"])
-    data = data.sort_values(['Benchmark','Size','GPUs','Section'])
-    data.groupby(['Size','GPUs','Section'])
-    data = data.groupby(['Benchmark','Size','GPUs','Section'],as_index=False).mean()
-    # sns.set_style("whitegrid")
-    g = sns.catplot(data=data, col='GPUs', row='Benchmark', x='Size', hue='Section', y='%total', \
-        kind='bar', palette='mako')
-    #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
-    #g.set_xticklabels(sorted(phases))
-    g.savefig(fout + fig_extns)
+    # data = data.sort_values(['Benchmark','Size','GPUs','Section'])
+    # data.groupby(['Size','GPUs','Section'])
+    # data = data.groupby(['Benchmark','Size','GPUs','Section'],as_index=False).mean()
+    # # sns.set_style("whitegrid")
+    # g = sns.catplot(data=data, col='GPUs', row='Benchmark', x='Size', hue='Section', y='%total', \
+    #     kind='bar', palette='mako')
+    # #g.set_axis_labels("Problem Size [K atoms]","Task Total Time [%]")
+    # #g.set_xticklabels(sorted(phases))
+    # g.savefig(fout + fig_extns)
 
     original_data.drop('min time', inplace=True, axis=1)
     original_data.drop('avg time', inplace=True, axis=1)
