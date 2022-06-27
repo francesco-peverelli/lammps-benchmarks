@@ -9,8 +9,8 @@ import prof.task_charts4paper
 fig_extns='.pdf'
 #bench kind
 
-#benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
-benchmarks = ['rhodo', 'lj', 'eam', 'chain', 'chute']
+benchmarks = ['lj', 'lj-single', 'lj-double']
+#benchmarks = ['chute', 'chute-single', 'chute-double']
 #atom #
 sizes = [32, 256, 864, 2048]
 #proc MPI
@@ -18,7 +18,7 @@ procs = [1, 2, 4, 8, 16, 32, 64]
 #for now falzo
 do_power = False
 #collection bench name
-experiment_name = 'lammps_benchs_'
+experiment_name = 'lammps_benchs_chute_prec_'
 #experiment_name = 'rhodo_precision'
 
 #TODO give the experiment name for this
