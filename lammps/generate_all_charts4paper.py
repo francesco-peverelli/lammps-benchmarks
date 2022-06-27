@@ -9,7 +9,7 @@ import prof.task_charts4paper
 fig_extns='.pdf'
 #bench kind
 
-benchmarks = ['lj', 'lj-single', 'lj-double']
+benchmarks = ['rhodo', 'lj', 'eam', 'chain', 'chute']
 #benchmarks = ['chute', 'chute-single', 'chute-double']
 #atom #
 sizes = [32, 256, 864, 2048]
@@ -18,7 +18,7 @@ procs = [1, 2, 4, 8, 16, 32, 64]
 #for now falzo
 do_power = False
 #collection bench name
-experiment_name = 'lammps_benchs_chute_prec_'
+experiment_name = 'lammps_bench_'
 #experiment_name = 'rhodo_precision'
 
 #TODO give the experiment name for this
@@ -29,5 +29,5 @@ os.chdir('./prof')
 
 prof.aggregate_mpi_data.main(experiment_name, benchmarks, procs, sizes)
 prof.mpi_charts4paper.main(experiment_name + '.csv', experiment_name, fig_extns)
-prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
-prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
+#prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
+#prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
