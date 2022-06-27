@@ -58,8 +58,6 @@ def main(fname, fout, fig_extns):
 
     # Reset matplotlib settings;
     plt.rcdefaults()
-    # plt.rcParams["font.family"] = ["Palatino"]
-
     plt.rcParams.update({
     "text.usetex": True,
     "font.family": "serif",
@@ -77,8 +75,6 @@ def main(fname, fout, fig_extns):
     plt.rcParams['axes.labelpad'] = 0
     plt.rcParams['pdf.fonttype'] = 42
     plt.rcParams['ps.fonttype'] = 42
-    # g = sns.FacetGrid(data=data, col='Processes', row='Benchmark', palette='mako', sharey=False)
-    # g = sns.FacetGrid(data=data)
     
     procsmap = {}
     categorical_value = 0

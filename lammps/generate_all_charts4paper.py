@@ -23,7 +23,7 @@ experiment_name = 'lammps_benchs_'
 
 #TODO give the experiment name for this
 #perf, // efficiency
-perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
+#perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
 
 os.chdir('./prof')
 
