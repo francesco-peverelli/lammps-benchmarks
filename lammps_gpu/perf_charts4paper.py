@@ -122,17 +122,7 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
 
     print(bench_df[bench_df['NAME'] == 'chain'])
     df = bench_df
-    ########################eliminating for unique catplot##################
-    # for s in sizes:
-    #     sns.set_style("whitegrid")
-    #     g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='PROCS', y='PERFORMANCE', \
-    #         kind='point', palette='mako')
-    #     #g.set(yscale="log")
-    #     scale = '[timestep/s]'
-    #     g.set_axis_labels("MPI Processes","Performance " + scale)
-    #     g.savefig(experiment_name + str(s) + 'k_perf'+fig_extns)
-    ########################end of  unique catplot##################
-    
+   
     # Reset matplotlib settings;
     plt.rcdefaults()
     # plt.rcParams["font.family"] = ["Palatino"]
@@ -168,18 +158,6 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
         g.set_axis_labels("GPU devices","Energy Efficiency " + scale)
         g.savefig(experiment_name + 'k_power'+fig_extns)
  
-    print(data)
-        
-#    if do_power:
-#        for s in sizes:
-#            sns.set_style("whitegrid")
-#            g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='GPU', y='POWEREFF', \
-#                kind='point', palette='mako')
-#            #g.set(yscale="log")
-#            scale = '[timestep/s/Watt]'
-#            g.set_axis_labels("MPI Processes","Performance " + scale)
-#            g.savefig(experiment_name + str(s) + 'k_power_data' + fig_extns)
-
     # Reset matplotlib settings;
     plt.rcdefaults()
     # plt.rcParams["font.family"] = ["Palatino"]
@@ -202,7 +180,7 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     plt.rcParams['pdf.fonttype'] = 42
     plt.rcParams['ps.fonttype'] = 42
     scale_points=1.75
-
+ 
     #Exclude the runs with no counterpart for other sizes in parallel efficiency graph
     s_idx = 0
     for s in sizes:
@@ -214,10 +192,5 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
         kind='point', palette='mako', scale = scale_points)
     g.set(yscale="log")
     scale = '[timestep/s]'
-    #g.set_xticklabels(g.get_xticklabels(), rotation=20, horizontalalignment='right')
-    #g.set_yticklabels(g.get_yticklabels(),rotation=10, horizontalalignment='right')
-    # ylabels = ['{:,.2f}'.format(x) + 'K' for x in g.get_xticks()/1000]
-    # g.set_xticklabels(ylabels)
-    g.set_axis_labels("GPU devices","Parallel Efficiency(\%)")
-    # g.set_ylabels("Parallel Efficiency(%)",labelpad=-5)
-    g.savefig(experiment_name+'parallel_efficiency_data'+fig_extns)
+    g.set_axis_labels("GPU devices","Parallel Efficiency(%)")
+    g.savefig(fname + '_parallel_efficiency'+fig_extns)
