@@ -17,7 +17,14 @@ def main(experiments, ngpus, nk_atoms, filename):
             try:
                 file = open(fname, "r")
                 params = fname.split('_')
-                bench = params[0].replace(".scaled","")
+                params[0] = params[0].replace(".scaled","")
+                if params[1].endswith('-double'):
+                    params[0] += '-double'
+                elif params[1].endswith('-single'):
+                    params[0] += '-single'
+                bench = params[0]
+                if params[1] == params[2]:
+                    del params[1]
                 if params[len(params)-3].endswith('k'):
                     size = int(params[len(params)-3][:-1])
                 else:

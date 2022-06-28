@@ -70,8 +70,6 @@ def main(fname, fout,fig_extns):
                     first = False
                 else:
                     df = pd.concat([df, partial_df], ignore_index = True, axis = 0)
-                if(s==2048):
-                    print(partial_df)
                 
 
     #mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=["MPI_(%)"])
@@ -94,22 +92,22 @@ def main(fname, fout,fig_extns):
 
     procsmap = {}
     categorical_value = 0
-    for p in sizes:
+    for p in gpus:
         procsmap[p] = categorical_value
         categorical_value += 1
     data=original_data
-    data['Category'] = data['Size']
+    data['Category'] = data['GPUs']
 
     data['Category'] = data['Category'].apply(lambda x: procsmap[x])
     mprocs = data['Category'].max()+1
 
     data=data.groupby(['Benchmark','Size', 'GPUs','Operation']).mean()
-    g= sns.displot(data=data, col='GPUs', row='Benchmark', kind='hist',\
+    g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
                 x='Category', hue='Operation', weights='Time(%)', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
-    g.set_axis_labels("Sizes","Run Time [\%]")
+    g.set_axis_labels("GPUs","Run Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     g.set(xticks=x)
-    g.set_xticklabels(sizes)
-    g.set_titles(row_template="B.={row_name}",col_template="GPUs={col_name}")
+    g.set_xticklabels(gpus)
+    g.set_titles(row_template="B.={row_name}",col_template="S.={col_name}")
     g.savefig(fout + "_stacked" + fig_extns)
 
