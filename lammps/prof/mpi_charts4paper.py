@@ -198,7 +198,10 @@ def main(fname, fout, fig_extns):
     mpi_func_data['Category'] = mpi_func_data['Processes']
     mpi_func_data['Category'] = mpi_func_data['Category'].apply(lambda x: procsmap[x])
     mprocs = mpi_func_data['Category'].max()+1
-   
+ 
+    mpi_func_data['Size'] = mpi_tot_data['Size'].apply(lambda x: int(x)) 
+    procs = [int(x) for x in procs]
+  
     # print(mpi_func_data)
     mpi_func_data=mpi_func_data.groupby(['Benchmark','Size','Processes','variable']).mean()
     g2= sns.displot(data=mpi_func_data, col='Size', row='Benchmark', kind='hist',\
@@ -211,7 +214,7 @@ def main(fname, fout, fig_extns):
     #procs.insert(0,0)
     # print(procs)
     g2.set_xticklabels(procs)
-    g2.set_titles(row_template="B.={row_name}",col_template="Size={col_name}")
+    g2.set_titles(row_template="B.={row_name}",col_template="S.={col_name}")
     g2.savefig(fout + "_mpi_funcsi_stacked"+fig_extns)
 
 if __name__ == "__main__": 
