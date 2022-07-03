@@ -77,7 +77,11 @@ def main(fname, fout, fig_extns):
                 x='Processes', y='value', palette='PuBu', aspect=1.4, errwidth=.85, capsize=.4)
     g.set_axis_labels("MPI Processes", "MPI Time [\%]")
     g.savefig(fout + "_mpi_tot_data"+fig_extns)
-                #, bins=mprocs, binrange=(0,mprocs))
+    
+    g=sns.catplot(data=mpi_time_data, hue='Size', col='Benchmark', kind='box',\
+                x='Processes', y='value', palette='PuBu', sharey=False, linewidth=2)
+    g.set_axis_labels("MPI Processes", "MPI Time [\%]")
+    g.savefig(fout + "_mpi_violin_tot_data"+fig_extns)
 
     # Plot MPI total imbalance % per rank, min max and average
     mpi_imb_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_Imb_(%)") 
@@ -88,6 +92,11 @@ def main(fname, fout, fig_extns):
                 x='Processes', y='value', palette='PuBu', aspect=1.4, errwidth=.85, capsize=.4)
     g.set_axis_labels("MPI Processes", "MPI imbalance [\%]")
     g.savefig(fout + "_mpi_imb_data"+fig_extns)
+
+    g=sns.catplot(data=mpi_imb_data, hue='Size', col='Benchmark', kind='box',\
+                x='Processes', y='value', palette='PuBu', sharey=False, linewidth=2)
+    g.set_axis_labels("MPI Processes", "MPI imbalance [\%]")
+    g.savefig(fout + "_mpi_imb_violin_data"+fig_extns)
 
     # Reset matplotlib settings;
     plt.rcdefaults()
