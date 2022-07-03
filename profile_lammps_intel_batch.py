@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-benchmarks = ["lj-long"]
+benchmarks = ["lj-long", "chain-long", "chute-long", "eam-long","rhodo-long"]
 variants = ["",".scaled",".scaled_864",".scaled_2048"]
 dims = [32, 256, 864, 2048]
 
