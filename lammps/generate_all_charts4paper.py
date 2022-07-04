@@ -17,7 +17,7 @@ sizes = [32, 256, 864, 2048]
 #proc MPI
 procs = [1, 2, 4, 8, 16, 32, 64]
 #for now falzo
-do_power = False
+do_power = True
 #collection bench name
 experiment_name = 'lammps_benchs_'
 #experiment_name = 'rhodo_kspace'
