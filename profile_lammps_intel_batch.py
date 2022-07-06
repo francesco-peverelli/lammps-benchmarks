@@ -1,9 +1,9 @@
 import subprocess
 import os
 
-benchmarks = ["chain-long", "chute-long", "eam-long","rhodo-long"]
-variants = ["",".scaled",".scaled_864",".scaled_2048"]
-dims = [32, 256, 864, 2048]
+benchmarks = ["rhodo-long"]
+variants = [".scaled_2048"]
+dims = [2048]
 
 for b in benchmarks:
     i = 0
