@@ -9,7 +9,7 @@ import prof.task_charts4paper
 fig_extns='.pdf'
 #bench kind
 
-benchmarks = ['chain', 'chute', 'eam', 'lj', 'rhodo']
+benchmarks = ['chain-long', 'chute-long', 'eam-long', 'lj-long', 'rhodo-long']
 # benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
 #benchmarks = ['chute', 'chute-single', 'chute-double']
 #atom #
@@ -23,7 +23,7 @@ experiment_name = 'lammps_benchs_'
 #experiment_name = 'rhodo_kspace'
 
 #perf, // efficiency
-perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
+#perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
 
 os.chdir('./prof')
 
