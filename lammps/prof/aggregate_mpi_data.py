@@ -37,10 +37,10 @@ def main(filename, experiments, mpi_nproc, nk_atoms):
                     print(bench[3:] + " not found!")
                     continue
                 if (exp_size not in nk_atoms):
-                    print(exp_size + " not found!")
+                    print(str(exp_size) + " not found!")
                     continue
                 if (exp_proc not in mpi_nproc):
-                    print(exp_proc + " not found!")
+                    print(str(exp_proc) + " not found!")
                     continue
                 times_dict = {"Benchmark" : bench} # mapping func : time%
                 times_dict['Size'] = int(params[len(params)-2][:-1])

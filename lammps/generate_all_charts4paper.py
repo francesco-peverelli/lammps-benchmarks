@@ -15,7 +15,7 @@ benchmarks = ['chain-long', 'chute-long', 'eam-long', 'lj-long', 'rhodo-long']
 #atom #
 sizes = [32, 256, 864, 2048]
 #proc MPI
-procs = [1, 2, 4, 8, 16, 32, 64]
+procs = [2, 4, 8, 16, 32, 64]
 #for now falzo
 do_power = True
 #collection bench name
@@ -29,5 +29,5 @@ os.chdir('./prof')
 
 prof.aggregate_mpi_data.main(experiment_name, benchmarks, procs, sizes)
 prof.mpi_charts4paper.main(experiment_name + '.csv', experiment_name, fig_extns)
-prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
-prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
+#prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
+#prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
