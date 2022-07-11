@@ -43,7 +43,8 @@ def main(fname, fout, fig_extns):
     plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
     plt.rcParams["legend.fontsize"]= 30   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.05    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6

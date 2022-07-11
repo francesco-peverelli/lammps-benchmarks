@@ -7,6 +7,9 @@ import prof.aggregate_gpu_data
 
 # benchmarks = ['chain','chain-single','chain-double']
 benchmarks = ['rhodo', 'lj', 'eam', 'chain']
+# benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
+# benchmarks = ['lj', 'lj-single', 'lj-double']
+# benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
 
 fig_extns='.pdf'
 

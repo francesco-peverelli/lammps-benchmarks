@@ -82,12 +82,12 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     for s in sizes:
         for p in procs:
             index = bench_df[(bench_df['SIZE'] == s) & (bench_df['GPU'] == p) & (bench_df['MPI'] != gpu_mpi_dict[s_index][p])].index
-            print(index)
-            print(str(s) + ' ' + str(p) + ' ' + str(s_index) + ' ' + str(gpu_mpi_dict[s_index][p]))
+            # print(index)
+            # print(str(s) + ' ' + str(p) + ' ' + str(s_index) + ' ' + str(gpu_mpi_dict[s_index][p]))
             bench_df = bench_df.drop(index)
         s_index = s_index + 1
    
-    print(bench_df[bench_df['NAME'] == 'chain']) 
+    # print(bench_df[bench_df['NAME'] == 'chain']) 
 
     # Compute parallel efficiency column
     base_p_nums = []
@@ -120,7 +120,7 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     bench_df = bench_df[bench_df['PAREFF'].isnull() == 0]
     bench_df.to_csv('elaborated.csv',sep=';')
 
-    print(bench_df[bench_df['NAME'] == 'chain'])
+    # print(bench_df[bench_df['NAME'] == 'chain'])
     df = bench_df
    
     # Reset matplotlib settings;
@@ -136,7 +136,8 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
     plt.rcParams["legend.fontsize"]= 28   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6
@@ -147,14 +148,14 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     scale_points=1.75
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='GPU', y='PERFORMANCE', \
             kind='point', palette='mako', scale =scale_points, sharey=False)
-    scale = '[timestep/s]'
+    scale = '[TS/s]'
     g.set_axis_labels("GPU devices","Performance " + scale)
     g.savefig(experiment_name + 'k_perf'+fig_extns)
     
     if do_power:
         g = sns.catplot(data=df, col='SIZE', hue='NAME', x='GPU', y='POWEREFF', \
             kind='point', palette='mako', scale =scale_points, sharey=False)
-        scale = '[timestep/s/Watt]'
+        scale = '[TS/s/Watt]'
         g.set_axis_labels("GPU devices","Energy Efficiency " + scale)
         g.savefig(experiment_name + 'k_power'+fig_extns)
  
@@ -171,7 +172,8 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     plt.rcParams["xtick.labelsize"]= 28    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 25    # major tick size in points
     plt.rcParams["legend.fontsize"]= 28   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6
@@ -191,6 +193,6 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='GPU', y='PAREFF', \
         kind='point', palette='mako', scale = scale_points)
     g.set(yscale="log")
-    scale = '[timestep/s]'
+    scale = '[TS/s]'
     g.set_axis_labels("GPU devices","Parallel Efficiency(%)")
     g.savefig(experiment_name + '_parallel_efficiency'+fig_extns)
