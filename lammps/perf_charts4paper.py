@@ -158,14 +158,14 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     scale_points=1.75
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='PERFORMANCE', \
             kind='point', palette='mako', scale =scale_points, sharey=False)
-    scale = '[timestep/s]'
+    scale = '[TS/s]'
     g.set_axis_labels("MPI Processes","Performance " + scale)
     g.savefig(experiment_name + 'k_perf'+fig_extns)
     
     if do_power:
         g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='POWEREFF', \
             kind='point', palette='mako', scale =scale_points, sharey=False)
-        scale = '[timestep/s/Watt]'
+        scale = '[TS/s/Watt]'
         g.set_axis_labels("MPI Processes","Energy Efficiency " + scale)
         g.savefig(experiment_name + 'k_power'+fig_extns)
  
@@ -176,7 +176,7 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
             g = sns.catplot(data=df[df['SIZE'] == s], hue='NAME', x='PROCS', y='POWEREFF', \
                 kind='point', palette='mako')
             #g.set(yscale="log")
-            scale = '[timestep/s/Watt]'
+            scale = '[TS/s/Watt]'
             g.set_axis_labels("MPI Processes","Performance " + scale)
             g.savefig(experiment_name + str(s) + 'k_power_data' + fig_extns)
 
@@ -204,7 +204,7 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
         scale_points=1.75
         g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='POWEREFF', \
                 kind='point', palette='mako', scale =scale_points, sharey=False)
-        scale = '[timestep/s/Watt]'
+        scale = '[TS/s/Watt]'
         g.set_axis_labels("MPI Processes","Performance " + scale)
         g.savefig(experiment_name + 'k_power_data' + fig_extns)
 
@@ -241,7 +241,7 @@ def main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns):
     g = sns.catplot(data=df, col='SIZE', hue='NAME', x='PROCS', y='PAREFF', \
         kind='point', palette='mako', scale = scale_points)
     g.set(yscale="log")
-    scale = '[timestep/s]'
+    scale = '[TS/s]'
     #g.set_xticklabels(g.get_xticklabels(), rotation=20, horizontalalignment='right')
     #g.set_yticklabels(g.get_yticklabels(),rotation=10, horizontalalignment='right')
     # ylabels = ['{:,.2f}'.format(x) + 'K' for x in g.get_xticks()/1000]

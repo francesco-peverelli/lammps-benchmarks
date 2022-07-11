@@ -67,7 +67,8 @@ def main(fname, fout, fig_extns):
     plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
     plt.rcParams["legend.fontsize"]= 30   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6
@@ -86,9 +87,10 @@ def main(fname, fout, fig_extns):
     mprocs = data['Category'].max()+1
    
     # print(data)
-    data=data.groupby(['Benchmark','Size','Processes','Section']).mean()
+    data.rename(columns = {'Section':'Task'}, inplace = True)
+    data=data.groupby(['Benchmark','Size','Processes','Task']).mean()
     g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
-                x='Category', hue='Section', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
+                x='Category', hue='Task', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
     g.set_axis_labels("MPI Processes","Run Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     #x=x

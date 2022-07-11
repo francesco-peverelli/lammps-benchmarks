@@ -42,8 +42,10 @@ def main(fname, fout, fig_extns):
     plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
     plt.rcParams["legend.fontsize"]= 30   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+    # plt.rcParams["legend.markerscale"]=0.01   # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6
 
@@ -60,10 +62,10 @@ def main(fname, fout, fig_extns):
     mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"],    \
     value_vars=mpi_percentage)
 
-    sns.set_style("whitegrid")
-    g = sns.catplot(data=mpi_tot_data, x='Processes', hue ='variable', row='Benchmark', col='Size', y='value', \
-         kind='bar', palette='Paired')
-    g.savefig(fout + "_mpi_old"+fig_extns)
+    # sns.set_style("whitegrid")
+    # g = sns.catplot(data=mpi_tot_data, x='Processes', hue ='variable', row='Benchmark', col='Size', y='value', \
+    #      kind='bar', palette='Paired')
+    # g.savefig(fout + "_mpi_old"+fig_extns)
 
     mpi_tot_data['Processes'] = mpi_tot_data['Processes'].apply(lambda x: int(x)) 
     mpi_tot_data['Size'] = mpi_tot_data['Size'].apply(lambda x: int(x)) 
@@ -72,7 +74,8 @@ def main(fname, fout, fig_extns):
     mpi_time_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_(%)") 
         | (mpi_tot_data['variable'] == "Max_MPI_(%)")
         | (mpi_tot_data['variable'] == "Min_MPI_(%)")]
-
+    # pd.set_option('display.max_rows', None)
+    # print(mpi_time_data.to_markdown())
     g=sns.catplot(data=mpi_time_data, hue='Size', col='Benchmark', kind='bar',\
                 x='Processes', y='value', palette='PuBu', aspect=1.4, errwidth=.85, capsize=.4)
     g.set_axis_labels("MPI Processes", "MPI Time [\%]")
@@ -87,6 +90,8 @@ def main(fname, fout, fig_extns):
     mpi_imb_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_Imb_(%)") 
         | (mpi_tot_data['variable'] == "Max_Imb_(%)")
         | (mpi_tot_data['variable'] == "Min_Imb_(%)")]
+
+    # print(mpi_imb_data.to_markdown())
 
     g=sns.catplot(data=mpi_imb_data, hue='Size', col='Benchmark', kind='bar',\
                 x='Processes', y='value', palette='PuBu', aspect=1.4, errwidth=.85, capsize=.4)
@@ -190,7 +195,8 @@ def main(fname, fout, fig_extns):
     plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
     plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
     plt.rcParams["legend.fontsize"]= 30   # major tick size in points
-    plt.rcParams["legend.handletextpad"]=0.01    # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
     # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
 
     plt.rcParams['hatch.linewidth'] = 0.6
@@ -212,9 +218,10 @@ def main(fname, fout, fig_extns):
     procs = [int(x) for x in procs]
   
     # print(mpi_func_data)
-    mpi_func_data=mpi_func_data.groupby(['Benchmark','Size','Processes','variable']).mean()
+    mpi_func_data.rename(columns = {'variable':'Function'}, inplace = True)
+    mpi_func_data=mpi_func_data.groupby(['Benchmark','Size','Processes','Function']).mean()
     g2= sns.displot(data=mpi_func_data, col='Size', row='Benchmark', kind='hist',\
-                x='Category', hue='variable', weights='value', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
+                x='Category', hue='Function', weights='value', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
     g2.set_axis_labels("Processes","MPI Function Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     #x=x
