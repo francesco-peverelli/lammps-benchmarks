@@ -59,7 +59,10 @@ def main(fname, fout, fig_extns):
     sizes = data['Size'].unique()
 
     data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
-    mpi_tot_data = data.melt(id_vars=["Processes", "Size", "Benchmark"],    \
+    new_size_string='Size[k atoms]'
+    data.rename(columns = {'Size':new_size_string}, inplace = True)
+
+    mpi_tot_data = data.melt(id_vars=["Processes", new_size_string, "Benchmark"],    \
     value_vars=mpi_percentage)
 
     # sns.set_style("whitegrid")
@@ -68,7 +71,7 @@ def main(fname, fout, fig_extns):
     # g.savefig(fout + "_mpi_old"+fig_extns)
 
     mpi_tot_data['Processes'] = mpi_tot_data['Processes'].apply(lambda x: int(x)) 
-    mpi_tot_data['Size'] = mpi_tot_data['Size'].apply(lambda x: int(x)) 
+    mpi_tot_data[new_size_string] = mpi_tot_data[new_size_string].apply(lambda x: int(x)) 
 
     # Plot MPI total runtime % per rank, min max and average
     mpi_time_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_(%)") 
@@ -76,12 +79,12 @@ def main(fname, fout, fig_extns):
         | (mpi_tot_data['variable'] == "Min_MPI_(%)")]
     # pd.set_option('display.max_rows', None)
     # print(mpi_time_data.to_markdown())
-    g=sns.catplot(data=mpi_time_data, hue='Size', col='Benchmark', kind='bar',\
+    g=sns.catplot(data=mpi_time_data, hue=new_size_string, col='Benchmark', kind='bar',\
                 x='Processes', y='value', palette='PuBu', aspect=1.4, errwidth=.85, capsize=.4)
     g.set_axis_labels("MPI Processes", "MPI Time [\%]")
     g.savefig(fout + "_mpi_tot_data"+fig_extns)
     
-    g=sns.catplot(data=mpi_time_data, hue='Size', col='Benchmark', kind='box',\
+    g=sns.catplot(data=mpi_time_data, hue=new_size_string, col='Benchmark', kind='box',\
                 x='Processes', y='value', palette='PuBu', sharey=False, linewidth=2)
     g.set_axis_labels("MPI Processes", "MPI Time [\%]")
     g.savefig(fout + "_mpi_violin_tot_data"+fig_extns)
@@ -93,12 +96,12 @@ def main(fname, fout, fig_extns):
 
     # print(mpi_imb_data.to_markdown())
 
-    g=sns.catplot(data=mpi_imb_data, hue='Size', col='Benchmark', kind='bar',\
+    g=sns.catplot(data=mpi_imb_data, hue=new_size_string, col='Benchmark', kind='bar',\
                 x='Processes', y='value', palette='PuBu', aspect=1.4, errwidth=.85, capsize=.4)
     g.set_axis_labels("MPI Processes", "MPI imbalance [\%]")
     g.savefig(fout + "_mpi_imb_data"+fig_extns)
 
-    g=sns.catplot(data=mpi_imb_data, hue='Size', col='Benchmark', kind='box',\
+    g=sns.catplot(data=mpi_imb_data, hue=new_size_string, col='Benchmark', kind='box',\
                 x='Processes', y='value', palette='PuBu', sharey=False, linewidth=2)
     g.set_axis_labels("MPI Processes", "MPI imbalance [\%]")
     g.savefig(fout + "_mpi_imb_violin_data"+fig_extns)
@@ -157,7 +160,7 @@ def main(fname, fout, fig_extns):
     # print(original_data)
     # print()
 
-    idxess=['Benchmark','Processes','Size']
+    idxess=['Benchmark','Processes',new_size_string]
     tmp=set(original_data.columns.values.tolist())-set(idxess)-set(top_funcs)
     # print(tmp)
     # print()
@@ -180,7 +183,7 @@ def main(fname, fout, fig_extns):
     # print(top_funcs)
     data['others']=original_data['others'] 
 
-    mpi_func_data = data.melt(id_vars=["Processes", "Size", "Benchmark"], value_vars=top_funcs)
+    mpi_func_data = data.melt(id_vars=["Processes", new_size_string, "Benchmark"], value_vars=top_funcs)
     # print(mpi_func_data)
     # print()
 
@@ -214,13 +217,13 @@ def main(fname, fout, fig_extns):
     mpi_func_data['Category'] = mpi_func_data['Category'].apply(lambda x: procsmap[x])
     mprocs = mpi_func_data['Category'].max()+1
  
-    mpi_func_data['Size'] = mpi_tot_data['Size'].apply(lambda x: int(x)) 
+    mpi_func_data[new_size_string] = mpi_tot_data[new_size_string].apply(lambda x: int(x)) 
     procs = [int(x) for x in procs]
   
     # print(mpi_func_data)
     mpi_func_data.rename(columns = {'variable':'Function'}, inplace = True)
-    mpi_func_data=mpi_func_data.groupby(['Benchmark','Size','Processes','Function']).mean()
-    g2= sns.displot(data=mpi_func_data, col='Size', row='Benchmark', kind='hist',\
+    mpi_func_data=mpi_func_data.groupby(['Benchmark',new_size_string,'Processes','Function']).mean()
+    g2= sns.displot(data=mpi_func_data, col=new_size_string, row='Benchmark', kind='hist',\
                 x='Category', hue='Function', weights='value', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
     g2.set_axis_labels("Processes","MPI Function Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
