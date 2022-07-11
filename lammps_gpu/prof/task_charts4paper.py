@@ -93,10 +93,10 @@ def main(fname, fout, fig_extns):
 
     data['Category'] = data['Category'].apply(lambda x: procsmap[x])
     mprocs = data['Category'].max()+1
-   
-    data=data.groupby(['Benchmark','Size', 'GPUs','Section']).mean()
+    data.rename(columns = {'Section':'Task'}, inplace = True)
+    data=data.groupby(['Benchmark','Size', 'GPUs','Task']).mean()
     g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
-                x='Category', hue='Section', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
+                x='Category', hue='Task', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
     g.set_axis_labels("GPUs","Run Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     #x=x

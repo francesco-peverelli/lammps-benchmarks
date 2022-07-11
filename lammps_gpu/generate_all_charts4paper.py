@@ -6,10 +6,10 @@ import prof.task_charts4paper
 import prof.aggregate_gpu_data
 
 # benchmarks = ['chain','chain-single','chain-double']
-benchmarks = ['rhodo', 'lj', 'eam', 'chain']
+# benchmarks = ['rhodo', 'lj', 'eam', 'chain']
 # benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
 # benchmarks = ['lj', 'lj-single', 'lj-double']
-# benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
+benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
 
 fig_extns='.pdf'
 
@@ -19,7 +19,9 @@ procs = [1, 2, 4, 6, 8]
 #for now falzo
 do_power = False
 
-experiment_name = 'gpu_bench'
+# experiment_name = 'gpu_bench_'
+# experiment_name = 'gpu_bench_kspace_'
+experiment_name = 'gpu_bench_rhodo_prec_'
 # experiment_name = 'chain_precision'
     
 perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name,fig_extns)
