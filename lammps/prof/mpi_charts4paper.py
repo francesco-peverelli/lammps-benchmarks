@@ -222,12 +222,15 @@ def main(fname, fout, fig_extns):
   
     # print(mpi_func_data)
     mpi_func_data.rename(columns = {'variable':'Function'}, inplace = True)
+    functions = mpi_func_data['Function'].unique()
+
     mpi_func_data=mpi_func_data.groupby(['Benchmark',new_size_string,'Processes','Function']).mean()
     g2= sns.displot(data=mpi_func_data, col=new_size_string, row='Benchmark', kind='hist',\
                 x='Category', hue='Function', weights='value', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
     g2.set_axis_labels("Processes","MPI Function Time [\%]")
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     #x=x
+    sns.move_legend(g2, "lower center", bbox_to_anchor=(.43, 1), ncol=len(functions), title=None, frameon=False)
     g2.set(xticks=x)
     #procs=list(procs)
     #procs.insert(0,0)

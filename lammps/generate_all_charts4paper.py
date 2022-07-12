@@ -30,7 +30,44 @@ perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_
 
 os.chdir('./prof')
 
-#prof.aggregate_mpi_data.main(experiment_name, benchmarks, procs, sizes)
-#prof.mpi_charts4paper.main(experiment_name + '.csv', experiment_name, fig_extns)
-# prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
-# prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
+# prof.aggregate_mpi_data.main(experiment_name, benchmarks, procs, sizes)
+# prof.mpi_charts4paper.main(experiment_name + '.csv', experiment_name, fig_extns)
+procs = [2, 4, 8, 16, 32, 64]
+prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
+prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
+
+################## MPI LONG ########################
+do_power = False
+procs = [4, 8, 16, 32, 64]
+
+benchmarks = ['chain-long', 'chute-long', 'eam-long', 'lj-long', 'rhodo-long']
+prof.aggregate_mpi_data.main(experiment_name, benchmarks, procs, sizes)
+prof.mpi_charts4paper.main(experiment_name + '.csv', experiment_name, fig_extns)
+
+
+# ################## Error Threshold ########################
+procs = [1, 2, 4, 8, 16, 32, 64]
+os.chdir('../')
+benchmarks = ['rhodo', 'rhodo-e-5', 'rhodo-e-6', 'rhodo-e-7']
+experiment_name = 'rhodo_kspace_'
+perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
+
+os.chdir('./prof')
+
+procs = [4, 8, 16, 32, 64]
+prof.aggregate_mpi_data.main(experiment_name, benchmarks, procs, sizes)
+prof.mpi_charts4paper.main(experiment_name + '.csv', experiment_name, fig_extns)
+procs = [2, 4, 8, 16, 32, 64]
+prof.parse_task_breakdown.main(benchmarks, procs, sizes, experiment_name + '_tasks')
+prof.task_charts4paper.main(experiment_name + '_tasks.csv', experiment_name + '_tasks', fig_extns)
+
+# ################## Precision Analysis ########################
+procs = [1, 2, 4, 8, 16, 32, 64]
+os.chdir('../')
+benchmarks = ['lj', 'lj-single', 'lj-double']
+experiment_name = 'lammps_benchs_lj_prec_'
+perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
+
+benchmarks = ['rhodo', 'rhodo-single', 'rhodo-double']
+experiment_name = 'lammps_benchs_rhodo_prec_'
+perf_charts4paper.main(benchmarks, sizes, procs, do_power, experiment_name, fig_extns)
