@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns              
 import matplotlib.ticker as tkr
 import matplotlib.gridspec as gridspec
+import matplotlib.patches as mpatches
 from matplotlib.patches import Patch
 import os
 import matplotlib.lines as lines
@@ -238,6 +239,81 @@ def main(fname, fout, fig_extns):
     g2.set_xticklabels(procs)
     g2.set_titles(row_template="B.={row_name}",col_template="S.={col_name}")
     g2.savefig(fout + "_mpi_funcsi_stacked"+fig_extns)
+
+
+def main_adjusted(fname, fout, fig_extns):
+    mpi_funcs = ["MPI_Scan", "MPI_Comm_dup", "MPI_Comm_size", "MPI_Alltoallv", "MPI_Cart_shift", \
+        "MPI_Finalize", "MPI_Wait", "MPI_Reduce", "MPI_Comm_rank", "MPI_Allgather", "MPI_Reduce_scatter", \
+        "MPI_Barrier", "MPI_Sendrecv", "MPI_Waitany", "MPI_Cart_rank", "MPI_Cart_create", "MPI_Irecv", \
+        "MPI_Cart_get", "MPI_Allreduce", "MPI_Comm_free", "MPI_Bcast", "MPI_Init", "MPI_Alltoall", "MPI_Send"]
+
+    data = pd.read_csv(fname, sep=',')
+    mpi_percentage = ["MPI_(%)","Max_MPI_(%)","Min_MPI_(%)","MPI_Imb_(%)", "Max_Imb_(%)","Min_Imb_(%)"]
+    mpi_percentage_nomaxmin=["Max_MPI_(%)","Min_MPI_(%)","MPI_Imb_(%)", "Max_Imb_(%)","Min_Imb_(%)"]
+
+
+    # Reset matplotlib settings;
+    plt.rcdefaults()
+    plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Palatino"],
+    })
+    plt.rcParams["font.size"] = 30
+    plt.rcParams["xtick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["ytick.labelsize"]= 30    # major tick size in points
+    plt.rcParams["legend.fontsize"]= 30   # major tick size in points
+    plt.rcParams["legend.handletextpad"]=0.1    # major tick size in points
+    plt.rcParams["legend.handlelength"]=1    # major tick size in points
+    # plt.rcParams["axes.titlesize"]= 10     # major tick size in points
+    # plt.rcParams["legend.markerscale"]=0.01   # major tick size in points
+
+    plt.rcParams['hatch.linewidth'] = 0.6
+
+    plt.rcParams['axes.labelpad'] = 0
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+
+    #add missing sections
+    bench = data['Benchmark'].unique()
+    procs = data['Processes'].unique()
+    sizes = data['Size'].unique()
+
+    data['Benchmark'] = data['Benchmark'].apply(lambda x: x[3:])
+    new_size_string='Size[k atoms]'
+    data.rename(columns = {'Size':new_size_string}, inplace = True)
+
+    mpi_tot_data = data.melt(id_vars=["Processes", new_size_string, "Benchmark"],    \
+    value_vars=mpi_percentage)
+
+    mpi_tot_data['Processes'] = mpi_tot_data['Processes'].apply(lambda x: int(x)) 
+    mpi_tot_data[new_size_string] = mpi_tot_data[new_size_string].apply(lambda x: int(x)) 
+
+    # Plot MPI total runtime % per rank, min max and average
+    mpi_time_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_(%)") 
+        | (mpi_tot_data['variable'] == "Max_MPI_(%)")
+        | (mpi_tot_data['variable'] == "Min_MPI_(%)")]
+    
+    g=sns.catplot(data=mpi_time_data, hue=new_size_string, col='Benchmark', kind='box',\
+                x='Processes', y='value', palette='PuBu', sharey=False, linewidth=2)
+    g.set_axis_labels("MPI Processes", "MPI Time [\%]")
+    sns.move_legend(g, "lower center", bbox_to_anchor=(.43, .9), ncol=len(sizes), frameon=False)
+
+    g.savefig(fout + "_mpi_violin_tot_data"+fig_extns)
+
+    # Plot MPI total imbalance % per rank, min max and average
+    mpi_imb_data = mpi_tot_data[(mpi_tot_data['variable'] == "MPI_Imb_(%)") 
+        | (mpi_tot_data['variable'] == "Max_Imb_(%)")
+        | (mpi_tot_data['variable'] == "Min_Imb_(%)")]
+
+    # print(mpi_imb_data.to_markdown())
+
+    g=sns.catplot(data=mpi_imb_data, hue=new_size_string, col='Benchmark', kind='box',\
+                x='Processes', y='value', palette='PuBu', sharey=False, linewidth=2)
+    g.set_axis_labels("MPI Processes", "MPI imbalance [\%]")
+    sns.move_legend(g, "lower center", bbox_to_anchor=(.43, .9), ncol=len(sizes), frameon=False)
+    
+    g.savefig(fout + "_mpi_imb_violin_data"+fig_extns)
 
 if __name__ == "__main__": 
     main()
