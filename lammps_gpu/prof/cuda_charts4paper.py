@@ -101,11 +101,14 @@ def main(fname, fout,fig_extns):
 
     data['Category'] = data['Category'].apply(lambda x: procsmap[x])
     mprocs = data['Category'].max()+1
+    functions = data['Operation'].unique()
 
     data=data.groupby(['Benchmark','Size', 'GPUs','Operation']).mean()
     g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
                 x='Category', hue='Operation', weights='Time(%)', multiple="stack", palette='OrRd', bins=mprocs, binrange=(0,mprocs))
     g.set_axis_labels("GPUs","Run Time [\%]")
+    sns.move_legend(g, "lower center", bbox_to_anchor=(.46, 1), ncol=int(len(functions)/3), title=None, frameon=False)
+
     x = np.arange(0+0.5,categorical_value+0.5, 1)
     g.set(xticks=x)
     g.set_xticklabels(gpus)

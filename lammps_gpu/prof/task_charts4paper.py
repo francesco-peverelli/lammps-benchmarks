@@ -94,11 +94,14 @@ def main(fname, fout, fig_extns):
     data['Category'] = data['Category'].apply(lambda x: procsmap[x])
     mprocs = data['Category'].max()+1
     data.rename(columns = {'Section':'Task'}, inplace = True)
+    functions = data['Task'].unique()
     data=data.groupby(['Benchmark','Size', 'GPUs','Task']).mean()
     g= sns.displot(data=data, col='Size', row='Benchmark', kind='hist',\
                 x='Category', hue='Task', weights='%total', multiple="stack", palette='BuPu', bins=mprocs, binrange=(0,mprocs))
     g.set_axis_labels("GPUs","Run Time [\%]")
+    sns.move_legend(g, "lower center", bbox_to_anchor=(.46, 1), ncol=len(functions), title=None, frameon=False)
     x = np.arange(0+0.5,categorical_value+0.5, 1)
+
     #x=x
     g.set(xticks=x)
     #procs=list(procs)
