@@ -1,4 +1,4 @@
-# Spatial Arch Benchmarks
+# LAMMPS Benchmarks
 
 In this repo we collect results of different benchmarks and software on a range of architectures. `run_wrapper.py` is used to run a benchmark:
 

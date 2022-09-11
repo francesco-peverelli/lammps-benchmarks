@@ -1,0 +1,1 @@
+# LAMMPS Profiling Results Directory 
