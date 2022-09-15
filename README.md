@@ -1,5 +1,18 @@
 # LAMMPS Benchmarks
 
+# Dependencies
+
+- Requires CUDA >= 11.4 to run GPU experiments
+- Requires the `powerstat` CPU profiling tool
+- Requires the `nvidia-smi` and `NVIDIA Nsight Systems` utilities
+- Requires `python 3`, and the `pandas` and `seaborn` python packages
+
+# Important assumptions
+
+This tool assumes that your LAMMPS software is located at `../lammps` relative to this repository. If your LAMMPS/ input files are in a different location, modify the run and profiling scripts accordingly. 
+
+# How To Use
+
 In this repo we collect results of different benchmarks and software on a range of architectures. 
 A collection of `run_<RUN TYPE>.sh` and `run_<RUN TYPE>.py` scripts are available to run different experiment setups on CPU and GPU.
 A collection of `profile_<RUN TYPE>.sh` and `profile_<RUN TYPE>.py` are available to manage profiling runs. These scripts are intended to be modified by the user to set up the desired experiments,
