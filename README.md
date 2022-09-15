@@ -1,4 +1,4 @@
-# LAMMPS Benchmarks
+# LAMMPS Benchmarks [![DOI](https://zenodo.org/badge/537037512.svg)](https://zenodo.org/badge/latestdoi/537037512)
 
 # Dependencies
 
